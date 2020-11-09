@@ -1,0 +1,19 @@
+<!--partial files imported-->
+<%- include partials/header.ejs %>
+
+<%- include partials/main_nav.ejs %>
+
+  <!--jumbotron Main Content-->
+  <div class="container">
+  <div class="jumbotron">
+      <h1 class="display-4"><%= title %></h1>
+      <hr class="my-4">
+      
+      <!--include the partial file-->
+      <%- include('./partials/' + file + '.ejs') %>
+  </div>
+  </div>
+  
+<%- include partials/bottom_nav.ejs %>
+
+<%- include partials/footer.ejs %>
