@@ -9,13 +9,6 @@
             <h1><%= title %></h1>
 
             <form class="form" method="POST">
-                <div class="form-group">
-                    <label for="idTextField">Tournament ID</label>
-                    <input type="text" class="form-control"
-                    id="idTextField"
-                    placeholder="Enter ID"
-                    name="tournament_id" required>
-                </div>
 
                 <div class="form-group">
                     <label for="titleTextField">TITLE</label>
@@ -25,25 +18,24 @@
                     name="title" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="participantTextField">Participants</label>
-                    <input type="text" class="form-control"
-                    id="participantsTextField"
-                    placeholder="Enter Participants"
-                    name="participant" required>
-                </div>
-
                 
-            
-
-            
 
                 <div class="form-group">
                     <label for="typeTextField">Type</label>
+                    <!--
                     <input type="text" class="form-control"
                     id="typeTextField"
                     placeholder="Enter Type"
-                    name="type" required>
+                    name="type" required>-->
+                    <input type="radio" id="threeRound" name="type" value="3 round">
+                    <label for="threeRound">3 Round</label><br>
+                    <input type="radio" id="threeRound" name="type" value="4 round">
+                    <label for="fourRound">4 Round</label><br>
+                </div>
+
+                <div class="form-group">
+                    <label for="participantTextField">Participants</label>
+                    <textarea id="participants" placeholder="Enter Participants" name="participants" rows="4" cols="50"></textarea>
                 </div>
                 
 

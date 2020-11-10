@@ -2,15 +2,12 @@ let mongoose =require('mongoose');
 
 //creat a MODEL class
 let tournamentModel= mongoose.Schema({
-    tournament_id: String,
     title: String,
-    participant: [String],
+    participants: Array,
     type : String
-    
-
 },
 {
-collection :"tournamentobject"
+collection :"tournaments"
 
 }); 
 module.exports=mongoose.model('Tournament',tournamentModel);

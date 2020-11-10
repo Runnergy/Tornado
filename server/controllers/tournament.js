@@ -14,8 +14,7 @@ module.exports.displayTournamentList = (req, res, next) => {
         }
         else
         {
-            //console.log(BookList);
-
+            console.log(tournamentList);
             res.render('tournament/list', {title: 'Tournaments', TournamentList: tournamentList});      
         }
     });
@@ -26,15 +25,19 @@ module.exports.displayCreatePage = (req, res, next) => {
 }
 
 module.exports.processCreatePage = (req, res, next) => {
+    // User will add one participant in each line
+    let participantString = req.body.participants;
+    
+    // split the line with the new line character and assign it to array
+    let participants = participantString.split("\n");
+
     let newTournament= Tournament({
-      
-        "tournament_id": req.body.tournament_id,
         "title": req.body.title,
-        "participant": req.body.participant,
+        "participants": participants,
         "type": req.body.type 
     });
 
-    Tournament.create(newTournament, (err, Book) =>{
+    Tournament.create(newTournament, (err, Tournament) =>{
         if(err)
         {
             console.log(err);
@@ -67,13 +70,14 @@ module.exports.displayUpdatePage = (req, res, next) => {
 }
 
 module.exports.processUpdatePage = (req, res, next) => {
-    let id = req.params.id
+    let id = req.params.id;
+    let participantString = req.body.participants;
+    let participants = participantString.split("\n");
 
     let updatedTounament = Tournament({
         "_id": id,
-        "tournament_id": req.body.tournament_id,
         "title": req.body.title,
-        "participant": req.body.participant,
+        "participants": participants,
         "type": req.body.type 
     });
 

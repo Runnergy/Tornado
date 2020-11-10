@@ -6,7 +6,7 @@ let mongoose = require('mongoose');
 let Tournament = require('../models/tournament');
 let tournamentController = require('../controllers/tournament');
 
-/* GET Route for the Book List page - READ Operation */
+/* GET Route for the Tournament List page - READ Operation */
 router.get('/', tournamentController.displayTournamentList );
 
 /* GET Route for displaying the Add page - CREATE Operation */

@@ -1,6 +1,6 @@
 module.exports =
 {
-    "URI": "mongodb+srv://chaeeun:FmnAYVExbJBNvLi5@dbserver.v1jag.mongodb.net/tournament?retryWrites=true&w=majority"
-}
+    // "URI": "mongodb://localhost/tornado",
+    "URI": "mongodb+srv://chaeeun:FmnAYVExbJBNvLi5@dbserver.v1jag.mongodb.net/tornado?retryWrites=true&w=majority"}
 
 
