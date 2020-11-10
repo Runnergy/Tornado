@@ -1,6 +1,6 @@
 module.exports =
 {
-    "URI": ""   //include the link to db here
+    "URI": "mongodb+srv://chaeeun:FmnAYVExbJBNvLi5@dbserver.v1jag.mongodb.net/tournament?retryWrites=true&w=majority"
 }
 
 

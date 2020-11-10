@@ -44,7 +44,7 @@
     "type": "git",
     "url": "git+https://github.com/Runnergy/Tornado.git"
   },
-  "bugs":{
+  "bugs": {
     "url": "https://github.com/Runnergy/Tornado.git/issues"
   },
   "homepage": "https://github.com/Runnergy/Tornado.git#readme"
