@@ -31,6 +31,14 @@
           <a class="nav-link" href="/about"><i class="fas fa-lg fa-info"></i> About </a>
         </li>
 
+        <% if (title == "Tournaments") { %>
+          <li class="nav-item active">
+          <% } else  { %>
+          <li class="nav-item">
+          <% } %>
+            <a class="nav-link" href="/tournament"><i class="fas fa-book"></i> Tournament </a>
+          </li>
+
       </ul>
     </div>
   </nav>

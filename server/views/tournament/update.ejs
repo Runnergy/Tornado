@@ -1,0 +1,74 @@
+<%- include ../partials/header.ejs %>
+
+<%- include ../partials/main_nav.ejs %>
+
+<!-- Content for the Add page -->
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <div class="form-group">
+                    <label for="idTextField">Tournament ID</label>
+                    <input type="text" class="form-control"
+                    id="idTextField"
+                    placeholder="Enter tournament ID"
+                    name="tournament_id" 
+                    value="<%= tournament.tournament_id %>"
+                    required>
+                </div>
+
+                <div class="form-group">
+                    <label for="titleTextField">TITLE</label>
+                    <input type="text" class="form-control"
+                    id="titleTextField"
+                    placeholder="Enter Title"
+                    name="title" 
+                    value="<%= tournament.title %>"
+                    required>
+                </div>
+
+                <div class="form-group">
+                    <label for="participantTextField">Participants</label>
+                    <input type="text" class="form-control"
+                    id="participantsTextField"
+                    placeholder="Enter Participants"
+                    name="participant" 
+                    value="<%= tournament.participant %>"
+                    required>
+                </div>
+
+                
+            
+
+            
+
+                <div class="form-group">
+                    <label for="typeTextField">Type</label>
+                    <input type="text" class="form-control"
+                    id="typeTextField"
+                    placeholder="Enter types of tournament"
+                    name="type"
+                    value="<%= tournament.type %>"
+                     required>
+                </div>
+                
+
+
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-edit"></i> Submit</button>
+                
+                    <a href="/tournament" class="btn btn-warning">
+                        <i class="fas fa-undo"></i> Cancel</a>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<%- include ../partials/bottom_nav.ejs %>
+
+<%- include ../partials/footer.ejs %>
