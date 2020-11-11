@@ -31,16 +31,16 @@
                     required>-->
 
                     <!-- make the radio button checked according to tournament type -->
-                    <% if(tournament.type == "3 round") { %>
-                        <input type="radio" id="threeRound" name="type" value="3 round" checked>
-                        <label for="threeRound">3 Round</label><br>
-                        <input type="radio" id="threeRound" name="type" value="4 round">
-                        <label for="fourRound">4 Round</label><br>
+                    <% if(tournament.type == "4 bouts") { %>
+                        <input type="radio" id="fourBouts" name="type" value="4 bouts" checked>
+                        <label for="lblFourBouts">4 Bouts</label><br>
+                        <input type="radio" id="sixteenBouts" name="type" value="16 Bouts">
+                        <label for="lblSixteenBouts">16 Bouts</label><br>
                     <% } else {%>
-                        <input type="radio" id="threeRound" name="type" value="3 round">
-                        <label for="threeRound">3 Round</label><br>
-                        <input type="radio" id="threeRound" name="type" value="4 round" checked>
-                        <label for="fourRound">4 Round</label><br>
+                        <input type="radio" id="fourBouts" name="type" value="4 bouts">
+                        <label for="lblFourBouts">4 Bouts</label><br>
+                        <input type="radio" id="sixteenBouts" name="type" value="16 Bouts" checked>
+                        <label for="lblSixteenBouts">16 Bouts</label><br>
                     <% } %>
                 </div>
                 
