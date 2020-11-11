@@ -30,11 +30,13 @@ module.exports.processCreatePage = (req, res, next) => {
     
     // split the line with the new line character and assign it to array
     let participants = participantString.split("\n");
-
+    let totalParticipants = participants.length;
+    bout = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+    
     let newTournament= Tournament({
         "title": req.body.title,
         "participants": participants,
-        "type": req.body.type 
+        "bout": bout
     });
 
     Tournament.create(newTournament, (err, Tournament) =>{
@@ -73,12 +75,14 @@ module.exports.processUpdatePage = (req, res, next) => {
     let id = req.params.id;
     let participantString = req.body.participants;
     let participants = participantString.split("\n");
-
+    let totalParticipants = participants.length;
+    bout = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+    
     let updatedTounament = Tournament({
         "_id": id,
         "title": req.body.title,
         "participants": participants,
-        "type": req.body.type 
+        "bout": bout
     });
 
     Tournament.updateOne({_id: id}, updatedTounament, (err) => {

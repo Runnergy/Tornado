@@ -14,7 +14,7 @@
                 <!-- Header Row-->
                 <tr class="d-flex">
                     <th class="text-center col-2">Title</th>
-                    <th class="text-center col-1">Type</th>
+                    <th class="text-center col-1">Bouts</th>
                     <th class="text-center col-4">Participants</th>
                     <th class="text-center col-1"></th>
                     <th class="text-center col-1"></th>
@@ -25,7 +25,7 @@
                 <% for(let count = 0; count < TournamentList.length; count++) { %>
                     <tr class="d-flex">
                         <td class="text-center col-2"><%= TournamentList[count].title %></td>
-                        <td class="text-center col-1"><%= TournamentList[count].type %></td>
+                        <td class="text-center col-1"><%= TournamentList[count].bout %></td>
                         <td class="text-center col-4"><%= TournamentList[count].participants %></td>
                         <td class="text-center col-1">
                             <a href="/tournament/update/<%= TournamentList[count]._id %>" class="btn btn-primary btn-sm">
