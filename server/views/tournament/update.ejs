@@ -4,6 +4,7 @@
 
 <!-- Content for the Add page -->
 <div class="container">
+<div class="jumbotron">
     <div class="row">
         <div class="offset-md-3 col-md-6">
             <h1><%= title %></h1>
@@ -17,31 +18,6 @@
                     name="title" 
                     value="<%= tournament.title %>"
                     required>
-                </div>
-
-                <div class="form-group">
-                    <label for="typeTextField">Type</label>
-                    <br>
-                    <!--
-                    <input type="text" class="form-control"
-                    id="typeTextField"
-                    placeholder="Enter Type"
-                    name="type"
-                    value="<%= tournament.type %>" 
-                    required>-->
-
-                    <!-- make the radio button checked according to tournament type -->
-                    <% if(tournament.type == "4 bouts") { %>
-                        <input type="radio" id="fourBouts" name="type" value="4 bouts" checked>
-                        <label for="lblFourBouts">4 Bouts</label><br>
-                        <input type="radio" id="sixteenBouts" name="type" value="16 Bouts">
-                        <label for="lblSixteenBouts">16 Bouts</label><br>
-                    <% } else {%>
-                        <input type="radio" id="fourBouts" name="type" value="4 bouts">
-                        <label for="lblFourBouts">4 Bouts</label><br>
-                        <input type="radio" id="sixteenBouts" name="type" value="16 Bouts" checked>
-                        <label for="lblSixteenBouts">16 Bouts</label><br>
-                    <% } %>
                 </div>
                 
                 <div class="form-group">
@@ -64,6 +40,7 @@
             </form>
         </div>
 
+    </div>
     </div>
 </div>
 
