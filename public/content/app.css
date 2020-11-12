@@ -57,8 +57,22 @@ body{
     margin-bottom: 20px;
 }
 
+/* Hero description text */
 #heroDescription {
     display: block;
     font-size: 15px;
     margin-bottom: 20px;
+}
+
+footer {
+    background-color: black;
+}
+
+footer a:hover {
+    text-decoration: none;
+    color: rgb(255, 208, 181);
+}
+
+.contactColumn {
+    display: inline-block;
 }
