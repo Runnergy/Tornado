@@ -10,14 +10,27 @@
                     value="<%= tournament.title %>"
                     required>
                 </div>
-                
+
+                <% if(tournament.type == "4 bouts") { %>
+                    <input type="radio" id="fourBouts" name="type" value="4" checked>
+                    <label for="lblFourBouts">4 Bouts</label><br>
+                    <input type="radio" id="eightBouts" name="type" value="8">
+                    <label for="lblEightBouts">8 Bouts</label><br>
+                <% } else {%>
+                    <input type="radio" id="fourBouts" name="type" value="4">
+                    <label for="lblFourBouts">4 Bouts</label><br>
+                    <input type="radio" id="eightBouts" name="type" value="8" checked>
+                    <label for="lblEightBouts">8 Bouts</label><br>
+                <% } %>
+
                 <div class="form-group">
                     <label for="participantTextField">Participants</label>
                     <textarea id="participantsTextArea"
                     placeholder="Enter Participants"
                     name="participants" 
-                    required rows="4" cols="50"><% for(let count = 0; count < tournament.participants.length; count++) { %><%= tournament.participants[count] %><% } %></textarea>
+                    required rows="4" cols="50"><% for(let count = 0; count < tournament.participants.length; count++) { %><%= tournament.participants[count] %>&#13;&#10;<% } %></textarea>
                 </div>
+
                 
 
 

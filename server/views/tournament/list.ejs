@@ -1,37 +1,41 @@
-<a href="/tournament/create" class="btn btn-primary" role="button">
-<i class="fas fa-plus-circle"></i> Create tournament</a>
-            <br>
-<table class="table table-bordered table-striped table-hover">
-<!-- Header Row-->
-                <tr class="d-flex">
-                    <th class="text-center col-2">Title</th>
-                    <th class="text-center col-1">Bouts</th>
-                    <th class="text-center col-4">Participants</th>
-                    <th class="text-center col-1"></th>
-                    <th class="text-center col-1"></th>
-                    <th class="text-center col-1"></th>
-                </tr>
+<div class="container pt-5 text-light">
+    <a href="/tournament/create" class="btn btn-primary" role="button">
+    <i class="fas fa-plus-circle"></i> Create tournament</a><br>
 
-                <!-- Repeatable Template Row -->
+    <table class="table table-bordered table-striped table-hover bg-light">
+    <!-- Header Row-->
+        <tr class="d-flex">
+            <th class="text-center col-3">Title</th>
+            <th class="text-center col-2">Type</th>
+            <th class="text-center col-4">Participants</th>
+            <th class="text-center col-1"></th>
+            <th class="text-center col-1"></th>
+            <th class="text-center col-1"></th>
+        </tr>
 
-                <% for(let count = 0; count < TournamentList.length; count++) { %>
-                    <tr class="d-flex">
-                        <td class="text-center col-2"><%= TournamentList[count].title %></td>
-                        <td class="text-center col-1"><%= TournamentList[count].bout %></td>
-                        <td class="text-center col-4"><%= TournamentList[count].participants %></td>
-                        <td class="text-center col-1">
-                            <a href="#" class="btn btn-success btn-sm">
-                            <i class="fas fa-eye"></i></a>
-                        </td>
-                        <td class="text-center col-1">
-                            <a href="/tournament/update/<%= TournamentList[count]._id %>" class="btn btn-primary btn-sm">
-                            <i class="fas fa-pencil-alt"></i></a>
-                        </td>
-                        <td class="text-center col-1">
-                            <a href="/tournament/delete/<%= TournamentList[count]._id %>" class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash-alt"></i></a>
-                        </td>
-                        
-                    </tr>
-                <% } %>
-            </table>
+        <!-- Repeatable Template Row -->
+
+        <% for(let count = 0; count < TournamentList.length; count++) { %>
+            <tr class="d-flex">
+                <td class="text-center col-3"><%= TournamentList[count].title %></td>
+                <td class="text-center col-2"><%= TournamentList[count].round %> rounds
+                    <br>
+                    <%= TournamentList[count].type %> bouts</td>
+                <td class="text-center col-4"><%= TournamentList[count].participants %></td>
+                <td class="text-center col-1">
+                    <a href="#" class="btn btn-success btn-sm">
+                    <i class="fas fa-eye"></i></a>
+                </td>
+                <td class="text-center col-1">
+                    <a href="/tournament/update/<%= TournamentList[count]._id %>" class="btn btn-primary btn-sm">
+                    <i class="fas fa-pencil-alt"></i></a>
+                </td>
+                <td class="text-center col-1">
+                    <a href="/tournament/delete/<%= TournamentList[count]._id %>" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash-alt"></i></a>
+                </td>
+                
+            </tr>
+        <% } %>
+    </table>
+</div>

@@ -4,7 +4,8 @@ let mongoose =require('mongoose');
 let tournamentModel= mongoose.Schema({
     title: String,
     participants: Array,
-    bout : String
+    round : String,
+    type: String
 },
 {
 collection :"tournaments"

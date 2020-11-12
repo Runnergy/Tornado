@@ -14,7 +14,7 @@ module.exports.displayTournamentList = (req, res, next) => {
         }
         else
         {
-            console.log(tournamentList);
+            // console.log(tournamentList);
             res.render('index', {title: 'Tournaments',file: '../views/tournament/list', TournamentList: tournamentList});      
         }
     });
@@ -29,16 +29,24 @@ module.exports.processCreatePage = (req, res, next) => {
     let participantString = req.body.participants;
     
     // split the line with the new line character and assign it to array
-    let participants = participantString.split("\n");
+    let participants = participantString.split("\r\n");
+
+    // remove empty element from the array
+    participants = participants.filter(item => item);
+
+    console.log(participants);
     
     let totalParticipants = participants.length;
-    bout = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+    round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
     
     let newTournament= Tournament({
         "title": req.body.title,
         "participants": participants,
-        "bout": bout
+        "round": round,
+        "type": req.body.type
     });
+
+    console.log(newTournament);
 
     Tournament.create(newTournament, (err, Tournament) =>{
         if(err)
@@ -74,16 +82,27 @@ module.exports.displayUpdatePage = (req, res, next) => {
 
 module.exports.processUpdatePage = (req, res, next) => {
     let id = req.params.id;
+    
+    // User will add one participant in each line
     let participantString = req.body.participants;
-    let participants = participantString.split("\n");
+    
+    // split the line with the new line character and assign it to array
+    let participants = participantString.split("\r\n");
+
+    // remove empty element from the array
+    participants = participants.filter(item => item);
+
+    participants = participants.filter(item => item);
+    
     let totalParticipants = participants.length;
-    bout = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+    round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
     
     let updatedTounament = Tournament({
         "_id": id,
         "title": req.body.title,
         "participants": participants,
-        "bout": bout
+        "round": round,
+        "type": req.body.type
     });
 
     Tournament.updateOne({_id: id}, updatedTounament, (err) => {
