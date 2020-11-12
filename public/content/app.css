@@ -5,7 +5,9 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    color: white;
 }
+
 #page-container {
     position: relative;
     min-height: 100vh;
@@ -24,6 +26,39 @@ body{
     /* Footer height */
 }
 
+/* bootstrap navbar custom color */
 .bg-custom {
     background-color: black;
+}
+
+/* button custom size */
+.btn-xl {
+    padding: 20px 30px;
+}
+
+/* Hero Container */
+.heroContent {
+    height: 85vh;
+    line-height: 85vh;
+    text-align: center;
+}
+
+#heroSpan {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+/* Hero heading text */
+#heroText {
+    display: block;
+    font-family: serif;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+#heroDescription {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 20px;
 }
