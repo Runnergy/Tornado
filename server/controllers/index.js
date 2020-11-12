@@ -8,11 +8,11 @@ let userModel = require('../models/user');
 let User = userModel.User; // alias
 
 module.exports.displayHomePage = (req, res, next) => {
-    res.render('index', { title: 'Home', file: 'home', displayName: req.user ? req.user.displayName : ''});
+    res.render('index', { title: 'Home', file: './partials/home', displayName: req.user ? req.user.displayName : ''});
 }
 
 module.exports.displayAboutPage = (req, res, next) => {
-    res.render('index', { title: 'About Us', file: 'about', displayName: req.user ? req.user.displayName : '' });
+    res.render('index', { title: 'About Us', file: './partials/about', displayName: req.user ? req.user.displayName : '' });
 }
 
 /*

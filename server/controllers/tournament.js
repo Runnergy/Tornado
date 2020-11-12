@@ -15,13 +15,13 @@ module.exports.displayTournamentList = (req, res, next) => {
         else
         {
             console.log(tournamentList);
-            res.render('tournament/list', {title: 'Tournaments', TournamentList: tournamentList});      
+            res.render('index', {title: 'Tournaments',file: '../views/tournament/list', TournamentList: tournamentList});      
         }
     });
 }
 
 module.exports.displayCreatePage = (req, res, next) => {
-    res.render('tournament/create', {title: 'Create Tournament'})          
+    res.render('index', { title: 'Create Tournament', file: '../views/tournament/create' });          
 }
 
 module.exports.processCreatePage = (req, res, next) => {
@@ -30,6 +30,7 @@ module.exports.processCreatePage = (req, res, next) => {
     
     // split the line with the new line character and assign it to array
     let participants = participantString.split("\n");
+    
     let totalParticipants = participants.length;
     bout = Math.ceil(Math.log(totalParticipants) / Math.log(2));
     
@@ -66,7 +67,7 @@ module.exports.displayUpdatePage = (req, res, next) => {
         else
         {
             //show the update view
-            res.render('tournament/update', {title: 'Update Tournament', tournament: tournamentToEdit})
+            res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', tournament: tournamentToEdit });
         }
     });
 }
