@@ -1,6 +1,10 @@
 /*custom css goes here*/
 body{
     background-color: black;
+    /* background-image: url("../assets/images/boxing1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; */
 }
 #page-container {
     position: relative;
