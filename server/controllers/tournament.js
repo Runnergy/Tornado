@@ -82,7 +82,7 @@ module.exports.displayUpdatePage = (req, res, next) => {
 
 module.exports.processUpdatePage = (req, res, next) => {
     let id = req.params.id;
-    
+
     // User will add one participant in each line
     let participantString = req.body.participants;
     
@@ -132,6 +132,23 @@ module.exports.performDelete = (req, res, next) => {
         {
              // refresh
              res.redirect('/tournament');
+        }
+    });
+}
+
+module.exports.displayBrackets = (req, res, next) => {
+    let id = req.params.id;
+
+    Tournament.findById(id, (err, tournamentToView) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the update view
+            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', tournament: tournamentToView });
         }
     });
 }

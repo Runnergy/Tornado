@@ -1,0 +1,66 @@
+<div class="container bracket-container p-5">
+    <table>
+        <tr>
+            <% for(let count = 0; count <= tournament.round; count++) { %>
+                <td class="text-center">ROUND <%= count %></td>
+            <% } %>
+        </tr>
+
+        <% for(let count = 0; count < tournament.type * 2; count++) { %>
+            <tr>
+                <td>
+                    <div class="participant first">
+                        <div class="participant-num"><%= count + 1 %></div>
+                        <div class="participant-name"><%= tournament.participants[count] %></div>
+                    </div>
+                </td>
+                <% if(count%2 == 0) { %>
+                    <td rowspan="2">
+                        <div class="participant second">
+                            <div class="participant-num">?</div>
+                            <div class="participant-name"></div>
+                        </div>
+                    </td>
+                <% } else { %>
+                    <td></td> 
+                <% } %>
+
+                <% if(count%4 == 0) { %>
+                    <td rowspan="4">
+                        <div class="participant third">
+                            <div class="participant-num">?</div>
+                            <div class="participant-name"></div>
+                        </div>
+                    </td>
+                <% } else { %>
+                    <td></td> 
+                <% } %>
+
+                <% if(count%8 == 0) { %>
+                    <td rowspan="8">
+                        <div class="participant fourth">
+                            <div class="participant-num">?</div>
+                            <div class="participant-name"></div>
+                        </div>
+                    </td>
+                <% } else { %>
+                    <td></td> 
+                <% } %>
+
+                <% if(tournament.round == '4') { %>
+                    <% if(count%16 == 0) { %>
+                        <td rowspan="16">
+                            <div class="participant fifth">
+                                <div class="participant-num">?</div>
+                                <div class="participant-name"></div>
+                            </div>
+                        </td>
+                    <% } else { %>
+                        <td></td> 
+                    <% } %>
+                <% } %>
+            </tr>
+        <% } %>
+        
+    </table>
+</div>

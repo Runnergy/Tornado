@@ -1,6 +1,6 @@
 /*custom css goes here*/
 body{
-    background-color: black;
+    /* background-color: rgb(131, 131, 131); */
     background-image: url("../assets/images/boxing1.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -37,20 +37,20 @@ body{
 }
 
 /* Hero Container */
-.heroContent {
+.hero-content {
     height: 85vh;
     line-height: 85vh;
     text-align: center;
 }
 
-#heroSpan {
+#hero-span {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
 }
 
 /* Hero heading text */
-#heroText {
+#hero-text {
     display: block;
     font-family: serif;
     font-size: 50px;
@@ -58,7 +58,7 @@ body{
 }
 
 /* Hero description text */
-#heroDescription {
+#hero-description {
     display: block;
     font-size: 15px;
     margin-bottom: 20px;
@@ -75,4 +75,41 @@ footer a:hover {
 
 .contactColumn {
     display: inline-block;
+}
+
+.participant {
+    background-color: #363636e3;
+    /* padding: 5px 0px; */
+    /* box-shadow: rgb(92, 36, 36) 2px 2px 2px; */
+    width: 170px;
+    text-align: left;
+    margin: 10px;
+    border-radius: 3px;
+    
+}
+
+.participant:hover {
+    background-color: #696969e3;
+    transition: 0.3s;
+}
+
+.participant-num {
+    text-align: center;
+    background-color: rgba(197, 197, 197, 0.205);
+    display: inline-block;
+    width: 30px;
+    padding: 5px;
+    color: black;
+}
+
+
+.participant-name {
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+.bracket-container table {
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
 }

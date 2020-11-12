@@ -24,5 +24,6 @@ router.post('/update/:id', tournamentController.processUpdatePage );
 /* GET to perform  Deletion - DELETE Operation */
 router.get('/delete/:id', tournamentController.performDelete);
 
+router.get('/brackets/:id', tournamentController.displayBrackets);
 
 module.exports = router;
