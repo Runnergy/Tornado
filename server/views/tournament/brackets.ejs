@@ -1,11 +1,13 @@
 <div class="container bracket-container p-5">
     <table>
         <tr>
+            <!-- repeats according to the number of rounds -->
             <% for(let count = 0; count <= tournament.round; count++) { %>
                 <td class="text-center">ROUND <%= count %></td>
             <% } %>
         </tr>
 
+        <!-- repeats for the number of participants by multiplying the bouts by 2 -->
         <% for(let count = 0; count < tournament.type * 2; count++) { %>
             <tr>
                 <td>
@@ -47,6 +49,7 @@
                     <td></td> 
                 <% } %>
 
+                <!-- only applied when we have 4th rounds -->
                 <% if(tournament.round == '4') { %>
                     <% if(count%16 == 0) { %>
                         <td rowspan="16">
