@@ -22,9 +22,10 @@
                     <br>
                     <%= TournamentList[i].type %> bouts</td>
                 <td class="text-center col-4">
+                
                     <!-- display the objects in the participants array -->
                     <% for(let j = 0; j < TournamentList[i].participants.length; j++) { %>
-                        <%= TournamentList[i].participants[j] %>, 
+                    <%=TournamentList[i].participants[j]%><% if(j != TournamentList[i].participants.length - 1) {%>,<% } %>
                     <% } %>
                 </td>
                 <td class="text-center col-1">
