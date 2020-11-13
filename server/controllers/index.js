@@ -15,6 +15,11 @@ module.exports.displayAboutPage = (req, res, next) => {
     res.render('index', { title: 'About Us', file: './partials/about', displayName: req.user ? req.user.displayName : '' });
 }
 
+module.exports.displayContactPage = (req, res, next) => {
+    res.render('index', { title: 'Contact Us', file: './partials/contact', displayName: req.user ? req.user.displayName : '' });
+}
+
+
 /*
 module.exports.performLogout = (req, res, next) => {
     req.logout();
