@@ -18,14 +18,14 @@
         }
 
         // determine winner for each round
-        determinWinner('first', 'second');
-        determinWinner('second', 'third');
-        determinWinner('third', 'fourth');
-        determinWinner('fourth', 'fifth');
+        determineWinner('first', 'second');
+        determineWinner('second', 'third');
+        determineWinner('third', 'fourth');
+        determineWinner('fourth', 'fifth');
         
     }
 
-    function determinWinner(currentRound, nextRound)
+    function determineWinner(currentRound, nextRound)
     {
         // current round's participants
         let roundParticipants = document.getElementsByClassName(currentRound);
