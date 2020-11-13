@@ -1,24 +1,25 @@
+<h1 class="display-4 text-center pb-4"><%= title %></h1>
 <div class="vh-100">
     <div class="row">
         <div class="offset-md-3 col-md-6">
             <form class="form" method="POST">
 
                 <div class="form-group">
-                    <label for="titleTextField">TITLE</label>
+                    <label for="titleTextField">Title</label>
                     <input type="text" class="form-control"
                     id="titleTextField"
-                    placeholder="Enter TITLE"
+                    placeholder="Enter title"
                     name="title" required>
                 </div>
 
                 <input type="radio" id="fourBouts" name="type" value="4">
-                <label for="lblFourBouts">4 Bouts</label><br>
+                <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
                 <input type="radio" id="sixteenBouts" name="type" value="8">
                 <label for="lblSixteenBouts">8 Bouts</label><br>
 
                 <div class="form-group">
                 <label for="participantTextField">Participants</label>
-                <textarea class="form-control" id="participants" name="participants" placeholder="Enter Participants" rows="5"></textarea>
+                <textarea class="form-control" id="participants" name="participants" placeholder="Enter participants" rows="8"></textarea>
                 </div>
                 
                 <button class="btn btn-primary" type="submit">
