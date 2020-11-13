@@ -91,8 +91,6 @@ module.exports.processUpdatePage = (req, res, next) => {
 
     // remove empty element from the array
     participants = participants.filter(item => item);
-
-    participants = participants.filter(item => item);
     
     let totalParticipants = participants.length;
     round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
