@@ -4,29 +4,48 @@
         <div class="offset-md-3 col-md-6">
             <form class="form" method="POST">
 
-                <div class="form-group">
-                    <label for="titleTextField">Title</label>
-                    <input type="text" class="form-control"
-                    id="titleTextField"
-                    placeholder="Enter title"
-                    name="title" required>
+                <div class="form-group row">
+                    <label for="titleTextField" class="col-2 col-form-label">Title</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control"
+                        id="titleTextField"
+                        placeholder="Enter title"
+                        name="title" required>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="typeTextField" class="col-2 col-form-label">Type</label>
+                    <div class="col-10">
+                        <input type="radio" id="fourBouts" name="type" value="4">
+                        <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
+                        <input type="radio" id="sixteenBouts" name="type" value="8">
+                        <label for="lblSixteenBouts">8 Bouts</label><br>
+                    </div>
                 </div>
 
-                <input type="radio" id="fourBouts" name="type" value="4">
-                <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
-                <input type="radio" id="sixteenBouts" name="type" value="8">
-                <label for="lblSixteenBouts">8 Bouts</label><br>
+                <div class="form-group row">
+                    <label for="example-date-input" class="col-2 col-form-label">Start-End</label>
+                    <div class="col-5">
+                        <input class="form-control" type="date" value="" id="">
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control" type="date" value="" id="">
+                    </div>
+                </div>
 
                 <div class="form-group">
                 <label for="participantTextField">Participants</label>
                 <textarea class="form-control" id="participants" name="participants" placeholder="Enter participants" rows="8"></textarea>
                 </div>
                 
-                <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-edit"></i> Create</button>
-                
+                <div class="form-group text-center">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-edit"></i> Create</button>
+                    
                     <a href="/tournament" class="btn btn-warning">
                         <i class="fas fa-undo"></i> Cancel</a>
+                </div>
 
             </form>
         </div>
