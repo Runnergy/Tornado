@@ -9,3 +9,46 @@
         </a>
     </span>
 </div>
+<div class="container">
+    <table class="table table-dark table-hover">
+    <!-- Header Row-->
+        <tr>
+            <th class="text-center" colspan="4">Active Tournaments</th>
+        </tr>
+        <tr class="d-flex">
+            <td class="text-center col-3">Title</td>
+            <td class="text-center col-2">Type</td>
+            <td class="text-center col-2">Host</td>
+            <td class="text-center col-2">Start</td>
+            <td class="text-center col-2">End</td>
+            <td class="text-center col-1"></td>
+        </tr>
+
+        <!-- Repeatable Template Row -->
+
+        <% for(let i = 0; i < TournamentList.length; i++) { %>
+            <tr class="d-flex">
+                <td class="text-center col-3"><%= TournamentList[i].title %></td>
+                <td class="text-center col-2"><%= TournamentList[i].round %> rounds
+                    <br>
+                    <%= TournamentList[i].type %> bouts</td>
+
+                <td class="text-center col-2">
+                    HOST_NAME
+                </td>
+                <td class="text-center col-2">
+                    2020-10-17
+                </td>
+                <td class="text-center col-2">
+                    2020-10-20
+                </td>
+                <td class="text-center col-1">
+                    <a href="/tournament/brackets/<%= TournamentList[i]._id %>" class="btn btn-success btn-sm">
+                    VIEW</a>
+                </td>
+                
+            </tr>
+        <% } %>
+    </table>
+</div>
+

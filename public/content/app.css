@@ -39,7 +39,7 @@ body{
 
 /* Hero Container */
 .hero-content {
-    height: 85vh;
+    height: 100vh;
     line-height: 85vh;
     text-align: center;
 }
