@@ -135,3 +135,11 @@ footer a:hover {
 i {
     color: white;
 }
+
+.bg-dark-80 {
+    background-color: rgba(39, 39, 39, 0.8);
+}
+
+.bg-light-80 {
+    background-color: rgba(175, 175, 175, 0.8);
+}
