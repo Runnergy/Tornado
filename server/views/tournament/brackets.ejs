@@ -64,6 +64,16 @@
                 <% } %>
             </tr>
         <% } %>
-        
     </table>
+    
+    <!-- only when the page is edit mode -->
+    <% if (title == "Tournament brackets") {%>
+        <div class="text-center p-5">
+            <button class="btn btn-primary" type="submit">
+                Save</button>
+            <a href="/tournament/update/<%= tournament._id %>" class="btn btn-warning">
+                Back to list</a>
+        </div>
+    <% } %>
+    
 </div>

@@ -113,7 +113,25 @@ footer a:hover {
     margin-left: auto;
 }
 
+/* long button */
 .btn-flexible {
     width: 100%;
     padding: 10px;
+}
+
+/* colors from colour swatches */
+.color-red3 {
+    background-color: #430505;
+}
+
+.color-red2 {
+    background-color: #680808;
+}
+
+.color-red1 {
+    background-color: #9c0404;
+}
+
+i {
+    color: white;
 }
