@@ -134,7 +134,7 @@ module.exports.performDelete = (req, res, next) => {
     });
 }
 
-module.exports.displayBrackets = (req, res, next) => {
+module.exports.editBrackets = (req, res, next) => {
     let id = req.params.id;
 
     Tournament.findById(id, (err, tournamentToView) => {
@@ -147,6 +147,23 @@ module.exports.displayBrackets = (req, res, next) => {
         {
             //show the update view
             res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', tournament: tournamentToView });
+        }
+    });
+}
+
+module.exports.displayBrackets = (req, res, next) => {
+    let id = req.params.id;
+
+    Tournament.findById(id, (err, tournamentToView) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the update view
+            res.render('index', { title: 'Tournament brackets - view', file: '../views/tournament/brackets', tournament: tournamentToView });
         }
     });
 }

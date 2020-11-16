@@ -54,12 +54,21 @@
                     required rows="8"><% for(let count = 0; count < tournament.participants.length; count++) { %><%= tournament.participants[count] %>&#13;&#10;<% } %></textarea>
                 </div>
 
-                <div class="form-group text-center">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-edit"></i> Create</button>
-                    
-                    <a href="/tournament" class="btn btn-warning">
-                        <i class="fas fa-undo"></i> Cancel</a>
+                <div class="form-group text-center row">
+                    <div class="col-4">
+                        <td class="text-center col-1">
+                            <a href="/tournament/brackets/<%= tournament._id %>" class="btn btn-danger btn-flexible">
+                            Bracket</a>
+                        </td>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-primary btn-flexible" type="submit">
+                            Confirm</button>
+                    </div>
+                    <div class="col-4">
+                        <a href="/tournament" class="btn btn-warning btn-flexible">
+                            Cancel</a>
+                    </div>
                 </div>
 
 

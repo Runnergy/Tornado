@@ -27,28 +27,32 @@
         <!-- Repeatable Template Row -->
 
         <% for(let i = 0; i < TournamentList.length; i++) { %>
-            <tr class="d-flex">
-                <td class="text-center col-3"><%= TournamentList[i].title %></td>
-                <td class="text-center col-2"><%= TournamentList[i].round %> rounds
-                    <br>
-                    <%= TournamentList[i].type %> bouts
-                </td>
+            <!-- we will replace this if statement with the one checking the status of tournament(active/inactive) -->
+            <% if(TournamentList[i].type == '8') { %>
+                <tr class="d-flex">
+                    <td class="text-center col-3"><%= TournamentList[i].title %></td>
+                    <td class="text-center col-2"><%= TournamentList[i].round %> rounds
+                        <br>
+                        <%= TournamentList[i].type %> bouts
+                    </td>
 
-                <td class="text-center col-2">
-                    HOST_NAME
-                </td>
-                <td class="text-center col-2">
-                    2020-10-17
-                </td>
-                <td class="text-center col-2">
-                    2020-10-20
-                </td>
-                <td class="text-center col-1">
-                    <a href="/tournament/brackets/<%= TournamentList[i]._id %>" class="btn btn-danger btn-sm">
-                    VIEW</a>
-                </td>
-                
-            </tr>
+                    <td class="text-center col-2">
+                        HOST_NAME
+                    </td>
+                    <td class="text-center col-2">
+                        2020-10-17
+                    </td>
+                    <td class="text-center col-2">
+                        2020-10-20
+                    </td>
+                    <td class="text-center col-1">
+                        <!-- When the URL contains /read-only, function determineWinner is not applied (cannot edit) -->
+                        <a href="/tournament/brackets/<%= TournamentList[i]._id %>/read-only" class="btn btn-danger btn-sm">
+                        VIEW</a>
+                    </td>
+                    
+                </tr>   
+            <% } %>
         <% } %>
     </table>
 </div>

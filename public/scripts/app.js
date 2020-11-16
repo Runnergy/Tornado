@@ -3,6 +3,7 @@
     function Start() {
         console.log("App started...");
 
+        let title = document.title;
 
         let deleteButtons = document.querySelectorAll('.btn-delete');
         
@@ -17,11 +18,15 @@
             });
         }
 
+        if(title === 'Tournament brackets')
+        {
+            determineWinner('first', 'second');
+            determineWinner('second', 'third');
+            determineWinner('third', 'fourth');
+            determineWinner('fourth', 'fifth');
+        }
         // determine winner for each round
-        determineWinner('first', 'second');
-        determineWinner('second', 'third');
-        determineWinner('third', 'fourth');
-        determineWinner('fourth', 'fifth');
+        
         
     }
 
