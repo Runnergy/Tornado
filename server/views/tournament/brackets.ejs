@@ -13,7 +13,11 @@
                 <td>
                     <div class="participant first">
                         <div class="participant-num"><%= count + 1 %></div>
-                        <div class="participant-name"><%= tournament.participants[count] %></div>
+                        <div class="participant-name">
+                            <% if(tournament.participants[count] != null) { %>
+                                <%= tournament.participants[count].participantname %>
+                            <% } %>
+                        </div>
                     </div>
                 </td>
                 <% if(count%2 == 0) { %>

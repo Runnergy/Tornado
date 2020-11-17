@@ -6,7 +6,7 @@ participantname: String,
 history: Array
 },
 {
-collection :"participants"
+collection :"participant"
 
 }); 
 module.exports=mongoose.model('participant',participantModel);

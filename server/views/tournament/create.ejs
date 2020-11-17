@@ -13,6 +13,27 @@
                         name="title" required>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="hostTextField" class="col-2 col-form-label">Host</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control"
+                        id="hostTextField"
+                        placeholder="Enter host name"
+                        name="hostname" 
+                        required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="typeTextField" class="col-2 col-form-label">Status</label>
+                    <div class="col-10">
+                        <input type="radio" id="active" name="status" value="active"> 
+                        <label for="lblActive">Active</label>&nbsp;&nbsp;
+                        <input type="radio" id="inactive" name="status" value="inactive">
+                        <label for="lblInactive">Inactive</label><br>
+                    </div>
+                </div>
                 
                 <div class="form-group row">
                     <label for="typeTextField" class="col-2 col-form-label">Type</label>
@@ -27,10 +48,10 @@
                 <div class="form-group row">
                     <label for="example-date-input" class="col-2 col-form-label">Start-End</label>
                     <div class="col-5">
-                        <input class="form-control" type="date" value="" id="">
+                        <input class="form-control" type="date" value="" id="" name="startdate">
                     </div>
                     <div class="col-5">
-                        <input class="form-control" type="date" value="" id="">
+                        <input class="form-control" type="date" value="" id="" name="enddate">
                     </div>
                 </div>
 

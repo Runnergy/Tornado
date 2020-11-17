@@ -25,12 +25,13 @@
                 <td class="text-center col-4">
                     <!-- display the objects in the participants array -->
                     <% for(let j = 0; j < TournamentList[i].participants.length; j++) { %>
-                    <%=TournamentList[i].participants[j]%><% if(j != TournamentList[i].participants.length - 1) {%>,<% } %>
+                    <%=TournamentList[i].participants[j].participantname %><% if(j != TournamentList[i].participants.length - 1) {%>,<% } %>
                     <% } %>
+                    
                 </td>
 
                 <td class="text-center col-3">
-                    2020/10/17 - 2020/10/20
+                    <%= TournamentList[i].startdate.toISOString().replace('T', ' ').substr(0, 10) %> - <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
                 </td>
 
                 <td class="text-center col-2">

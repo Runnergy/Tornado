@@ -5,6 +5,7 @@ let mongoose = require('mongoose');
 
 // create a reference to the model
 let Tournament = require('../models/tournament');
+let Participant = require('../models/participant');
 
 module.exports.displayTournamentList = (req, res, next) => {
     Tournament.find((err, tournamentList) => {
@@ -14,8 +15,7 @@ module.exports.displayTournamentList = (req, res, next) => {
         }
         else
         {
-            // console.log(tournamentList);
-            res.render('index', {title: 'Tournaments',file: '../views/tournament/list', TournamentList: tournamentList});      
+            res.render('index', {title: 'Tournaments',file: '../views/tournament/list', TournamentList: tournamentList});   
         }
     });
 }
@@ -33,20 +33,32 @@ module.exports.processCreatePage = (req, res, next) => {
 
     // remove empty element from the array
     participants = participants.filter(item => item);
-
-    console.log(participants);
     
     let totalParticipants = participants.length;
     round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+
+    let arrayParticipants = new Array();
     
+    for (let index = 0; index < participants.length; index++) {
+        let participantName = participants[index];
+        let participant = Participant({
+            "participantname": participantName,
+            "history": 0
+        });
+        arrayParticipants[index] = participant;
+        console.log(participant.participantname);
+    }
+
     let newTournament= Tournament({
         "title": req.body.title,
-        "participants": participants,
+        "participants": arrayParticipants,
+        "startdate": req.body.startdate,
+        "enddate": req.body.enddate,
         "round": round,
-        "type": req.body.type
+        "type": req.body.type,
+        "hostname": req.body.hostname,
+        "status": req.body.status
     });
-
-    console.log(newTournament);
 
     Tournament.create(newTournament, (err, Tournament) =>{
         if(err)
@@ -92,15 +104,42 @@ module.exports.processUpdatePage = (req, res, next) => {
     // remove empty element from the array
     participants = participants.filter(item => item);
     
-    let totalParticipants = participants.length;
-    round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+    // let totalParticipants = participants.length;
+    // round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+
+    let round = 0;
+
+    if(req.body.type == '4')
+    {
+        round = '3';
+    }
+    else
+    {
+        round = '4';
+    }
+
+    
+    let arrayParticipants = new Array();
+    
+    for (let index = 0; index < participants.length; index++) {
+        let participant = Participant({
+            "participantname": participants[index],
+            "history": 0
+        });
+        arrayParticipants[index] = participant;
+    }
+
     
     let updatedTounament = Tournament({
         "_id": id,
         "title": req.body.title,
-        "participants": participants,
+        "participants": arrayParticipants,
+        "startdate": req.body.startdate,
+        "enddate": req.body.enddate,
         "round": round,
-        "type": req.body.type
+        "type": req.body.type,
+        "hostname": req.body.hostname,
+        "status": req.body.status
     });
 
     Tournament.updateOne({_id: id}, updatedTounament, (err) => {
@@ -112,7 +151,7 @@ module.exports.processUpdatePage = (req, res, next) => {
         else
         {
             // refresh 
-            res.redirect('/tournament');
+            res.redirect('back');
         }
     });
 }

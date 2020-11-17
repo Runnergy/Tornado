@@ -28,7 +28,7 @@
 
         <% for(let i = 0; i < TournamentList.length; i++) { %>
             <!-- we will replace this if statement with the one checking the status of tournament(active/inactive) -->
-            <% if(TournamentList[i].type == '8') { %>
+            <% if(TournamentList[i].status == 'active') { %>
                 <tr class="d-flex">
                     <td class="text-center col-3"><%= TournamentList[i].title %></td>
                     <td class="text-center col-2"><%= TournamentList[i].round %> rounds
@@ -37,13 +37,13 @@
                     </td>
 
                     <td class="text-center col-2">
-                        HOST_NAME
+                        <%= TournamentList[i].hostname %> 
                     </td>
                     <td class="text-center col-2">
-                        2020-10-17
+                        <%= TournamentList[i].startdate.toISOString().replace('T', ' ').substr(0, 10) %> 
                     </td>
                     <td class="text-center col-2">
-                        2020-10-20
+                        <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %> 
                     </td>
                     <td class="text-center col-1">
                         <!-- When the URL contains /read-only, function determineWinner is not applied (cannot edit) -->
