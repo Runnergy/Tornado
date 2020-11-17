@@ -3,7 +3,12 @@ let mongoose =require('mongoose');
 //creat a MODEL class
 let tournamentModel= mongoose.Schema({
     title: String,
-    participants: Array,
+    participants: [{
+    participant:{
+            participantName: String,
+            history:Array
+         }
+        }],
     round : String,
     type: String
 },
