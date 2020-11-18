@@ -37,7 +37,7 @@ module.exports.displayContactPage = (req, res, next) => {
 module.exports.displayLoginPage = (req, res, next) => {
     //check if the user is already logged in
     if (!req.user) {
-        res.render('auth/login', {
+        res.render('authentication/login', {
             title: "Login",
             messages: req.flash('loginMessage'),
             displayName: req.user ? req.user.displayName : ''
@@ -65,7 +65,7 @@ module.exports.processLoginPage = (req, res, next) => {
                 if (err) {
                     return next(err);
                 }
-                return res.redirect('/contact-list');
+                return res.redirect('/tournament');
             })
         })(req, res, next);
 }
@@ -73,7 +73,7 @@ module.exports.processLoginPage = (req, res, next) => {
 module.exports.displayRegisterPage = (req, res, next) => {
     //if user is not already logged in
     if (!req.user) {
-        res.render('auth/register',
+        res.render('authentication/register',
         {
             title: "Register",
             messages: req.flash('registerMessage'),
@@ -116,7 +116,7 @@ module.exports.processRegisterPage = (req, res, next) => {
             //redirect the user and authenticate them
 
             return passport.authenticate('local')(req, res, () => {
-                res.redirect('/contact-list')
+                res.redirect('/tournament')
             });
         }
     });
