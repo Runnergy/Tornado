@@ -8,6 +8,10 @@ body{
     color: white;
 }
 
+fieldset {
+    border: none;
+}
+
 #page-container {
     position: relative;
     min-height: 100vh;
