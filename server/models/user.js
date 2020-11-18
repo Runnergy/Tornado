@@ -17,8 +17,6 @@ let User=mongoose.Schema
                 default: '',
                 trim: true,
                 required: 'password is required'
-
-
             },*/ 
     email:            
             {type: String,
@@ -40,19 +38,14 @@ let User=mongoose.Schema
             {type: Date,
                 default: Date.now
             }
-
 },
 {
         collection:"users"
 }
 
-
 );
 
-
-
 //configure options for user model
-
 let options=({missingPasswordError: 'wrong /missing password'});
 User.plugin(passportLocalMongoose, options);
 module.exports.User=mongoose.model('User',User);

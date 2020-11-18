@@ -5,14 +5,11 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-
 // modules for authentication
 let session = require('express-session');
-/*
 let passport = require('passport');
 let passportLocal = require('passport-local');
 let localStrategy = passportLocal.Strategy;
-*/
 let flash = require('connect-flash');
 
 // database setup
@@ -27,7 +24,6 @@ mongoDb.on('error', console.error.bind(console, 'Connection Error:'));
 mongoDb.once('open', () => {
   console.log('Connected to MongoDB...');
 });
-
 
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
@@ -56,11 +52,9 @@ app.use(session({
 // initialize flash
 app.use(flash());
 
-/*
 //initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
-*/
 
 //passport user configuration
 
@@ -68,16 +62,12 @@ app.use(passport.session());
 let userModel = require('../models/user');
 let User = userModel.User;
 
-/*
 //implement a User authentication stratgy
 passport.use(User.createStrategy());
-*/
 
-/*
 // serialize and deserialize the user info
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-*/
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

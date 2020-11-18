@@ -1,4 +1,3 @@
-
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
@@ -15,13 +14,13 @@ module.exports.displayTournamentList = (req, res, next) => {
         }
         else
         {
-            res.render('index', {title: 'Tournaments',file: '../views/tournament/list', TournamentList: tournamentList});   
+            res.render('index', {title: 'Tournaments',file: '../views/tournament/list', TournamentList: tournamentList, displayName: req.user ? req.user.displayName : ''});   
         }
     });
 }
 
 module.exports.displayCreatePage = (req, res, next) => {
-    res.render('index', { title: 'Create Tournament', file: '../views/tournament/create' });          
+    res.render('index', { title: 'Create Tournament', file: '../views/tournament/create', displayName: req.user ? req.user.displayName : '' });          
 }
 
 module.exports.processCreatePage = (req, res, next) => {
@@ -87,7 +86,7 @@ module.exports.displayUpdatePage = (req, res, next) => {
         else
         {
             //show the update view
-            res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', tournament: tournamentToEdit });
+            res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', tournament: tournamentToEdit, displayName: req.user ? req.user.displayName : '' });
         }
     });
 }
@@ -185,7 +184,7 @@ module.exports.editBrackets = (req, res, next) => {
         else
         {
             //show the update view
-            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', tournament: tournamentToView });
+            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', tournament: tournamentToView, displayName: req.user ? req.user.displayName : ''  });
         }
     });
 }
@@ -202,7 +201,7 @@ module.exports.displayBrackets = (req, res, next) => {
         else
         {
             //show the update view
-            res.render('index', { title: 'Tournament brackets - view', file: '../views/tournament/brackets', tournament: tournamentToView });
+            res.render('index', { title: 'Tournament brackets - view', file: '../views/tournament/brackets', tournament: tournamentToView, displayName: req.user ? req.user.displayName : ''  });
         }
     });
 }
