@@ -37,8 +37,9 @@ module.exports.displayContactPage = (req, res, next) => {
 module.exports.displayLoginPage = (req, res, next) => {
     //check if the user is already logged in
     if (!req.user) {
-        res.render('authentication/login', {
+        res.render('index', {
             title: "Login",
+            file: './authentication/login',
             messages: req.flash('loginMessage'),
             displayName: req.user ? req.user.displayName : ''
         })
@@ -73,9 +74,10 @@ module.exports.processLoginPage = (req, res, next) => {
 module.exports.displayRegisterPage = (req, res, next) => {
     //if user is not already logged in
     if (!req.user) {
-        res.render('authentication/register',
+        res.render('index',
         {
             title: "Register",
+            file: './authentication/register',
             messages: req.flash('registerMessage'),
             displayName: req.user ? req.user.displayName : ' '
         });
