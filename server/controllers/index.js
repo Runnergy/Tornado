@@ -106,8 +106,9 @@ module.exports.processRegisterPage = (req, res, next) => {
                 );
                 console.log('Error, user already exists');
             }
-            return res.render('auth/register', {
+            return res.render('index', {
                 title: 'Register',
+                file: './authentication/register',
                 messages: req.flash('registerMessage'),
                 displayName: req.user ? req.user.displayName : ' '
             });
