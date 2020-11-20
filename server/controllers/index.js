@@ -78,7 +78,7 @@ module.exports.displayRegisterPage = (req, res, next) => {
             title: "Register",
             file: './authentication/register',
             messages: req.flash('registerMessage'),
-            displayName: req.user ? req.user.displayName : ' '
+            displayName: req.user ? req.user.displayName : ''
         });
     }
     else {
@@ -109,7 +109,7 @@ module.exports.processRegisterPage = (req, res, next) => {
                 title: 'Register',
                 file: './authentication/register',
                 messages: req.flash('registerMessage'),
-                displayName: req.user ? req.user.displayName : ' '
+                displayName: req.user ? req.user.displayName : ''
             });
         }
         else {
