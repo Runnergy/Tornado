@@ -1,39 +1,46 @@
 <!--Main Content of the Page-->
-  <main class="container">
-    <div  >
-      <h1 style="text-align-last: center; color: white; margin-top: 2cm; " class="display-5">  <%= title %>  </h1>
-      <hr class="my-4">
+  <main class="container p-5 bg-dark-80">
+    <div>
+      <h1 class="display-5 text-center mb-5">  <%= title %>  </h1>
+      <hr class="my-4 mb-5">
     </div>
-  </main>
+    <div class= "row justify-content-md-center">
+      <div class="col-lg-5 col-md-5 col-sm-8 col-xs-8">
 
-<div class= "row justify-content-md-center">
-  <div class = "col-lg-5 col-md-5 col-sm-8 col-xs-8">
-   <form>
+      <form class="mb-5">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" class="form-control" id="fname" required placeholder="Please enter your first name" >
+      </div>
 
-  <div class="form-group">
-    <label for="fname">First Name</label>
-    <input type="text" class="form-control" id="fname" required placeholder="Please enter your first name..." >
-  </div>
+      <div class="form-group">
+        <label for="lname">Last name</label>
+        <input type="text" class="form-control" id="lname" required placeholder="Please enter your last name">
+      </div>
 
-  <div class="form-group">
-    <label for="lname">Last name</label>
-    <input type="text" class="form-control" id="lname" required placeholder="Please enter your last name...">
-  </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+      </div>
+    
 
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input type="email" class="form-control" id="email" placeholder="name@example.com">
-  </div>
- 
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea class="form-control" id="message" rows="3" placeholder="Enter your message here"></textarea>
+      </div>
 
-  <div class="form-group">
-    <label for="message">Your Message</label>
-    <textarea class="form-control" id="message" rows="3" placeholder="Type your message here..."></textarea>
-  </div>
+      <div class="row mt-3">
+        <div class="col-6">
+          <button type="submit" class="btn btn-primary btn-flexible" id="sendButton"><i class="far fa-envelope"></i> Send</button>
+        </div>
+        <div class="col-6">
+          <button type="reset" class="btn btn-warning btn-flexible" id="resetButton"><i class="fas fa-window-close"></i> Cancel</button>
+        </div>
+      </div>
 
-  <button type="submit" class="btn btn-primary" id="sendButton"><i class="far fa-envelope"></i> Send</button>
-  <button type="reset" class="btn btn-warning" id="resetButton"><i class="fas fa-window-close"></i> Cancel</button>
+      
 
-   </form> <br><br><br>
- </div>
-</div>
+      </form> <br><br><br>
+    </div>
+    </div>
+</main>
