@@ -33,8 +33,19 @@ module.exports.processCreatePage = (req, res, next) => {
     // remove empty element from the array
     participants = participants.filter(item => item);
     
-    let totalParticipants = participants.length;
-    round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+    // let totalParticipants = participants.length;
+    // round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
+
+    let round = '';
+
+    if(req.body.type == '4')
+    {
+        round = '3';
+    }
+    else
+    {
+        round = '4';
+    }
 
     let arrayParticipants = new Array();
     
@@ -106,7 +117,7 @@ module.exports.processUpdatePage = (req, res, next) => {
     // let totalParticipants = participants.length;
     // round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
 
-    let round = 0;
+    let round = '';
 
     if(req.body.type == '4')
     {
