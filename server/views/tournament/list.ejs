@@ -17,15 +17,15 @@
         <% for(let i = 0; i < TournamentList.length; i++) { %>
             <tr class="d-flex">
                 <td class="text-center col-2"><%= TournamentList[i].title %></td>
-                <td class="text-center col-1"><%= TournamentList[i].round %> rounds
+                <td class="text-center col-1"><%= TournamentList[i].roundTotal %> rounds
                     <br>
                     <%= TournamentList[i].type %> bouts
                 </td>
 
                 <td class="text-center col-4">
                     <!-- display the objects in the participants array -->
-                    <% for(let j = 0; j < TournamentList[i].participants.length; j++) { %>
-                    <%=TournamentList[i].participants[j].participantname %><% if(j != TournamentList[i].participants.length - 1) {%>,<% } %>
+                    <% for(let j = 0; j < TournamentList[i].round1.length; j++) { %>
+                    <%=TournamentList[i].round1[j] %><% if(j != TournamentList[i].round1.length - 1) {%>,<% } %>
                     <% } %>
                 </td>
 
@@ -59,15 +59,15 @@
         <% for(let i = 0; i < TournamentList.length; i++) { %>
             <tr class="d-flex">
                 <td class="text-center col-2"><%= TournamentList[i].title %></td>
-                <td class="text-center col-2"><%= TournamentList[i].round %> rounds
+                <td class="text-center col-2"><%= TournamentList[i].roundTotal %> rounds
                     <br>
                     <%= TournamentList[i].type %> bouts
                 </td>
 
                 <td class="text-center col-5">
                     <!-- display the objects in the participants array -->
-                    <% for(let j = 0; j < TournamentList[i].participants.length; j++) { %>
-                    <%=TournamentList[i].participants[j].participantname %><% if(j != TournamentList[i].participants.length - 1) {%>,<% } %>
+                    <% for(let j = 0; j < TournamentList[i].round1.length; j++) { %>
+                    <%=TournamentList[i].round1[j] %><% if(j != TournamentList[i].round1.length - 1) {%>,<% } %>
                     <% } %>
                 </td>
 

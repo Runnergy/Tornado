@@ -117,36 +117,43 @@ module.exports.processUpdatePage = (req, res, next) => {
     // let totalParticipants = participants.length;
     // round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
 
-    let round = '';
+    let roundTotal = '';
 
     if(req.body.type == '4')
     {
-        round = '3';
+        roundTotal = '3';
     }
     else
     {
-        round = '4';
+        roundTotal = '4';
     }
 
     
-    let arrayParticipants = new Array();
+    // User will add one participant in each line
+    let secondRoundString = req.body.secondRoundParticipants;
+    let thirdRoundString = req.body.thirdRoundParticipants;
+    let forthRoundString = req.body.forthRoundParticipants;
+    let fifthRoundString = req.body.fifthRoundParticipants;
     
-    for (let index = 0; index < participants.length; index++) {
-        let participant = Participant({
-            "participantname": participants[index],
-            "history": 0
-        });
-        arrayParticipants[index] = participant;
-    }
+    
+    // split the line with the new line character and assign it to array
+    let secondParticipants = secondRoundString.split(",");
+    let thirdParticipants = thirdRoundString.split(",");
+    let forthParticipants = forthRoundString.split(",");
+    let fifthParticipants = fifthRoundString.split(",");
 
     
     let updatedTounament = Tournament({
         "_id": id,
         "title": req.body.title,
-        "participants": arrayParticipants,
+        "round1": participants,
+        "round2": secondParticipants,
+        "round3": thirdParticipants,
+        "round4": forthParticipants,
+        "round5": fifthParticipants,
         "startdate": req.body.startdate,
         "enddate": req.body.enddate,
-        "round": round,
+        "roundTotal": roundTotal,
         "type": req.body.type,
         "hostname": req.body.hostname,
         "status": req.body.status
@@ -213,6 +220,49 @@ module.exports.displayBrackets = (req, res, next) => {
         {
             //show the update view
             res.render('index', { title: 'Tournament brackets - view', file: '../views/tournament/brackets', tournament: tournamentToView, displayName: req.user ? req.user.displayName : ''  });
+        }
+    });
+}
+
+module.exports.processBracket = (req, res, next) => {
+    let id = req.params.id;
+
+    // User will add one participant in each line
+    let firstRoundString = req.body.firstRoundParticipants;
+    let secondRoundString = req.body.secondRoundParticipants;
+    let thirdRoundString = req.body.thirdRoundParticipants;
+    let forthRoundString = req.body.forthRoundParticipants;
+    let fifthRoundString = req.body.fifthRoundParticipants;
+    
+    
+    // split the line with the new line character and assign it to array
+    let firstParticipants = firstRoundString.split(",");
+    let secondParticipants = secondRoundString.split(",");
+    let thirdParticipants = thirdRoundString.split(",");
+    let forthParticipants = forthRoundString.split(",");
+    let fifthParticipants = fifthRoundString.split(",");
+
+    
+    let updatedTounament = Tournament({
+        "_id": id,
+        "round1": firstParticipants,
+        "round2": secondParticipants,
+        "round3": thirdParticipants,
+        "round4": forthParticipants,
+        "round5": fifthParticipants
+    });
+
+    Tournament.updateOne({_id: id}, updatedTounament, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            console.log(updatedTounament.round3);
+            // refresh 
+            res.redirect('back');
         }
     });
 }

@@ -5,8 +5,13 @@ let participantSchema = mongoose.model('participant').schema;
 //creat a MODEL class
 let tournamentModel= mongoose.Schema({
     title: String,
-    participants: [participantSchema],
-    round: String,
+    // participants: [participantSchema],
+    roundTotal: String,
+    round1: [String],
+    round2: [String],
+    round3: [String],
+    round4: [String],
+    round5: [String],
     type: String,
     enddate: Date,
     startdate: Date,

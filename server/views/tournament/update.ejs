@@ -82,8 +82,24 @@
                     <textarea class="form-control" id="participants"
                     placeholder="Enter participants"
                     name="participants" 
-                    required rows="8"><% for(let count = 0; count < tournament.participants.length; count++) { %><%= tournament.participants[count].participantname %>&#13;&#10;<% } %></textarea>
+                    required rows="8"><% for(let count = 0; count < tournament.round1.length; count++) { %><%= tournament.round1[count] %>&#13;&#10;<% } %></textarea>
                 </div>
+
+                <input type="text" class="form-control invisible" id="firstRoundParticipants" 
+                    value="<%= tournament.round1 %>"
+                    name="firstRoundParticipants">
+                <input type="text" class="form-control invisible"  id="secondRoundParticipants" 
+                    value="<%= tournament.round2 %>"
+                    name="secondRoundParticipants">
+                <input type="text" class="form-control invisible"  id="thirdRoundParticipants" 
+                    value="<%= tournament.round3 %>"
+                    name="thirdRoundParticipants">
+                <input type="text" class="form-control invisible"  id="forthRoundParticipants" 
+                    value="<%= tournament.round4 %>"
+                    name="forthRoundParticipants">
+                <input type="text" class="form-control invisible"  id="fifthRoundParticipants" 
+                    value="<%= tournament.round5 %>"
+                    name="fifthRoundParticipants">
 
                 <div class="form-group text-center row">
                     <div class="col-4">

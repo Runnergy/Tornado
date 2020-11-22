@@ -1,83 +1,143 @@
 <div class="container bracket-container p-5">
-    <table>
-        <tr>
-            <!-- repeats according to the number of rounds -->
-            <% for(let count = 0; count <= tournament.round; count++) { %>
-                <td class="text-center">ROUND <%= count %></td>
-            <% } %>
-        </tr>
-
-        <!-- repeats for the number of participants by multiplying the bouts by 2 -->
-        <% for(let count = 0; count < tournament.type * 2; count++) { %>
+    <form class="form" method="POST">
+        <table>
             <tr>
-                <td>
-                    <div class="participant first">
-                        <div class="participant-num"><%= count + 1 %></div>
-                        <div class="participant-name">
-                            <% if(tournament.participants[count] != null) { %>
-                                <%= tournament.participants[count].participantname %>
-                            <% } %>
-                        </div>
-                    </div>
-                </td>
-                <% if(count%2 == 0) { %>
-                    <td rowspan="2">
-                        <div class="participant second">
-                            <div class="participant-num">?</div>
-                            <div class="participant-name"></div>
-                        </div>
-                    </td>
-                <% } else { %>
-                    <td></td> 
+                <!-- repeats according to the number of rounds -->
+                <% for(let count = 0; count <= tournament.roundTotal; count++) { %>
+                    <td class="text-center">ROUND <%= count %></td>
                 <% } %>
+            </tr>
 
-                <% if(count%4 == 0) { %>
-                    <td rowspan="4">
-                        <div class="participant third">
-                            <div class="participant-num">?</div>
-                            <div class="participant-name"></div>
-                        </div>
-                    </td>
-                <% } else { %>
-                    <td></td> 
-                <% } %>
-
-                <% if(count%8 == 0) { %>
-                    <td rowspan="8">
-                        <div class="participant fourth">
-                            <div class="participant-num">?</div>
-                            <div class="participant-name"></div>
-                        </div>
-                    </td>
-                <% } else { %>
-                    <td></td> 
-                <% } %>
-
-                <!-- only applied when we have 4th rounds -->
-                <% if(tournament.round == '4') { %>
-                    <% if(count%16 == 0) { %>
-                        <td rowspan="16">
-                            <div class="participant fifth">
-                                <div class="participant-num">?</div>
-                                <div class="participant-name"></div>
+            <!-- repeats for the number of participants by multiplying the bouts by 2 -->
+            <% for(let count = 0; count < tournament.type * 2; count++) { %>
+                <tr>
+                    <td>
+                        <div class="input-group mb-3 first">
+                            <div class="input-group-prepend">
+                            <button class="btn btn-secondary" type="button"><%= count + 1 %></button>
                             </div>
+                            <input type="text" class="form-control" 
+                            value="<% if(tournament.round1[count] != null) { %><%= tournament.round1[count] %><% } %>" 
+                            placeholder="Username" aria-label="" 
+                            aria-describedby="basic-addon1"
+                            size="10"  maxlength="10"
+                            name="round1<%= count + 1 %>"
+                            disabled>
+                        </div>
+                    </td>
+                    <% if(count%2 == 0) { %>
+                        <td rowspan="2">
+                            
+                            <div class="input-group mb-3 second">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-secondary" type="button"><%= count/2 + 1 %></button>
+                                </div>
+                                <input type="text" class="form-control" 
+                                value="<% if(tournament.round1[count] != null) { %><%= tournament.round2[count/2] %><% } %>" 
+                                placeholder="Username" aria-label="" 
+                                aria-describedby="basic-addon1"
+                                size="10"  maxlength="10"
+                                disabled>
+                            </div>
+                            <!-- <input class="form-control invisible" type="text" value="" id="" name="0<%= count/2 %>"> -->
                         </td>
                     <% } else { %>
                         <td></td> 
                     <% } %>
-                <% } %>
-            </tr>
-        <% } %>
-    </table>
+
+                    <% if(count%4 == 0) { %>
+                        <td rowspan="4">
+                            <div class="input-group mb-3 third">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-secondary" type="button"><%= count/4 + 1 %></button>
+                                </div>
+                                <input type="text" class="form-control" 
+                                value="<% if(tournament.round1[count] != null) { %><%= tournament.round3[count/4] %><% } %>" 
+                                placeholder="Username" aria-label="" 
+                                aria-describedby="basic-addon1"
+                                size="10"  maxlength="10"
+                                disabled>
+                            </div>
+                            <!-- <input class="form-control invisible" type="text" value="" id="" name="00<%= count/4 %>"> -->
+                        </td>
+                    <% } else { %>
+                        <td></td> 
+                    <% } %>
+
+                    <% if(count%8 == 0) { %>
+                        <td rowspan="8">
+                            <div class="input-group mb-3 forth">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-secondary" type="button"><%= count/8 + 1 %></button>
+                                </div>
+                                <input type="text" class="form-control" 
+                                value="<% if(tournament.round1[count] != null) { %><%= tournament.round4[count/8] %><% } %>" 
+                                placeholder="Username" aria-label="" 
+                                aria-describedby="basic-addon1"
+                                size="10"  maxlength="10"
+                                disabled>
+                            </div>
+                            <!-- <input class="form-control invisible" type="text" value="" id="" name="000<%= count/8 %>"> -->
+                        </td>
+                    <% } else { %>
+                        <td></td> 
+                    <% } %>
+
+                    <!-- only applied when we have 4th rounds -->
+                    <% if(tournament.roundTotal == '4') { %>
+                        <% if(count%16 == 0) { %>
+                            <td rowspan="16">
+                                <div class="input-group mb-3 fifth">
+                                    <div class="input-group-prepend">
+                                    <button class="btn btn-secondary" type="button"><%= count/16 + 1 %></button>
+                                    </div>
+                                    <input type="text" class="form-control" 
+                                    value="<% if(tournament.round1[count] != null) { %><%= tournament.round5[count/16] %><% } %>" 
+                                    placeholder="Username" aria-label="" 
+                                    aria-describedby="basic-addon1"
+                                    size="10"  maxlength="10"
+                                    disabled>
+                                </div>
+                                <!-- <input class="form-control invisible" type="text" value="" id="" name="0000<%= count/16 %>"> -->
+                            </td>
+                        <% } else { %>
+                            <td></td> 
+                        <% } %>
+                    <% } %>
+                </tr>
+            <% } %>
+        </table>
+        
+        
+        <input type="text" class="form-control invisible" id="firstRoundParticipants" 
+            value="<%= tournament.round1 %>"
+            name="firstRoundParticipants">
+        <input type="text" class="form-control invisible"  id="secondRoundParticipants" 
+            value="<%= tournament.round2 %>"
+            name="secondRoundParticipants">
+        <input type="text" class="form-control invisible"  id="thirdRoundParticipants" 
+            value="<%= tournament.round3 %>"
+            name="thirdRoundParticipants">
+        <input type="text" class="form-control invisible"  id="forthRoundParticipants" 
+            value="<%= tournament.round4 %>"
+            name="forthRoundParticipants">
+        <input type="text" class="form-control invisible"  id="fifthRoundParticipants" 
+            value="<%= tournament.round5 %>"
+            name="fifthRoundParticipants">
+
     
-    <!-- only when the page is edit mode -->
-    <% if (title == "Tournament brackets") {%>
-        <div class="text-center p-5">
-            <button class="btn btn-primary" type="submit">
-                Save</button>
-            <a href="/tournament/update/<%= tournament._id %>" class="btn btn-warning">
-                Back to list</a>
-        </div>
-    <% } %>
+        <!-- only when the page is edit mode -->
+        <% if (title == "Tournament brackets") {%>
+            
+            <div class="text-center p-5">
+                <button class="btn btn-secondary" id="btnClearBracket">
+                    Clear</button>
+                <button class="btn btn-primary" type="submit">
+                    Confirm</button>
+                <a href="/tournament/update/<%= tournament._id %>" class="btn btn-warning">
+                    Back to list</a>
+            </div>
+        <% } %>
+    </form>
     
 </div>

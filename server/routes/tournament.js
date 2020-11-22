@@ -28,4 +28,6 @@ router.get('/brackets/:id', tournamentController.editBrackets);
 
 router.get('/brackets/:id/read-only', tournamentController.displayBrackets);
 
+router.post('/brackets/:id', tournamentController.processBracket);
+
 module.exports = router;

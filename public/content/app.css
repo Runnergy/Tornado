@@ -147,3 +147,8 @@ i {
 .bg-light-80 {
     background-color: rgba(175, 175, 175, 0.8);
 }
+
+.invisible {
+    display: none;
+    visibility: hidden;
+}
