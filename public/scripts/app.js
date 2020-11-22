@@ -19,30 +19,35 @@
             });
         }
 
+        // when the user is in Tournament bracket page(not in read-only)
         if(title === 'Tournament brackets')
         {
+            // enable user determine winner
             determineWinner('first', 'second');
             determineWinner('second', 'third');
             determineWinner('third', 'forth');
             determineWinner('forth', 'fifth');
 
+            // clear bracket button in bracket page
             let clearButton = document.querySelector('#btnClearBracket');
+
+            // when the clear bracket button is clicked
             clearButton.addEventListener('click', clearBrackets);
         }
-        
     }
 
     function determineWinner(currentRound, nextRound)
     {
-        // current round's participants
+        // array of current round's participants
         let roundParticipants = document.getElementsByClassName(currentRound);
 
-        // participants in current round
-        let roundParticipantsArray = document.getElementById(currentRound + 'RoundParticipants').value;
-        let nextRoundParticipantsArray = document.getElementById(nextRound + 'RoundParticipants').value;
+        // participants in current and next round (text input's value)
+        let currentParticipantsValue = document.getElementById(currentRound + 'RoundParticipants').value;
+        let nextRoundParticipantsValue = document.getElementById(nextRound + 'RoundParticipants').value;
         
-        let currentArray = roundParticipantsArray.split(",");
-        let nextArray = nextRoundParticipantsArray.split(",");
+        // split the value and assign them to the array
+        let currentParticipantsArray = currentParticipantsValue.split(",");
+        let nextParticipantsArray = nextRoundParticipantsValue.split(",");
         
         for (let index = 0; index < roundParticipants.length; index++) 
         {
@@ -58,18 +63,24 @@
                 nextRoundParticipants[nextIndex].getElementsByTagName('input')[0].value = 
                     roundParticipants[index].getElementsByTagName('input')[0].value;
 
-                roundParticipantsArray = document.getElementById(currentRound + 'RoundParticipants').value;
+                // assign value again in current round (text input's value)
+                currentParticipantsValue = document.getElementById(currentRound + 'RoundParticipants').value;
     
-                currentArray = roundParticipantsArray.split(",");
+                // array containing the list of current round's participants
+                currentParticipantsArray = currentParticipantsValue.split(",");
 
-                nextArray[nextIndex] = currentArray[index];
+                // assign selected participant's name to the next round's participant array
+                nextParticipantsArray[nextIndex] = currentParticipantsArray[index];
+
                 // console.log(nextArray);
-                let nextRoundParticipantsArray = document.getElementById(nextRound + 'RoundParticipants');
-                nextRoundParticipantsArray.value = nextArray;
+
+                // assign value again in current round (text input's value)
+                nextRoundParticipantsArray = document.getElementById(nextRound + 'RoundParticipants');
+                nextRoundParticipantsArray.value = nextParticipantsArray;
                 
-                console.log(currentArray);
-                console.log(nextArray);
-                console.log(nextRoundParticipantsArray.value);
+                // console.log(currnetParticipantsArray);
+                // console.log(nextParticipantsArray);
+                // console.log(nextRoundParticipantsArray.value);
             });
         }
         
@@ -77,11 +88,13 @@
 
     function clearBrackets()
     {
+        // all round's participants array
         let secondParticipantsArray = document.getElementById('secondRoundParticipants');
         let thirdParticipantsArray = document.getElementById('thirdRoundParticipants');
         let forthParticipantsArray = document.getElementById('forthRoundParticipants');
         let fifthParticipantsArray = document.getElementById('fifthRoundParticipants');
         
+        // assign null to every array 
         secondParticipantsArray.value = null;
         thirdParticipantsArray.value = null;
         forthParticipantsArray.value = null;

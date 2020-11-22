@@ -36,35 +36,24 @@ module.exports.processCreatePage = (req, res, next) => {
     // let totalParticipants = participants.length;
     // round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
 
-    let round = '';
+    // determine round according to the number of bouts
+    let roundTotal = '';
 
     if(req.body.type == '4')
     {
-        round = '3';
+        roundTotal = '3';
     }
     else
     {
-        round = '4';
-    }
-
-    let arrayParticipants = new Array();
-    
-    for (let index = 0; index < participants.length; index++) {
-        let participantName = participants[index];
-        let participant = Participant({
-            "participantname": participantName,
-            "history": 0
-        });
-        arrayParticipants[index] = participant;
-        console.log(participant.participantname);
+        roundTotal = '4';
     }
 
     let newTournament= Tournament({
         "title": req.body.title,
-        "participants": arrayParticipants,
+        "round1": participants,
         "startdate": req.body.startdate,
         "enddate": req.body.enddate,
-        "round": round,
+        "roundTotal": roundTotal,
         "type": req.body.type,
         "hostname": req.body.hostname,
         "status": req.body.status
@@ -117,6 +106,8 @@ module.exports.processUpdatePage = (req, res, next) => {
     // let totalParticipants = participants.length;
     // round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
 
+
+    // determine round according to the number of bouts
     let roundTotal = '';
 
     if(req.body.type == '4')
@@ -127,21 +118,18 @@ module.exports.processUpdatePage = (req, res, next) => {
     {
         roundTotal = '4';
     }
-
     
-    // User will add one participant in each line
+    // get values from the input text field containing list of participants in each round
     let secondRoundString = req.body.secondRoundParticipants;
     let thirdRoundString = req.body.thirdRoundParticipants;
     let forthRoundString = req.body.forthRoundParticipants;
     let fifthRoundString = req.body.fifthRoundParticipants;
     
-    
-    // split the line with the new line character and assign it to array
+    // split and assign it to array
     let secondParticipants = secondRoundString.split(",");
     let thirdParticipants = thirdRoundString.split(",");
     let forthParticipants = forthRoundString.split(",");
     let fifthParticipants = fifthRoundString.split(",");
-
     
     let updatedTounament = Tournament({
         "_id": id,
@@ -227,7 +215,7 @@ module.exports.displayBrackets = (req, res, next) => {
 module.exports.processBracket = (req, res, next) => {
     let id = req.params.id;
 
-    // User will add one participant in each line
+    // get values from the input text field containing list of participants in each round
     let firstRoundString = req.body.firstRoundParticipants;
     let secondRoundString = req.body.secondRoundParticipants;
     let thirdRoundString = req.body.thirdRoundParticipants;
@@ -235,7 +223,7 @@ module.exports.processBracket = (req, res, next) => {
     let fifthRoundString = req.body.fifthRoundParticipants;
     
     
-    // split the line with the new line character and assign it to array
+    // split and assign it to array
     let firstParticipants = firstRoundString.split(",");
     let secondParticipants = secondRoundString.split(",");
     let thirdParticipants = thirdRoundString.split(",");

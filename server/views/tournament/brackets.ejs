@@ -14,9 +14,11 @@
                 <tr>
                     <td>
                         <div class="input-group mb-3 first">
+                            <!-- container number -->
                             <div class="input-group-prepend">
                             <button class="btn btn-secondary" type="button"><%= count + 1 %></button>
                             </div>
+                            <!-- input text field diaplaying participant' name -->
                             <input type="text" class="form-control" 
                             value="<% if(tournament.round1[count] != null) { %><%= tournament.round1[count] %><% } %>" 
                             placeholder="Username" aria-label="" 
@@ -30,9 +32,11 @@
                         <td rowspan="2">
                             
                             <div class="input-group mb-3 second">
+                                <!-- container number -->
                                 <div class="input-group-prepend">
                                 <button class="btn btn-secondary" type="button"><%= count/2 + 1 %></button>
                                 </div>
+                                <!-- input text field diaplaying participant' name -->
                                 <input type="text" class="form-control" 
                                 value="<% if(tournament.round1[count] != null) { %><%= tournament.round2[count/2] %><% } %>" 
                                 placeholder="Username" aria-label="" 
@@ -49,9 +53,11 @@
                     <% if(count%4 == 0) { %>
                         <td rowspan="4">
                             <div class="input-group mb-3 third">
+                                <!-- container number -->
                                 <div class="input-group-prepend">
                                 <button class="btn btn-secondary" type="button"><%= count/4 + 1 %></button>
                                 </div>
+                                <!-- input text field diaplaying participant' name -->
                                 <input type="text" class="form-control" 
                                 value="<% if(tournament.round1[count] != null) { %><%= tournament.round3[count/4] %><% } %>" 
                                 placeholder="Username" aria-label="" 
@@ -68,9 +74,11 @@
                     <% if(count%8 == 0) { %>
                         <td rowspan="8">
                             <div class="input-group mb-3 forth">
+                                <!-- container number -->
                                 <div class="input-group-prepend">
                                 <button class="btn btn-secondary" type="button"><%= count/8 + 1 %></button>
                                 </div>
+                                <!-- input text field diaplaying participant' name -->
                                 <input type="text" class="form-control" 
                                 value="<% if(tournament.round1[count] != null) { %><%= tournament.round4[count/8] %><% } %>" 
                                 placeholder="Username" aria-label="" 
@@ -89,9 +97,11 @@
                         <% if(count%16 == 0) { %>
                             <td rowspan="16">
                                 <div class="input-group mb-3 fifth">
+                                    <!-- container number -->
                                     <div class="input-group-prepend">
                                     <button class="btn btn-secondary" type="button"><%= count/16 + 1 %></button>
                                     </div>
+                                    <!-- input text field diaplaying participant' name -->
                                     <input type="text" class="form-control" 
                                     value="<% if(tournament.round1[count] != null) { %><%= tournament.round5[count/16] %><% } %>" 
                                     placeholder="Username" aria-label="" 
@@ -109,7 +119,7 @@
             <% } %>
         </table>
         
-        
+        <!-- invisible input text fields containing the list of participants in the round -->
         <input type="text" class="form-control invisible" id="firstRoundParticipants" 
             value="<%= tournament.round1 %>"
             name="firstRoundParticipants">
