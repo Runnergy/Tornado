@@ -102,6 +102,14 @@ footer a:hover {
     background-color: #9c0404;
 }
 
+.active:hover {
+    background-color: #d49191a1;
+}
+
+.inactive {
+    background-color: #303030ab;
+}
+
 i {
     color: white;
 }

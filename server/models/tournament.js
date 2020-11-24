@@ -13,8 +13,9 @@ let tournamentModel= mongoose.Schema({
     type: String,
     enddate: Date,
     startdate: Date,
-    hostname: String,
-    status: String
+    host: String,
+    status: String,
+    description: String
 },
 {
 collection :"tournaments"

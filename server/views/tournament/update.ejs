@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <label for="hostTextField" class="col-2 col-form-label">Host</label>
                     <div class="col-10">
                         <input type="text" class="form-control"
@@ -26,26 +26,7 @@
                         value="<%= tournament.hostname %>"
                         required>
                     </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="typeTextField" class="col-2 col-form-label">Status</label>
-                    <div class="col-10">
-                        <!-- When the type of tournament is 4 bouts -->
-                        <% if(tournament.status == "active") { %>
-                            <input type="radio" id="active" name="status" value="active" checked> 
-                            <label for="lblActive">Active</label>&nbsp;&nbsp;
-                            <input type="radio" id="inactive" name="status" value="inactive">
-                            <label for="lblInactive">Inactive</label><br>
-                        <% } else {%>
-                            <!-- When the type of tournament is 8 bouts -->
-                            <input type="radio" id="active" name="status" value="active">
-                            <label for="lblActive">Active</label>&nbsp;&nbsp;
-                            <input type="radio" id="inactive" name="status" value="inactive" checked>
-                            <label for="lblInactive">Inactive</label><br>
-                        <% } %>
-                    </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                     <label for="typeTextField" class="col-2 col-form-label">Type</label>
@@ -74,6 +55,11 @@
                     <div class="col-5">
                         <input class="form-control" type="date" value="<%= tournament.enddate.toISOString().replace('T', ' ').substr(0, 10) %>" id="" name="enddate">
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="participantTextField">Description</label>
+                    <textarea class="form-control" id="description" name="description" placeholder="Enter description" rows="3"  required><%= tournament.description %></textarea>
                 </div>
                 
 

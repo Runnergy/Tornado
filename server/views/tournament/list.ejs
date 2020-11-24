@@ -6,9 +6,10 @@
     <!-- Header Row-->
         <tr class="d-flex">
             <td class="text-center col-2">Title</td>
+            <td class="text-center col-1">Status</td>
             <td class="text-center col-1">Type</td>
-            <td class="text-center col-4">Participants</td>
-            <td class="text-center col-3">Start - End</td>
+            <td class="text-center col-4">Description</td>
+            <td class="text-center col-2">End date</td>
             <td class="text-center col-2"></td>
         </tr>
 
@@ -17,41 +18,53 @@
         <% for(let i = 0; i < TournamentList.length; i++) { %>
             <tr class="d-flex">
                 <td class="text-center col-2"><%= TournamentList[i].title %></td>
-                <td class="text-center col-1"><%= TournamentList[i].roundTotal %> rounds
-                    <br>
+
+                <td class="text-center col-1">
+                    <% if( TournamentList[i].status == 'active' ){ %>
+                        <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
+                    <% } %> 
+                </td>
+
+                <td class="text-center col-1">
                     <%= TournamentList[i].type %> bouts
                 </td>
 
                 <td class="text-center col-4">
-                    <!-- display the objects in the participants array -->
-                    <% for(let j = 0; j < TournamentList[i].round1.length; j++) { %>
-                    <%=TournamentList[i].round1[j] %><% if(j != TournamentList[i].round1.length - 1) {%>,<% } %>
-                    <% } %>
+                    <%= TournamentList[i].description.substr(0, 40) %>....
                 </td>
 
-                <td class="text-center col-3">
-                    <%= TournamentList[i].startdate.toISOString().replace('T', ' ').substr(0, 10) %> - <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
+                <td class="text-center col-2">
+                    <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
                 </td>
                 <td class="text-center col-2">
-                    <a href="/tournament/brackets/<%= TournamentList[i]._id %>/read-only" class="btn color-red3 btn-sm">
+                    <a href="/tournament/brackets/<%= TournamentList[i]._id %>/read-only" class="btn color-red3 active btn-sm">
                     <i class="fas fa-eye"></i></a>
-                    <a href="/tournament/update/<%= TournamentList[i]._id %>" class="btn color-red2 btn-sm">
-                    <i class="fas fa-pencil-alt"></i></a>
-                    <a href="/tournament/delete/<%= TournamentList[i]._id %>" class="btn color-red1 btn-sm btn-delete">
-                    <i class="fas fa-trash-alt"></i></a>
+                    <% if( TournamentList[i].host == username ){ %>
+                        <a href="/tournament/update/<%= TournamentList[i]._id %>" class="btn color-red2 active btn-sm">
+                        <i class="fas fa-pencil-alt"></i></a>
+                        <a href="/tournament/delete/<%= TournamentList[i]._id %>" class="btn color-red1 active btn-sm btn-delete">
+                        <i class="fas fa-trash-alt"></i></a>
+                    <% } else {%>
+                        <a class="btn btn-sm inactive">
+                        <i class="fas fa-pencil-alt"></i></a>
+                        <a class="btn btn-sm inactive">
+                        <i class="fas fa-trash-alt"></i></a>
+                    <% } %> 
                 </td>
             </tr>
         <% } %>
     </table>
+    
     <% } else {%>
     <h3 id="hero-description">Please <a href="/login">login</a> to View, Edit or Delete tournament options.</h3>
     <table class="table bg-light-80 table-hover">
     <!-- Header Row-->
         <tr class="d-flex">
             <td class="text-center col-2">Title</td>
-            <td class="text-center col-2">Type</td>
-            <td class="text-center col-5">Participants</td>
-            <td class="text-center col-3">Start - End</td>
+            <td class="text-center col-1">Status</td>
+            <td class="text-center col-1">Type</td>
+            <td class="text-center col-5">Description</td>
+            <td class="text-center col-3">End date</td>
         </tr>
 
         <!-- Repeatable Template Row -->
@@ -59,20 +72,23 @@
         <% for(let i = 0; i < TournamentList.length; i++) { %>
             <tr class="d-flex">
                 <td class="text-center col-2"><%= TournamentList[i].title %></td>
-                <td class="text-center col-2"><%= TournamentList[i].roundTotal %> rounds
-                    <br>
+
+                <td class="text-center col-1">
+                    <% if( TournamentList[i].status == 'active' ){ %>
+                        <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
+                    <% } %> 
+                </td>
+
+                <td class="text-center col-1">
                     <%= TournamentList[i].type %> bouts
                 </td>
 
                 <td class="text-center col-5">
-                    <!-- display the objects in the participants array -->
-                    <% for(let j = 0; j < TournamentList[i].round1.length; j++) { %>
-                    <%=TournamentList[i].round1[j] %><% if(j != TournamentList[i].round1.length - 1) {%>,<% } %>
-                    <% } %>
+                    <%= TournamentList[i].description.substr(0, 20) %>
                 </td>
 
                 <td class="text-center col-3">
-                    <%= TournamentList[i].startdate.toISOString().replace('T', ' ').substr(0, 10) %> - <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
+                    <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
                 </td>
             </tr>
         <% } %>

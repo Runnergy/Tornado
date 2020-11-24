@@ -13,7 +13,11 @@ module.exports.displayTournamentList = (req, res, next) => {
         }
         else
         {
-            res.render('index', {title: 'Tournaments',file: '../views/tournament/list', TournamentList: tournamentList, displayName: req.user ? req.user.displayName : ''});   
+            res.render('index', {title: 'Tournaments',file: '../views/tournament/list', 
+                        TournamentList: tournamentList, 
+                        displayName: req.user ? req.user.displayName : '', 
+                        username: req.user ? req.user.username : '' }); 
+            console.log(req.user ? req.user.username : '');  
         }
     });
 }
@@ -47,6 +51,20 @@ module.exports.processCreatePage = (req, res, next) => {
         roundTotal = '4';
     }
 
+    let status = '';
+    let currentDate = new Date().toISOString().slice(0,10);
+
+    if(req.body.startdate <= currentDate && 
+        req.body.enddate >= currentDate &&
+        participants.length == req.body.type * 2)
+        {
+            status = 'active';
+        }
+        // console.log(req.body.type * 2);
+        // console.log(req.body.enddate);
+        // console.log(req.body.startdate);
+        // username: req.user.username
+
     let newTournament= Tournament({
         "title": req.body.title,
         "round1": participants,
@@ -54,8 +72,9 @@ module.exports.processCreatePage = (req, res, next) => {
         "enddate": req.body.enddate,
         "roundTotal": roundTotal,
         "type": req.body.type,
-        "hostname": req.body.hostname,
-        "status": req.body.status
+        "host": req.user.username,
+        "status": status,
+        "description": req.body.description
     });
 
     Tournament.create(newTournament, (err, Tournament) =>{
@@ -117,6 +136,17 @@ module.exports.processUpdatePage = (req, res, next) => {
     {
         roundTotal = '4';
     }
+
+    let status = '';
+    let currentDate = new Date().toISOString().slice(0,10);
+
+    if(req.body.startdate <= currentDate && 
+        req.body.enddate >= currentDate &&
+        participants.length == req.body.type * 2)
+        {
+            status = 'active';
+            console.log(status);
+        }
     
     // get values from the input text field containing list of participants in each round
     let secondRoundString = req.body.secondRoundParticipants;
@@ -142,8 +172,9 @@ module.exports.processUpdatePage = (req, res, next) => {
         "enddate": req.body.enddate,
         "roundTotal": roundTotal,
         "type": req.body.type,
-        "hostname": req.body.hostname,
-        "status": req.body.status
+        "host": req.user.username,
+        "status": status,
+        "description": req.body.description
     });
 
     Tournament.updateOne({_id: id}, updatedTounament, (err) => {
@@ -189,7 +220,7 @@ module.exports.editBrackets = (req, res, next) => {
         else
         {
             //show the update view
-            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', tournament: tournamentToView, displayName: req.user ? req.user.displayName : ''  });
+            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', tournament: tournamentToView, displayName: req.user ? req.user.displayName : '' });
         }
     });
 }

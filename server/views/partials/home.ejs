@@ -12,48 +12,46 @@
 <div class="container">
     <table class="table bg-dark-80 text-light">
     <!-- Header Row-->
-        <tr>
-            <th class="text-center" colspan="4">Active Tournaments</th>
-        </tr>
         <tr class="d-flex">
-            <td class="text-center col-3">Title</td>
-            <td class="text-center col-2">Type</td>
-            <td class="text-center col-2">Host</td>
-            <td class="text-center col-2">Start</td>
-            <td class="text-center col-2">End</td>
+            <td class="text-center col-2">Title</td>
+            <td class="text-center col-1">Status</td>
+            <td class="text-center col-1">Type</td>
+            <td class="text-center col-4">Description</td>
+            <td class="text-center col-3">End date</td>
             <td class="text-center col-1"></td>
         </tr>
 
         <!-- Repeatable Template Row -->
 
         <% for(let i = 0; i < TournamentList.length; i++) { %>
-            <!-- we will replace this if statement with the one checking the status of tournament(active/inactive) -->
-            <% if(TournamentList[i].status == 'active') { %>
+            <% if( TournamentList[i].status == 'active' ){ %>
                 <tr class="d-flex">
-                    <td class="text-center col-3"><%= TournamentList[i].title %></td>
-                    <td class="text-center col-2"><%= TournamentList[i].roundTotal %> rounds
-                        <br>
+                    <td class="text-center col-2"><%= TournamentList[i].title %></td>
+
+                    <td class="text-center col-1">
+                        <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
+                    </td>
+
+                    <td class="text-center col-1">
                         <%= TournamentList[i].type %> bouts
                     </td>
 
-                    <td class="text-center col-2">
-                        <%= TournamentList[i].hostname %> 
+                    <td class="text-center col-4">
+                        Lorem Ipsum is simply dummy text of t...
                     </td>
-                    <td class="text-center col-2">
-                        <%= TournamentList[i].startdate.toISOString().replace('T', ' ').substr(0, 10) %> 
-                    </td>
-                    <td class="text-center col-2">
-                        <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %> 
+
+                    <td class="text-center col-3">
+                        <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
                     </td>
                     <td class="text-center col-1">
                         <!-- When the URL contains /read-only, function determineWinner is not applied (cannot edit) -->
                         <a href="/tournament/brackets/<%= TournamentList[i]._id %>/read-only" class="btn btn-danger btn-sm">
                         VIEW</a>
                     </td>
-                    
-                </tr>   
+                </tr>
             <% } %>
         <% } %>
+        
     </table>
 </div>
 
