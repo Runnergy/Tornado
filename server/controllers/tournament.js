@@ -4,7 +4,6 @@ let mongoose = require('mongoose');
 
 // create a reference to the model
 let Tournament = require('../models/tournament');
-let Participant = require('../models/participant');
 
 module.exports.displayTournamentList = (req, res, next) => {
     Tournament.find((err, tournamentList) => {

@@ -1,6 +1,4 @@
 let mongoose =require('mongoose');
-const participant = require('./participant');
-let participantSchema = mongoose.model('participant').schema;
 
 //creat a MODEL class
 let tournamentModel= mongoose.Schema({
