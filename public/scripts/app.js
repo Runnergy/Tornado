@@ -116,10 +116,16 @@
 
                 // assign the array to next round's text input field
                 document.getElementById(nextRound + 'RoundParticipants').value = nextParticipantsArray;
-            });
-            
+            });   
         }
-        
     }
-
 })();
+
+function displayParticipant() {
+        let fourBouts = document.getElementById("fourBouts");
+        let sixteenBouts = document.getElementById("sixteenBouts");
+        let fourbout = document.getElementById("fourbout");
+        let eightbout = document.getElementById("eightbout");
+        fourbout.style.display = fourBouts.checked ? "block" : "none";
+        eightbout.style.display = sixteenBouts.checked ? "block" : "none";
+};
