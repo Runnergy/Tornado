@@ -57,10 +57,20 @@
                     <% } %> 
 
                     <!-- next round button -->
-                    <div class="offset-5 col-2">
+                    <div class="offset-3 col-2">
                         <button class="btn btn-primary btn-flexible d-block" type="submit">Next Round</button>
                     </div>
 
+                    <!-- Last round button -->
+                    <% if(parseInt(roundNumber) > 0) { %>
+                        <div class="col-2">
+                            <a class="btn btn-primary btn-flexible d-block" href="/tournament/progress/<%= tournament._id %>/<%= parseInt(roundNumber) - 1 %>">Last Round</a>
+                        </div>
+                    <% } %>
+                    <div class="col-2">
+                        <a class="btn btn-primary btn-flexible d-block" href="/tournament/update/<%= tournament._id %>">Back to Edit Page</a>
+                    </div>
+                    
                 <% } else { %> 
                     <!-- check the result button -->
                     <a href="/tournament/brackets/<%= tournament._id %>" class="btn btn-danger">
