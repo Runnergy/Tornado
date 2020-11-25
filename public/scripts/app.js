@@ -19,114 +19,58 @@
             });
         }
 
-        // when the user is in Tournament bracket page(not in read-only)
-        if(title === 'Tournament brackets')
+        if(title === 'Progress Tournament')
         {
-            // enable user determine winner
-            determineWinner('first', 'second');
-            determineWinner('second', 'third');
-            determineWinner('third', 'forth');
-            determineWinner('forth', 'fifth');
+            let currentPage = window.location.href;
 
-            // clear bracket button in bracket page
-            let clearButton = document.querySelector('#btnClearBracket');
-
-            // when the clear bracket button is clicked
-            clearButton.addEventListener('click', clearBrackets);
+            // get the round number using the last character of url
+            let roundNumber = currentPage.substr(currentPage.length - 1);
+            
+            // call function with different parameters
+            switch (roundNumber) {
+                case '0': 
+                determineWinnerRound('first', 'second');
+                    break;
+                case '1': 
+                determineWinnerRound('second', 'third');
+                    break;
+                case '2': 
+                determineWinnerRound('third', 'forth');
+                    break;
+                case '3': 
+                determineWinnerRound('forth', 'fifth');
+                    break;
+                case '4': 
+                determineWinnerRound('forth', 'fifth');
+                    break;
+            
+                default:
+                    break;
+            }
         }
-    }
-
-    function determineWinner(currentRound, nextRound)
-    {
-        // array of current round's participants
-        let roundParticipants = document.getElementsByClassName(currentRound);
-
-        // participants in current and next round (text input's value)
-        let currentParticipantsValue = document.getElementById(currentRound + 'RoundParticipants').value;
-        let nextRoundParticipantsValue = document.getElementById(nextRound + 'RoundParticipants').value;
-        
-        // split the value and assign them to the array
-        let currentParticipantsArray = currentParticipantsValue.split(",");
-        let nextParticipantsArray = nextRoundParticipantsValue.split(",");
-        
-        for (let index = 0; index < roundParticipants.length; index++) 
-        {
-            // when one of the participant object is clicked
-            roundParticipants[index].getElementsByTagName('button')[0].addEventListener('click', (e) => {
-                // calculate the index to display clicked object on the next round's object
-                nextIndex = Math.floor((index)/2);
-
-                // next round's participants
-                let nextRoundParticipants = document.getElementsByClassName(nextRound);
-
-                // assign clicked current participant's name to the next round's winner name
-                nextRoundParticipants[nextIndex].getElementsByTagName('input')[0].value = 
-                    roundParticipants[index].getElementsByTagName('input')[0].value;
-
-                // assign value again in current round (text input's value)
-                currentParticipantsValue = document.getElementById(currentRound + 'RoundParticipants').value;
-    
-                // array containing the list of current round's participants
-                currentParticipantsArray = currentParticipantsValue.split(",");
-
-                // assign selected participant's name to the next round's participant array
-                nextParticipantsArray[nextIndex] = currentParticipantsArray[index];
-
-                // console.log(nextArray);
-
-                // assign value again in current round (text input's value)
-                nextRoundParticipantsArray = document.getElementById(nextRound + 'RoundParticipants');
-                nextRoundParticipantsArray.value = nextParticipantsArray;
-                
-                // console.log(currnetParticipantsArray);
-                // console.log(nextParticipantsArray);
-                // console.log(nextRoundParticipantsArray.value);
-            });
-        }
-        
-    }
-
-    function clearBrackets()
-    {
-        // all round's participants array
-        let secondParticipantsArray = document.getElementById('secondRoundParticipants');
-        let thirdParticipantsArray = document.getElementById('thirdRoundParticipants');
-        let forthParticipantsArray = document.getElementById('forthRoundParticipants');
-        let fifthParticipantsArray = document.getElementById('fifthRoundParticipants');
-        
-        // assign null to every array 
-        secondParticipantsArray.value = null;
-        thirdParticipantsArray.value = null;
-        forthParticipantsArray.value = null;
-        fifthParticipantsArray.value = null;
     }
     
     window.addEventListener("load", Start);
 
     if(document.title == "Contact Us")
     {
-        console.log("on contact page")
+        // get send and cancel button
         let sendButton = document.getElementById("sendButton");
         let cancelButton = document.getElementById("resetButton");
     
         sendButton.addEventListener("click", (event) => {
            event.preventDefault();
     
+           // get values from form elements
            let firstName = document.getElementById("fname").value;
            let lastName = document.getElementById("lname").value;
            let email = document.getElementById("email").value;
            let message = document.getElementById("message").value;
            let form = document.forms[0];
     
-           console.log("First Name: " + firstName);
-           console.log("Last Name: " + lastName);
-           console.log("Email: " + email);
-           console.log("Message: " + message );
-           console.log("");
-    
            if(firstName =="" || lastName=="" || email=="" )
            {
-               confirm("Please fill the form...")
+               confirm("Please fill the form...");
            }
            else
            {
@@ -137,8 +81,6 @@
            }
     
            form.reset();
-           
-          
         })
     
         cancelButton.addEventListener("click", (event) => {
@@ -148,6 +90,36 @@
                location.href = "/home";
             }
         })
+    }
+
+    function determineWinnerRound(currentRound, nextRound)
+    {
+        // radio button for each participant
+        let rbtnRoundParticipants = document.getElementsByClassName('rbtnRoundParticipants');
+
+        // text input field containing string value of next round's participants
+        let nextRoundParticipants = document.getElementById(nextRound + 'RoundParticipants').value;
+        
+        // split the string and assign them to the array
+        let nextParticipantsArray = nextRoundParticipants.split(",");
+
+        for (let index = 0; index < rbtnRoundParticipants.length; index++) 
+        {
+            // when radio button is changed
+            rbtnRoundParticipants[index].addEventListener('change', (e) => {
+
+                // calculate the index to display clicked object on the next round's object
+                nextIndex = Math.floor((index)/2);
+
+                // assign changed radio button's value to next round's participants array
+                nextParticipantsArray[nextIndex] = rbtnRoundParticipants[index].value;
+
+                // assign the array to next round's text input field
+                document.getElementById(nextRound + 'RoundParticipants').value = nextParticipantsArray;
+            });
+            
+        }
+        
     }
 
 })();

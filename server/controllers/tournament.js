@@ -4,6 +4,7 @@ let mongoose = require('mongoose');
 
 // create a reference to the model
 let Tournament = require('../models/tournament');
+let Round = require('../models/tournament_round');
 
 module.exports.displayTournamentList = (req, res, next) => {
     Tournament.find((err, tournamentList) => {
@@ -17,13 +18,13 @@ module.exports.displayTournamentList = (req, res, next) => {
                         TournamentList: tournamentList, 
                         displayName: req.user ? req.user.displayName : '', 
                         username: req.user ? req.user.username : '' }); 
-            console.log(req.user ? req.user.username : '');  
         }
     });
 }
 
 module.exports.displayCreatePage = (req, res, next) => {
-    res.render('index', { title: 'Create Tournament', file: '../views/tournament/create', displayName: req.user ? req.user.displayName : '' });          
+    res.render('index', { title: 'Create Tournament', file: '../views/tournament/create', 
+                displayName: req.user ? req.user.displayName : '' });          
 }
 
 module.exports.processCreatePage = (req, res, next) => {
@@ -35,9 +36,6 @@ module.exports.processCreatePage = (req, res, next) => {
 
     // remove empty element from the array
     participants = participants.filter(item => item);
-    
-    // let totalParticipants = participants.length;
-    // round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
 
     // determine round according to the number of bouts
     let roundTotal = '';
@@ -54,20 +52,24 @@ module.exports.processCreatePage = (req, res, next) => {
     let status = '';
     let currentDate = new Date().toISOString().slice(0,10);
 
+    // if current date is between start date and end date & have enough participants
     if(req.body.startdate <= currentDate && 
         req.body.enddate >= currentDate &&
         participants.length == req.body.type * 2)
         {
+            // active status
             status = 'active';
         }
-        // console.log(req.body.type * 2);
-        // console.log(req.body.enddate);
-        // console.log(req.body.startdate);
-        // username: req.user.username
+
+    // object that will be inserted in rounds array, containing participants array 
+    let participantArray = {"participants": participants};
+
+    // placeholder object that will be inserted in rounds array
+    let emptyParticipantArray = {"participants": []};
 
     let newTournament= Tournament({
         "title": req.body.title,
-        "round1": participants,
+        "rounds": [participantArray, emptyParticipantArray, emptyParticipantArray, emptyParticipantArray, emptyParticipantArray],
         "startdate": req.body.startdate,
         "enddate": req.body.enddate,
         "roundTotal": roundTotal,
@@ -104,7 +106,9 @@ module.exports.displayUpdatePage = (req, res, next) => {
         else
         {
             //show the update view
-            res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', tournament: tournamentToEdit, displayName: req.user ? req.user.displayName : '' });
+            res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', 
+                        tournament: tournamentToEdit, 
+                        displayName: req.user ? req.user.displayName : '' });
         }
     });
 }
@@ -120,10 +124,6 @@ module.exports.processUpdatePage = (req, res, next) => {
 
     // remove empty element from the array
     participants = participants.filter(item => item);
-    
-    // let totalParticipants = participants.length;
-    // round = Math.ceil(Math.log(totalParticipants) / Math.log(2));
-
 
     // determine round according to the number of bouts
     let roundTotal = '';
@@ -140,34 +140,24 @@ module.exports.processUpdatePage = (req, res, next) => {
     let status = '';
     let currentDate = new Date().toISOString().slice(0,10);
 
+    // if current date is between start date and end date & have enough participants
     if(req.body.startdate <= currentDate && 
         req.body.enddate >= currentDate &&
         participants.length == req.body.type * 2)
         {
             status = 'active';
-            console.log(status);
         }
-    
-    // get values from the input text field containing list of participants in each round
-    let secondRoundString = req.body.secondRoundParticipants;
-    let thirdRoundString = req.body.thirdRoundParticipants;
-    let forthRoundString = req.body.forthRoundParticipants;
-    let fifthRoundString = req.body.fifthRoundParticipants;
-    
-    // split and assign it to array
-    let secondParticipants = secondRoundString.split(",");
-    let thirdParticipants = thirdRoundString.split(",");
-    let forthParticipants = forthRoundString.split(",");
-    let fifthParticipants = fifthRoundString.split(",");
+
+    // object that will be inserted in rounds array, containing participants array 
+    let ParticipantArray = {"participants": participants};
+
+    // placeholder object that will be inserted in rounds array
+    let emptyParticipantArray = {"participants": []};
     
     let updatedTounament = Tournament({
         "_id": id,
         "title": req.body.title,
-        "round1": participants,
-        "round2": secondParticipants,
-        "round3": thirdParticipants,
-        "round4": forthParticipants,
-        "round5": fifthParticipants,
+        "rounds": [ParticipantArray, emptyParticipantArray, emptyParticipantArray, emptyParticipantArray, emptyParticipantArray],
         "startdate": req.body.startdate,
         "enddate": req.body.enddate,
         "roundTotal": roundTotal,
@@ -220,7 +210,9 @@ module.exports.editBrackets = (req, res, next) => {
         else
         {
             //show the update view
-            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', tournament: tournamentToView, displayName: req.user ? req.user.displayName : '' });
+            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
+                        tournament: tournamentToView, 
+                        displayName: req.user ? req.user.displayName : '' });
         }
     });
 }
@@ -237,13 +229,37 @@ module.exports.displayBrackets = (req, res, next) => {
         else
         {
             //show the update view
-            res.render('index', { title: 'Tournament brackets - view', file: '../views/tournament/brackets', tournament: tournamentToView, displayName: req.user ? req.user.displayName : ''  });
+            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
+                        tournament: tournamentToView, 
+                        displayName: req.user ? req.user.displayName : ''  });
         }
     });
 }
 
-module.exports.processBracket = (req, res, next) => {
+module.exports.displayProgress = (req, res, next) => {
     let id = req.params.id;
+    let roundNumber = req.params.roundNumber;
+
+    Tournament.findById(id, (err, tournamentToView) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the update view
+            res.render('index', { title: 'Progress Tournament', file: '../views/tournament/progress', 
+                        tournament: tournamentToView, 
+                        displayName: req.user ? req.user.displayName : '',
+                        roundNumber: roundNumber });
+        }
+    });
+}
+
+module.exports.processProgress = (req, res, next) => {
+    let id = req.params.id;
+    let roundNumber = req.params.roundNumber;
 
     // get values from the input text field containing list of participants in each round
     let firstRoundString = req.body.firstRoundParticipants;
@@ -252,22 +268,21 @@ module.exports.processBracket = (req, res, next) => {
     let forthRoundString = req.body.forthRoundParticipants;
     let fifthRoundString = req.body.fifthRoundParticipants;
     
-    
     // split and assign it to array
-    let firstParticipants = firstRoundString.split(",");
-    let secondParticipants = secondRoundString.split(",");
-    let thirdParticipants = thirdRoundString.split(",");
-    let forthParticipants = forthRoundString.split(",");
-    let fifthParticipants = fifthRoundString.split(",");
+    let firstParticipantArray = {"participants": firstRoundString.split(",")};
+    let secondParticipantArray = {"participants": secondRoundString.split(",")};
+    let thirdParticipantArray = {"participants": thirdRoundString.split(",")};
+    let forthParticipantArray = {"participants": forthRoundString.split(",")};
+    let fifthParticipantArray = {"participants": fifthRoundString.split(",")};
 
-    
+    // tournament object containing array of participants for each round
     let updatedTounament = Tournament({
         "_id": id,
-        "round1": firstParticipants,
-        "round2": secondParticipants,
-        "round3": thirdParticipants,
-        "round4": forthParticipants,
-        "round5": fifthParticipants
+        "rounds.0": firstParticipantArray,
+        "rounds.1": secondParticipantArray,
+        "rounds.2": thirdParticipantArray,
+        "rounds.3": forthParticipantArray,
+        "rounds.4": fifthParticipantArray,
     });
 
     Tournament.updateOne({_id: id}, updatedTounament, (err) => {
@@ -278,9 +293,8 @@ module.exports.processBracket = (req, res, next) => {
         }
         else
         {
-            console.log(updatedTounament.round3);
-            // refresh 
-            res.redirect('back');
+            // redirect to next round page
+            res.redirect(`/tournament/progress/${id}/${parseInt(roundNumber) + 1}`);
         }
     });
 }

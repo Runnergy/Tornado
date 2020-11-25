@@ -102,11 +102,13 @@ footer a:hover {
     background-color: #9c0404;
 }
 
-.active:hover {
+/* hover effect when the button is enabled */
+.active-btn:hover {
     background-color: #d49191a1;
 }
 
-.inactive {
+/* bkg color when button is disabled */
+.inactive-btn {
     background-color: #303030ab;
 }
 
@@ -114,14 +116,17 @@ i {
     color: white;
 }
 
+/* dark background color a little bit transparent */
 .bg-dark-80 {
     background-color: rgba(73, 73, 73, 0.6);
 }
 
+/* light background color a little bit transparent */
 .bg-light-80 {
     background-color: rgba(175, 175, 175, 0.8);
 }
 
+/* invisible elements */
 .invisible {
     display: none;
     visibility: hidden;

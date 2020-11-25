@@ -1,9 +1,13 @@
 <div class="container vh-100 pt-5 text-light text-center">
     <a href="/tournament/create" class="btn btn-danger btn-lg m-5" role="button">
     Create tournament</a><br>
+
+    <!-- when the user is logged in -->
     <% if(typeof displayName == 'string' && displayName ){ %>
+
     <table class="table bg-light-80 table-hover">
-    <!-- Header Row-->
+
+        <!-- Header Row-->
         <tr class="d-flex">
             <td class="text-center col-2">Title</td>
             <td class="text-center col-1">Status</td>
@@ -14,84 +18,99 @@
         </tr>
 
         <!-- Repeatable Template Row -->
-
         <% for(let i = 0; i < TournamentList.length; i++) { %>
             <tr class="d-flex">
+
+                <!-- tournament title -->
                 <td class="text-center col-2"><%= TournamentList[i].title %></td>
 
+                <!-- tournament status -->
                 <td class="text-center col-1">
                     <% if( TournamentList[i].status == 'active' ){ %>
                         <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
                     <% } %> 
                 </td>
 
+                <!-- number of bouts in tournament -->
                 <td class="text-center col-1">
                     <%= TournamentList[i].type %> bouts
                 </td>
 
+                <!-- tournament description -->
                 <td class="text-center col-4">
-                    <%= TournamentList[i].description.substr(0, 40) %>....
+                    <%= TournamentList[i].description.substr(0, 35) %><% if( TournamentList[i].description.substr(0, 35).length >= 35 ){ %>....<% } %> 
                 </td>
 
+                <!-- tournament end date -->
                 <td class="text-center col-2">
                     <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
                 </td>
+
+                <!-- tournament bracket view button -->
                 <td class="text-center col-2">
-                    <a href="/tournament/brackets/<%= TournamentList[i]._id %>/read-only" class="btn color-red3 active btn-sm">
+                    <a href="/tournament/brackets/<%= TournamentList[i]._id %>" class="btn color-red3 active-btn btn-sm">
                     <i class="fas fa-eye"></i></a>
+
+                    <!-- update and delete button are enabled only for the user who created the tournament -->
                     <% if( TournamentList[i].host == username ){ %>
-                        <a href="/tournament/update/<%= TournamentList[i]._id %>" class="btn color-red2 active btn-sm">
+                        <a href="/tournament/update/<%= TournamentList[i]._id %>" class="btn color-red2 active-btn btn-sm">
                         <i class="fas fa-pencil-alt"></i></a>
-                        <a href="/tournament/delete/<%= TournamentList[i]._id %>" class="btn color-red1 active btn-sm btn-delete">
+                        <a href="/tournament/delete/<%= TournamentList[i]._id %>" class="btn color-red1 active-btn btn-sm btn-delete">
                         <i class="fas fa-trash-alt"></i></a>
                     <% } else {%>
-                        <a class="btn btn-sm inactive">
+                        <a class="btn btn-sm inactive-btn">
                         <i class="fas fa-pencil-alt"></i></a>
-                        <a class="btn btn-sm inactive">
+                        <a class="btn btn-sm inactive-btn">
                         <i class="fas fa-trash-alt"></i></a>
                     <% } %> 
                 </td>
             </tr>
         <% } %>
     </table>
-    
     <% } else {%>
-    <h3 id="hero-description">Please <a href="/login">login</a> to View, Edit or Delete tournament options.</h3>
-    <table class="table bg-light-80 table-hover">
-    <!-- Header Row-->
-        <tr class="d-flex">
-            <td class="text-center col-2">Title</td>
-            <td class="text-center col-1">Status</td>
-            <td class="text-center col-1">Type</td>
-            <td class="text-center col-5">Description</td>
-            <td class="text-center col-3">End date</td>
-        </tr>
+        <!-- message for the user who is not logged in -->
+        <h3 id="hero-description">Please <a href="/login">login</a> to View, Edit or Delete tournament options.</h3>
+        <table class="table bg-light-80 table-hover">
 
-        <!-- Repeatable Template Row -->
-
-        <% for(let i = 0; i < TournamentList.length; i++) { %>
+        <!-- Header Row-->
             <tr class="d-flex">
-                <td class="text-center col-2"><%= TournamentList[i].title %></td>
-
-                <td class="text-center col-1">
-                    <% if( TournamentList[i].status == 'active' ){ %>
-                        <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
-                    <% } %> 
-                </td>
-
-                <td class="text-center col-1">
-                    <%= TournamentList[i].type %> bouts
-                </td>
-
-                <td class="text-center col-5">
-                    <%= TournamentList[i].description.substr(0, 20) %>
-                </td>
-
-                <td class="text-center col-3">
-                    <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
-                </td>
+                <td class="text-center col-2">Title</td>
+                <td class="text-center col-1">Status</td>
+                <td class="text-center col-1">Type</td>
+                <td class="text-center col-5">Description</td>
+                <td class="text-center col-3">End date</td>
             </tr>
-        <% } %>
-    </table>
+
+            <!-- Repeatable Template Row -->
+            <% for(let i = 0; i < TournamentList.length; i++) { %>
+                <tr class="d-flex">
+
+                    <!-- tournament title -->
+                    <td class="text-center col-2"><%= TournamentList[i].title %></td>
+
+                    <!-- tournament status -->
+                    <td class="text-center col-1">
+                        <% if( TournamentList[i].status == 'active' ){ %>
+                            <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
+                        <% } %> 
+                    </td>
+
+                    <!-- number of bouts in the tournament -->
+                    <td class="text-center col-1">
+                        <%= TournamentList[i].type %> bouts
+                    </td>
+
+                    <!-- tournament description -->
+                    <td class="text-center col-5">
+                        <%= TournamentList[i].description.substr(0, 20) %>
+                    </td>
+
+                    <!-- tournament enddate -->
+                    <td class="text-center col-3">
+                        <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
+                    </td>
+                </tr>
+            <% } %>
+        </table>
     <% } %>    
 </div>

@@ -24,10 +24,13 @@ router.post('/update/:id', tournamentController.processUpdatePage );
 /* GET to perform  Deletion - DELETE Operation */
 router.get('/delete/:id', tournamentController.performDelete);
 
-router.get('/brackets/:id', tournamentController.editBrackets);
+/* GET Route for the Tournament bracket page - READ Operation */
+router.get('/brackets/:id', tournamentController.displayBrackets);
 
-router.get('/brackets/:id/read-only', tournamentController.displayBrackets);
+/* GET Route for displaying the Update tournament progress page - UPDATE Operation */
+router.get('/progress/:id/:roundNumber', tournamentController.displayProgress);
 
-router.post('/brackets/:id', tournamentController.processBracket);
+/* POST Route for processing the Update tournament progress page - UPDATE Operation */
+router.post('/progress/:id/:roundNumber', tournamentController.processProgress);
 
 module.exports = router;

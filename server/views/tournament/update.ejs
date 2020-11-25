@@ -4,6 +4,7 @@
             <form class="form p-5" method="POST">
 
 
+                <!-- tournament title -->
                 <div class="form-group row">
                     <label for="titleTextField" class="col-2 col-form-label">Title</label>
                     <div class="col-10">
@@ -16,37 +17,27 @@
                     </div>
                 </div>
 
-                <!-- <div class="form-group row">
-                    <label for="hostTextField" class="col-2 col-form-label">Host</label>
-                    <div class="col-10">
-                        <input type="text" class="form-control"
-                        id="hostTextField"
-                        placeholder="Enter host name"
-                        name="hostname" 
-                        value="<%= tournament.hostname %>"
-                        required>
-                    </div>
-                </div> -->
-
+                <!-- tournament type -->
                 <div class="form-group row">
                     <label for="typeTextField" class="col-2 col-form-label">Type</label>
                     <div class="col-10">
+
                         <!-- When the type of tournament is 4 bouts -->
-                        
-                            <input type="radio" id="fourBouts" name="type" value="4" 
-                            <% if(tournament.type == "4") { %>
-                            checked
-                            <% } %>> 
-                            <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
-                            <input type="radio" id="eightBouts" name="type" value="8"
-                            <% if(tournament.type == "8") { %>
-                            checked
-                            <% } %>>
-                            <label for="lblEightBouts">8 Bouts</label><br>
+                        <input type="radio" id="fourBouts" name="type" value="4" 
+                        <% if(tournament.type == "4") { %>
+                        checked
+                        <% } %>> 
+                        <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
+                        <input type="radio" id="eightBouts" name="type" value="8"
+                        <% if(tournament.type == "8") { %>
+                        checked
+                        <% } %>>
+                        <label for="lblEightBouts">8 Bouts</label><br>
                             
                     </div>
                 </div>
 
+                <!-- tournament start date and end date-->
                 <div class="form-group row">
                     <label for="example-date-input" class="col-2 col-form-label">Start-End</label>
                     <div class="col-5">
@@ -57,47 +48,37 @@
                     </div>
                 </div>
 
+                <!-- tournament description -->
                 <div class="form-group">
                     <label for="participantTextField">Description</label>
                     <textarea class="form-control" id="description" name="description" placeholder="Enter description" rows="3"  required><%= tournament.description %></textarea>
                 </div>
                 
-
+                <!-- tournament participants -->
                 <div class="form-group">
                     <label for="participantTextField">Participants</label>
                     <textarea class="form-control" id="participants"
                     placeholder="Enter participants"
                     name="participants" 
-                    required rows="8"><% for(let count = 0; count < tournament.round1.length; count++) { %><%= tournament.round1[count] %>&#13;&#10;<% } %></textarea>
+                    required rows="8"><% for(let count = 0; count < tournament.rounds[0].participants.length; count++) { %><%= tournament.rounds[0].participants[count] %>&#13;&#10;<% } %></textarea>
                 </div>
 
-                <input type="text" class="form-control invisible" id="firstRoundParticipants" 
-                    value="<%= tournament.round1 %>"
-                    name="firstRoundParticipants">
-                <input type="text" class="form-control invisible"  id="secondRoundParticipants" 
-                    value="<%= tournament.round2 %>"
-                    name="secondRoundParticipants">
-                <input type="text" class="form-control invisible"  id="thirdRoundParticipants" 
-                    value="<%= tournament.round3 %>"
-                    name="thirdRoundParticipants">
-                <input type="text" class="form-control invisible"  id="forthRoundParticipants" 
-                    value="<%= tournament.round4 %>"
-                    name="forthRoundParticipants">
-                <input type="text" class="form-control invisible"  id="fifthRoundParticipants" 
-                    value="<%= tournament.round5 %>"
-                    name="fifthRoundParticipants">
-
                 <div class="form-group text-center row">
+                    <!-- tournament start/resume button -->
                     <div class="col-4">
                         <td class="text-center col-1">
-                            <a href="/tournament/brackets/<%= tournament._id %>" class="btn btn-danger btn-flexible">
-                            Bracket</a>
+                            <a href="/tournament/progress/<%= tournament._id %>/0" class="btn btn-danger btn-flexible">
+                            Start/Resume Tournament</a>
                         </td>
                     </div>
+
+                    <!-- tournament save button -->
                     <div class="col-4">
                         <button class="btn btn-primary btn-flexible" type="submit">
                             Save</button>
                     </div>
+
+                    <!-- back to list button -->
                     <div class="col-4">
                         <a href="/tournament" class="btn btn-warning btn-flexible">
                             Back to list</a>

@@ -1,15 +1,12 @@
 let mongoose =require('mongoose');
+const round = require('./tournament_round');
+let roundSchema = mongoose.model('round').schema;
 
 //creat a MODEL class
 let tournamentModel= mongoose.Schema({
     title: String,
-    // participants: [participantSchema],
+    rounds: [roundSchema],
     roundTotal: String,
-    round1: [String],
-    round2: [String],
-    round3: [String],
-    round4: [String],
-    round5: [String],
     type: String,
     enddate: Date,
     startdate: Date,
