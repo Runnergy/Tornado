@@ -23,12 +23,12 @@
                     <div class="col-10">
 
                         <!-- When the type of tournament is 4 bouts -->
-                        <input type="radio" id="fourBouts" name="type" value="4" 
+                        <input type="radio" id="fourBouts" name="type" value="4" onclick="displayParticipant()"
                         <% if(tournament.type == "4") { %>
                         checked
                         <% } %>> 
                         <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
-                        <input type="radio" id="eightBouts" name="type" value="8"
+                        <input type="radio" id="eightBouts" name="type" value="8" onclick="displayParticipant()"
                         <% if(tournament.type == "8") { %>
                         checked
                         <% } %>>
@@ -57,6 +57,12 @@
                 <!-- tournament participants -->
                 <div class="form-group">
                     <label for="participantTextField">Participants</label>
+                    <div class="form-group" id="fourbout" style="display: none">
+                        <small class="form-text text-muted">A total of 8 participants are required for viewing the brackets properly.</small>
+                    </div>
+                    <div class="form-group" id="eightbout" style="display: none">
+                        <small class="form-text text-muted">A total of 16 participants are required for viewing the brackets properly.</small>
+                    </div>
                     <textarea class="form-control" id="participants"
                     placeholder="Enter participants"
                     name="participants" 

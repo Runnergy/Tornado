@@ -123,9 +123,9 @@
 
 function displayParticipant() {
         let fourBouts = document.getElementById("fourBouts");
-        let sixteenBouts = document.getElementById("sixteenBouts");
+        let eightBouts = document.getElementById("eightBouts");
         let fourbout = document.getElementById("fourbout");
         let eightbout = document.getElementById("eightbout");
         fourbout.style.display = fourBouts.checked ? "block" : "none";
-        eightbout.style.display = sixteenBouts.checked ? "block" : "none";
+        eightbout.style.display = eightBouts.checked ? "block" : "none";
 };
