@@ -1,15 +1,21 @@
 <!--homepage-->
 <div class="hero-content">
     <span class="vertical-center">
-        <h1 id="hero-text">Welcome to Tornado</h1>
-        <h3 id="hero-description">Want to create a single elimination tournament? <br>Start your tournament!</h3>
-        <a href="/tournament/create" class="btn btn-outline-danger btn-xl" 
+        <h1 id="hero-text">Welcome to Tornado!</h1><br>
+        <h3 id="hero-description">Want to create a single elimination tournament? <br>Start here!</h3><br> <br>
+        <div class="btn-toolbar">
+        <a style="float: left; margin-right: 3cm;" href="/tournament/create" class="btn btn-outline-danger btn-xl" 
             role="button" id="hero-createBtn">
             Create tournament
         </a>
+          <a style="float: right;" class="btn btn-outline-info btn-xl" 
+            role="button" id="hero-createBtn" onclick="myFunction()">
+            Active Tournaments
+        </a>
+     </div>
     </span>
 </div>
-<div class="container">
+<div class="container" id="tournamentTable">
     <table class="table bg-dark-80 text-light">
         <!-- Header Row-->
         <tr class="d-flex">

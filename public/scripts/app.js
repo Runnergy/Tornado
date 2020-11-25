@@ -129,3 +129,8 @@ function displayParticipant() {
         fourbout.style.display = fourBouts.checked ? "block" : "none";
         eightbout.style.display = eightBouts.checked ? "block" : "none";
 };
+
+function myFunction() {
+  var element = document.getElementById("tournamentTable");
+  element.scrollIntoView();
+}
