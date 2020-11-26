@@ -15,16 +15,22 @@ module.exports.displayTournamentList = (req, res, next) => {
         else
         {
             res.render('index', {title: 'Tournaments',file: '../views/tournament/list', 
-                        TournamentList: tournamentList, 
-                        displayName: req.user ? req.user.displayName : '', 
-                        username: req.user ? req.user.username : '' }); 
+                TournamentList: tournamentList, 
+                displayName: req.user ? req.user.displayName : '', 
+                username: req.user ? req.user.username : ''
+            }); 
         }
     });
 }
 
 module.exports.displayCreatePage = (req, res, next) => {
-    res.render('index', { title: 'Create Tournament', file: '../views/tournament/create', 
-                displayName: req.user ? req.user.displayName : '' });          
+    if (!req.user) {
+        req.session.returnTo = req.originalUrl; 
+        res.redirect('/login');
+    } else {
+        res.render('index', { title: 'Create Tournament', file: '../views/tournament/create', 
+        displayName: req.user ? req.user.displayName : '' });
+    }       
 }
 
 module.exports.processCreatePage = (req, res, next) => {
@@ -105,10 +111,16 @@ module.exports.displayUpdatePage = (req, res, next) => {
         }
         else
         {
-            //show the update view
-            res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', 
-                        tournament: tournamentToEdit, 
-                        displayName: req.user ? req.user.displayName : '' });
+            if (!req.user) {
+                req.session.returnTo = req.originalUrl; 
+                res.redirect('/login');
+            } else {
+                //show the update view
+                res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', 
+                            tournament: tournamentToEdit, 
+                    displayName: req.user ? req.user.displayName : ''
+                });
+            }
         }
     });
 }
@@ -167,24 +179,32 @@ module.exports.processUpdatePage = (req, res, next) => {
         "description": req.body.description
     });
 
-    Tournament.updateOne({_id: id}, updatedTounament, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            // refresh 
-            res.redirect('back');
-        }
-    });
+    if (!req.user) {
+        req.session.returnTo = req.originalUrl; 
+        res.redirect('/login');
+    } else {
+        Tournament.updateOne({_id: id}, updatedTounament, (err) => {
+            if(err)
+            {
+                console.log(err);
+                res.end(err);
+            }
+            else
+            {
+                // refresh 
+                res.redirect('back');
+            }
+        });
+    }
 }
 
 module.exports.performDelete = (req, res, next) => {
     let id = req.params.id;
-
-    Tournament.remove({_id: id}, (err) => {
+    if (!req.user) {
+                req.session.returnTo = req.originalUrl; 
+                res.redirect('/login');
+    } else {
+                Tournament.remove({_id: id}, (err) => {
         if(err)
         {
             console.log(err);
@@ -192,10 +212,11 @@ module.exports.performDelete = (req, res, next) => {
         }
         else
         {
-             // refresh
-             res.redirect('/tournament');
+            // refresh
+            res.redirect('/tournament');
         }
     });
+    }
 }
 
 module.exports.editBrackets = (req, res, next) => {
@@ -209,10 +230,16 @@ module.exports.editBrackets = (req, res, next) => {
         }
         else
         {
-            //show the update view
-            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
+            if (!req.user) {
+                req.session.returnTo = req.originalUrl; 
+                res.redirect('/login');
+            } else {
+                //show the update view
+                res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
                         tournament: tournamentToView, 
-                        displayName: req.user ? req.user.displayName : '' });
+                    displayName: req.user ? req.user.displayName : ''
+                });
+            }
         }
     });
 }
@@ -228,10 +255,15 @@ module.exports.displayBrackets = (req, res, next) => {
         }
         else
         {
-            //show the update view
-            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
+            if (!req.user) {
+                req.session.returnTo = req.originalUrl; 
+                res.redirect('/login');
+            } else {
+                //show the update view
+                res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
                         tournament: tournamentToView, 
                         displayName: req.user ? req.user.displayName : ''  });
+            }
         }
     });
 }
@@ -248,11 +280,16 @@ module.exports.displayProgress = (req, res, next) => {
         }
         else
         {
-            //show the update view
-            res.render('index', { title: 'Progress Tournament', file: '../views/tournament/progress', 
-                        tournament: tournamentToView, 
-                        displayName: req.user ? req.user.displayName : '',
-                        roundNumber: roundNumber });
+            if (!req.user) {
+                req.session.returnTo = req.originalUrl; 
+                res.redirect('/login');
+            } else {
+                //show the update view
+                res.render('index', { title: 'Progress Tournament', file: '../views/tournament/progress', 
+                tournament: tournamentToView, 
+                displayName: req.user ? req.user.displayName : '',
+                roundNumber: roundNumber });
+            }
         }
     });
 }
@@ -293,8 +330,13 @@ module.exports.processProgress = (req, res, next) => {
         }
         else
         {
-            // redirect to next round page
+            if (!req.user) {
+                req.session.returnTo = req.originalUrl; 
+                res.redirect('/login');
+            } else {
+                // redirect to next round page
             res.redirect(`/tournament/progress/${id}/${parseInt(roundNumber) + 1}`);
+            }
         }
     });
 }

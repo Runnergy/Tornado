@@ -44,7 +44,9 @@ module.exports.displayLoginPage = (req, res, next) => {
         })
     }
     else {
-        return res.redirect('/');
+        res.redirect(req.session.returnTo || '/');
+        delete req.session.returnTo;
+        //return res.redirect('/');
     }
 }
 
@@ -65,7 +67,9 @@ module.exports.processLoginPage = (req, res, next) => {
                 if (err) {
                     return next(err);
                 }
-                return res.redirect('/tournament');
+                res.redirect(req.session.returnTo || '/');
+                delete req.session.returnTo;
+                //return res.redirect('/tournament');
             })
         })(req, res, next);
 }
