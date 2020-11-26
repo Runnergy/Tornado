@@ -92,6 +92,37 @@
         })
     }
 
+    if(document.title == "Register")
+    {let password = document.getElementById("password");
+    let passwordconfirm = document.getElementById("password1");
+    
+    function checkPassword(){
+        let status = document.getElementById("password_checking");
+         let buttonsubmit =document.getElementById("submitbtn");
+    
+        status.innerHTML = "";
+        buttonsubmit.removeAttribute("disabled");
+    
+        if(password.value === "")
+            return;
+    
+        if(passwordconfirm.value === password.value)
+            return;
+    
+        status.innerHTML = "Passwords do not match";
+        status.style.color="red";
+        buttonsubmit.setAttribute("disabled", "disabled");
+    }
+    
+    password.addEventListener("change", function(event){
+        checkPassword();
+    });
+    passwordconfirm.addEventListener("change", function(event){
+        checkPassword();
+    });
+        
+}
+
     function determineWinnerRound(currentRound, nextRound)
     {
         // radio button for each participant
