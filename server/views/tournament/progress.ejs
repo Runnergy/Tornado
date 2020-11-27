@@ -1,81 +1,86 @@
 <div class="container p-5 vh-100">
     <form method="POST">
-        <div class="row">
-            
+        <h2 class="display-4 text-center mb-5">Who's the winner?</h2>
+        <div class="row container bg-dark-80">
             <!-- repeat half the number of participants -->
             <% if(roundNumber < tournament.roundTotal) { %>
                 <% for(let i = 0; i < tournament.rounds[roundNumber].participants.length/2; i++) { %>
 
                     <!-- if the user does not reach the last round -->
-                    
-                        <div class="offset-1 col-4">
-                            <div class="input-group roundParticipant">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
+                    <div class="offset-2 col-3 mb-1">
+                        <div class="input-group roundParticipant">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
 
-                                        <!-- radio button for each participant -->
-                                        <input type="radio" name="bout <%= i %>" class="rbtnRoundParticipants" 
-                                            value="<%= tournament.rounds[roundNumber].participants[i * 2] %>"
-                                            <% if(tournament.rounds[roundNumber].participants[i * 2] == 
-                                                tournament.rounds[parseInt(roundNumber) + 1].participants[i]) { %>
-                                                checked
-                                            <% } %>
-                                            required>
-                                    </div>
+                                    <!-- radio button for each participant -->
+                                    <input type="radio" name="bout <%= i %>" class="rbtnRoundParticipants" 
+                                        value="<%= tournament.rounds[roundNumber].participants[i * 2] %>"
+                                        <% if(tournament.rounds[roundNumber].participants[i * 2] == 
+                                            tournament.rounds[parseInt(roundNumber) + 1].participants[i]) { %>
+                                            checked
+                                        <% } %>
+                                        required>
                                 </div>
-                                <!-- disabled text input field displaying participant name -->
-                                <input type="text" class="form-control txtRoundParticipant" 
-                                    value="<%= tournament.rounds[roundNumber].participants[i * 2] %>" 
-                                    disabled>
                             </div>
+                            <!-- disabled text input field displaying participant name -->
+                            <input type="text" class="form-control txtRoundParticipant" 
+                                value="<%= tournament.rounds[roundNumber].participants[i * 2] %>" 
+                                disabled>
                         </div>
-
-                        <div class="col-2"></div>
-
-                        <div class="col-4">
-                            <div class="input-group roundParticipant">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-
-                                        <!-- radio button for each participant -->
-                                        <input type="radio" name="bout <%= i %>" class="rbtnRoundParticipants" 
-                                            value="<%= tournament.rounds[roundNumber].participants[2 * i + 1] %>" 
-                                            <% if(tournament.rounds[roundNumber].participants[2 * i + 1] == 
-                                                tournament.rounds[parseInt(roundNumber) + 1].participants[i]) { %>
-                                                checked
-                                            <% } %>
-                                            required>
-                                    </div>
-                                </div>
-
-                                <!-- disabled text input field displaying participant name -->
-                                <input type="text" class="form-control txtRoundParticipant" 
-                                    value="<%= tournament.rounds[roundNumber].participants[2 * i + 1] %>"
-                                    disabled>
-                            </div>
-                        </div>
-                    <% } %> 
-
-                    <!-- next round button -->
-                    <div class="offset-3 col-2">
-                        <button class="btn btn-primary btn-flexible d-block" type="submit">Next Round</button>
                     </div>
 
-                    <!-- Last round button -->
-                    <% if(parseInt(roundNumber) > 0) { %>
-                        <div class="col-2">
-                            <a class="btn btn-primary btn-flexible d-block" href="/tournament/progress/<%= tournament._id %>/<%= parseInt(roundNumber) - 1 %>">Last Round</a>
+                    <div class="col-2 text-center text-muted">VS</div>
+
+                    <div class="col-3 mb-1">
+                        <div class="input-group roundParticipant">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+
+                                    <!-- radio button for each participant -->
+                                    <input type="radio" name="bout <%= i %>" class="rbtnRoundParticipants" 
+                                        value="<%= tournament.rounds[roundNumber].participants[2 * i + 1] %>" 
+                                        <% if(tournament.rounds[roundNumber].participants[2 * i + 1] == 
+                                            tournament.rounds[parseInt(roundNumber) + 1].participants[i]) { %>
+                                            checked
+                                        <% } %>
+                                        required>
+                                </div>
+                            </div>
+
+                            <!-- disabled text input field displaying participant name -->
+                            <input type="text" class="form-control txtRoundParticipant" 
+                                value="<%= tournament.rounds[roundNumber].participants[2 * i + 1] %>"
+                                disabled>
                         </div>
-                    <% } %>
-                    <div class="col-2">
-                        <a class="btn btn-primary btn-flexible d-block" href="/tournament/update/<%= tournament._id %>">Back to Edit Page</a>
                     </div>
-                    
-                <% } else { %> 
-                    <!-- check the result button -->
-                    <a href="/tournament/brackets/<%= tournament._id %>" class="btn btn-danger">
-                        Check the result</a>
+                <% } %> 
+                
+                <div class="offset-2 col-3 mt-4">
+                <!-- Last round button -->
+                <% if(parseInt(roundNumber) > 0) { %>
+                        <a class="btn btn-primary btn-sm" href="/tournament/progress/<%= tournament._id %>/<%= parseInt(roundNumber) - 1 %>">PREVIOUS</a>
                 <% } %>
+                </div>
+                
+                <div class="col-2 text-center mt-4">
+                    <a class="btn btn-primary btn-sm" href="/tournament/update/<%= tournament._id %>">Back to Edit</a>
+                </div>
+
+                <!-- next round button -->
+                <div class="col-3 text-right mt-4">
+                    <button class="btn btn-primary btn-sm" type="submit">NEXT</button>
+                </div>
+
+                
+                
+                
+            <% } else { %> 
+                <!-- check the result button -->
+                <div class="col-12 text-center mt-4">
+                    <a href="/tournament/brackets/<%= tournament._id %>" class="btn btn-xl btn-outline-danger">
+                        Check the result</a>
+                </div>
+            <% } %>
             
 
             <!-- invisible text input fields containing winners for each round -->

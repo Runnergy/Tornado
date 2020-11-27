@@ -219,30 +219,30 @@ module.exports.performDelete = (req, res, next) => {
     }
 }
 
-module.exports.editBrackets = (req, res, next) => {
-    let id = req.params.id;
+// module.exports.editBrackets = (req, res, next) => {
+//     let id = req.params.id;
 
-    Tournament.findById(id, (err, tournamentToView) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            if (!req.user) {
-                req.session.returnTo = req.originalUrl; 
-                res.redirect('/login');
-            } else {
-                //show the update view
-                res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
-                        tournament: tournamentToView, 
-                    displayName: req.user ? req.user.displayName : ''
-                });
-            }
-        }
-    });
-}
+//     Tournament.findById(id, (err, tournamentToView) => {
+//         if(err)
+//         {
+//             console.log(err);
+//             res.end(err);
+//         }
+//         else
+//         {
+//             if (!req.user) {
+//                 req.session.returnTo = req.originalUrl; 
+//                 res.redirect('/login');
+//             } else {
+//                 //show the update view
+//                 res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
+//                         tournament: tournamentToView, 
+//                     displayName: req.user ? req.user.displayName : ''
+//                 });
+//             }
+//         }
+//     });
+// }
 
 module.exports.displayBrackets = (req, res, next) => {
     let id = req.params.id;
@@ -255,15 +255,15 @@ module.exports.displayBrackets = (req, res, next) => {
         }
         else
         {
-            if (!req.user) {
-                req.session.returnTo = req.originalUrl; 
-                res.redirect('/login');
-            } else {
+            // if (!req.user) {
+            //     req.session.returnTo = req.originalUrl; 
+            //     res.redirect('/login');
+            // } else {
                 //show the update view
                 res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
                         tournament: tournamentToView, 
                         displayName: req.user ? req.user.displayName : ''  });
-            }
+            // }
         }
     });
 }

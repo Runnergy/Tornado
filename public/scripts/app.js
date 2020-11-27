@@ -29,19 +29,19 @@
             // call function with different parameters
             switch (roundNumber) {
                 case '0': 
-                determineWinnerRound('first', 'second');
+                determineWinnerRound('second');
                     break;
                 case '1': 
-                determineWinnerRound('second', 'third');
+                determineWinnerRound('third');
                     break;
                 case '2': 
-                determineWinnerRound('third', 'forth');
+                determineWinnerRound('forth');
                     break;
                 case '3': 
-                determineWinnerRound('forth', 'fifth');
+                determineWinnerRound('fifth');
                     break;
                 case '4': 
-                determineWinnerRound('forth', 'fifth');
+                determineWinnerRound('fifth');
                     break;
             
                 default:
@@ -51,12 +51,25 @@
 
         if(title === 'Tournament brackets')
         {
-            let exportButton = document.getElementById('btnExport');
-            exportButton.addEventListener('click', () => {
-                let resultContainer = document.getElementsByClassName('bracket-container')[0];
-                console.log(window);
-                html2pdf().from(resultContainer).save();
-            });
+            let bracketWidth = document.getElementById('resultBracket').clientWidth;
+
+            let exportButtons = document.getElementsByClassName('btnExport');
+
+            for (const exportButton of exportButtons) {
+                    exportButton.addEventListener('click', () => {
+                    let opt = {
+                        html2canvas:  { width: bracketWidth }
+                    }; 
+
+                    let resultBracket = document.getElementById('resultBracket');
+                    let resultTable = document.getElementById('resultTable');
+                    
+                    html2pdf().from(resultTable).toPdf().set(opt).get('pdf').then(function (pdf) {
+                        pdf.addPage();
+                    }).from(resultBracket).toContainer().toCanvas().toPdf().save();
+                });
+            }
+            
         }
     }
     
@@ -133,11 +146,12 @@
         
 }
 
-    function determineWinnerRound(currentRound, nextRound)
+    function determineWinnerRound(nextRound)
     {
         // radio button for each participant
         let rbtnRoundParticipants = document.getElementsByClassName('rbtnRoundParticipants');
 
+        console.log(rbtnRoundParticipants);
         // text input field containing string value of next round's participants
         let nextRoundParticipants = document.getElementById(nextRound + 'RoundParticipants').value;
         
