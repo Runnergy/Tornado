@@ -81,34 +81,7 @@
 
     if(document.title == "Contact Us")
     {
-        // get send and cancel button
-        let sendButton = document.getElementById("sendButton");
-        let cancelButton = document.getElementById("resetButton");
-    
-        sendButton.addEventListener("click", (event) => {
-           event.preventDefault();
-    
-           // get values from form elements
-           let firstName = document.getElementById("fname").value;
-           let lastName = document.getElementById("lname").value;
-           let email = document.getElementById("email").value;
-           let message = document.getElementById("message").value;
-           let form = document.forms[0];
-    
-           if(firstName =="" || lastName=="" || email=="" )
-           {
-               confirm("Please fill the form...");
-           }
-           else
-           {
-            if(confirm("Your submission was successfull..."))
-            {
-               location.href = "/home";
-            }
-           }
-    
-           form.reset();
-        })
+         let cancelButton = document.getElementById("resetButton");
     
         cancelButton.addEventListener("click", (event) => {
            event.preventDefault();
@@ -232,4 +205,12 @@ function displayParticipant() {
 function myFunction() {
   var element = document.getElementById("tournamentTable");
   element.scrollIntoView();
-}
+};
+
+function contactFunction()
+{
+    if(confirm("Your submission was successfull..."))
+            {
+               document.getElementById("contactForm").reset();
+            }
+};
