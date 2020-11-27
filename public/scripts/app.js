@@ -69,7 +69,11 @@
                     }).from(resultBracket).toContainer().toCanvas().toPdf().save();
                 });
             }
-            
+        }
+
+        if(title === "Update Tournament"|| title === "Create Tournament")
+        {
+            dateValidation();
         }
     }
     
@@ -151,7 +155,6 @@
         // radio button for each participant
         let rbtnRoundParticipants = document.getElementsByClassName('rbtnRoundParticipants');
 
-        console.log(rbtnRoundParticipants);
         // text input field containing string value of next round's participants
         let nextRoundParticipants = document.getElementById(nextRound + 'RoundParticipants').value;
         
@@ -173,6 +176,47 @@
                 document.getElementById(nextRound + 'RoundParticipants').value = nextParticipantsArray;
             });   
         }
+    }
+
+    function dateValidation()
+    {
+        let submitButton = document.getElementById('btnSubmit');
+
+        submitButton.addEventListener('click', (event) => {
+            
+            let startdate = new Date(document.getElementById('startdate').value);
+            let enddate = new Date(document.getElementById('enddate').value);
+
+            // time difference in milliseconds
+            const diffTime = enddate - startdate;
+
+            // difference in days
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+            // date input fields
+            let dateStartdate = document.getElementById('startdate');
+            let dateEnddate = document.getElementById('enddate');
+
+            // if enddate - startdate is less then 0, call preventDefault function, displaying error
+            if(diffDays < 0)
+            {
+                event.preventDefault();
+
+                // invalid input class
+                dateStartdate.classList.add("is-invalid");
+                dateEnddate.classList.add("is-invalid");
+            }
+            else
+            {
+                // remove invalid input class
+                dateStartdate.classList.remove("is-invalid");
+                dateEnddate.classList.remove("is-invalid");
+
+                // add valid input class
+                dateStartdate.classList.add("is-valid");
+                dateEnddate.classList.add("is-valid");
+            }
+        });
     }
 })();
 

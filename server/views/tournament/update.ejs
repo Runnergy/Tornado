@@ -41,10 +41,10 @@
                 <div class="form-group row">
                     <label for="example-date-input" class="col-2 col-form-label">Start-End</label>
                     <div class="col-5">
-                        <input class="form-control" type="date" value="<%= tournament.startdate.toISOString().replace('T', ' ').substr(0, 10) %>" id="" name="startdate">
+                        <input class="form-control" type="date" value="<%= tournament.startdate.toISOString().replace('T', ' ').substr(0, 10) %>" id="startdate" name="startdate">
                     </div>
                     <div class="col-5">
-                        <input class="form-control" type="date" value="<%= tournament.enddate.toISOString().replace('T', ' ').substr(0, 10) %>" id="" name="enddate">
+                        <input class="form-control" type="date" value="<%= tournament.enddate.toISOString().replace('T', ' ').substr(0, 10) %>" id="enddate" name="enddate">
                     </div>
                 </div>
 
@@ -80,7 +80,7 @@
 
                     <!-- tournament save button -->
                     <div class="col-4">
-                        <button class="btn btn-primary btn-flexible" type="submit">
+                        <button class="btn btn-primary btn-flexible" type="submit" id="btnSubmit">
                             Save</button>
                     </div>
 
