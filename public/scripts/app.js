@@ -48,6 +48,16 @@
                     break;
             }
         }
+
+        if(title === 'Tournament brackets')
+        {
+            let exportButton = document.getElementById('btnExport');
+            exportButton.addEventListener('click', () => {
+                let resultContainer = document.getElementsByClassName('bracket-container')[0];
+                console.log(window);
+                html2pdf().from(resultContainer).save();
+            });
+        }
     }
     
     window.addEventListener("load", Start);
