@@ -6,6 +6,11 @@
     <% if(typeof displayName == 'string' && displayName ){ %>
 
     <table class="table bg-light-80 table-hover">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th>Active Tournaments</th>
+            </tr>
+        </thead>
 
         <!-- Header Row-->
         <tr class="d-flex">
@@ -20,7 +25,6 @@
         <!-- Repeatable Template Row -->
         <% for(let i = 0; i < TournamentList.length; i++) { %>
             <tr class="d-flex">
-
                 <!-- tournament title -->
                 <td class="text-center col-2"><%= TournamentList[i].title %></td>
 
@@ -71,8 +75,14 @@
         <!-- message for the user who is not logged in -->
         <h3 id="hero-description">Please <a href="/login">login</a> to View, Edit or Delete tournament options.</h3>
         <table class="table bg-light-80 table-hover">
+            <!-- Header Row-->
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>Active Tournaments</th>
+                </tr>
+            </thead>
 
-        <!-- Header Row-->
+        
             <tr class="d-flex">
                 <td class="text-center col-2">Title</td>
                 <td class="text-center col-1">Status</td>
