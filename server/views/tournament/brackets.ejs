@@ -9,17 +9,19 @@
             <h6 class="text-center m-5"><%= tournament.description %></h6>
 
             <!-- If last round's participant array is not empty -->
-            <% if(tournament.rounds[tournament.rounds.length-1].participants.length > 0) { %>
+            <% if(tournament.rounds[tournament.roundTotal].participants[0] != '') { %>
                 <!-- Display winner -->
                 <h4 class="text-center mb-5 container p-5">
                     <span class="bg-dark-80 p-4 rounded">
                         <b>CONGRATULATIONS!</b>
-                        <% if(tournament.rounds[tournament.rounds.length-1].participants[0] != '') { %>
-                            <%= tournament.rounds[tournament.rounds.length-1].participants[0] %>
-                        <% } else { %>
-                            <%= tournament.rounds[tournament.rounds.length-2].participants[0] %>
-                        <% } %>
+                            <%= tournament.rounds[tournament.roundTotal].participants[0] %>
                         is the winner
+                    </span>
+                </h4>
+            <% } else { %>
+                <h4 class="text-center mb-5 container p-5">
+                    <span class="bg-dark-80 p-4 rounded">
+                        Tournament is in progress.
                     </span>
                 </h4>
             <% } %>
@@ -38,7 +40,7 @@
     </div>
 
     <!-- result bracket -->
-    <div class="container pt-5 vh-100">
+    <div class="container pt-5">
         <table class="mt-5" id="resultBracket">
             <tr>
                 <!-- repeats the number of rounds -->
@@ -205,7 +207,6 @@
                             </td>
                         <% } else { %>
                             <td class="text-center">
-                                Lose
                             </td>
                         <% } %>
                         

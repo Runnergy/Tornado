@@ -1,7 +1,7 @@
 <div class="container p-5 vh-100">
     <form method="POST">
         <h2 class="display-4 text-center mb-5">Who's the winner?</h2>
-        <div class="row container bg-dark-80">
+        <div class="row container">
             <!-- repeat half the number of participants -->
             <% if(roundNumber < tournament.roundTotal) { %>
                 <% for(let i = 0; i < tournament.rounds[roundNumber].participants.length/2; i++) { %>

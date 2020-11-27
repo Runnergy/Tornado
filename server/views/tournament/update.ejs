@@ -3,6 +3,20 @@
         <div class="offset-md-3 col-md-6 p-5 bg-dark-80">
             <form class="form p-5" method="POST">
 
+                <% if(new Date(Date.parse(tournament.enddate) + (29 * 60 * 60 * 1000)) < Date.now()) { %>
+                    <div class="alert alert-danger" role="alert">
+                        This tournament already ended.
+                    </div>
+                <% } if(new Date(Date.parse(tournament.startdate) + (29 * 60 * 60 * 1000)) > Date.now()) { %>
+                    <div class="alert alert-danger" role="alert">
+                        This tournament hasn't started yet.
+                    </div>
+                <% } if(tournament.rounds[0].participants.length != parseInt(tournament.type) * 2) { %>
+                    <div class="alert alert-danger" role="alert">
+                        The number of participants should be <%= parseInt(tournament.type) * 2 %>.
+                    </div>
+                <% } %>
+
 
                 <!-- tournament title -->
                 <div class="form-group row">
@@ -73,8 +87,16 @@
                     <!-- tournament start/resume button -->
                     <div class="col-4">
                         <td class="text-center col-1">
-                            <a href="/tournament/progress/<%= tournament._id %>/0" class="btn btn-danger btn-flexible">
-                            Start/Resume Tournament</a>
+                            <% if(new Date(Date.parse(tournament.enddate) + (29 * 60 * 60 * 1000)) >= Date.now() &&
+                                    new Date(Date.parse(tournament.startdate) + (29 * 60 * 60 * 1000)) <= Date.now() &&
+                                    tournament.rounds[0].participants.length == parseInt(tournament.type) * 2) { %>
+                                    <a href="/tournament/progress/<%= tournament._id %>/0" class="btn btn-danger btn-flexible">
+                                        Start/Resume Tournament</a>
+                            <% } else {%>
+                                <a class="btn btn-flexible bg-light-80 btn-disabled">
+                                    Start/Resume Tournament</a>
+                            <% } %>
+
                         </td>
                     </div>
 
