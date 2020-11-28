@@ -111,8 +111,9 @@
                     </td>
 
                     <!-- tournament description -->
+                    <!-- tournament description -->
                     <td class="text-center col-5">
-                        <%= TournamentList[i].description.substr(0, 20) %>
+                        <%= TournamentList[i].description.substr(0, 35) %><% if( TournamentList[i].description.substr(0, 35).length >= 35 ){ %>....<% } %> 
                     </td>
 
                     <!-- tournament enddate -->
