@@ -1,7 +1,9 @@
 <div class="container bracket-container p-5">
+
     <!-- tournament result message -->
     <div class="vh-75 row pb-5">
         <div class="bg-dark-80 rounded pt-5 pb-5 offset-2 col-8">
+
             <!-- Title of the tournament -->
             <h2 class="text-center m-3"><%= tournament.title %></h2>
 
@@ -76,7 +78,6 @@
                                         <div class="participant-name">
                                             <%= tournament.rounds[1].participants[count/2] %>
                                         </div>
-                                        
                                     </div>
                                 <% } else { %>
                                     <div class="participant second text-muted">
@@ -209,12 +210,12 @@
                             <td class="text-center">
                             </td>
                         <% } %>
-                        
                     <% } %>
                 </tr>
             <% } %>
         </table>
     </div>
+    
     <div class="text-center p-1 pt-5 row">
         <!-- go to result bracket -->
         <a class="btn color-red1 active-btn text-light mb-3 offset-4 col-4" href="#resultBracket"><i class="fas fa-trophy"></i> Check Bracket</a><br>
@@ -223,5 +224,4 @@
         <button class="btn color-red3 active-btn text-light offset-4 col-4 btnExport"><i class="fas fa-file-pdf"></i> Export PDF</button><br>
         <div class="col-4"></div>
     </div>
-    
 </div>

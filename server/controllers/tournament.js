@@ -97,7 +97,6 @@ module.exports.processCreatePage = (req, res, next) => {
             res.redirect('/tournament');
         }
     });
-
 }
 
 module.exports.displayUpdatePage = (req, res, next) => {

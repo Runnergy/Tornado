@@ -118,9 +118,7 @@ module.exports.processRegisterPage = (req, res, next) => {
         }
         else {
             //if no error exists, then registration is successsful
-
             //redirect the user and authenticate them
-
             return passport.authenticate('local')(req, res, () => {
                 res.redirect('/tournament')
             });

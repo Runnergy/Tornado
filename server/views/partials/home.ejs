@@ -2,26 +2,28 @@
 <div class="hero-content">
     <span class="vertical-center">
         <h1 id="hero-text">Welcome to Tornado!</h1><br>
-        <h3 id="hero-description">Want to create a single elimination tournament? <br>Start here!</h3><br> <br>
+        <h3 id="hero-description">Want to create a single elimination tournament? <br>Start here!</h3><br><br>
         <div class="btn-toolbar">
-        <a style="float: left; margin-right: 3cm;" href="/tournament/create" class="btn btn-outline-danger btn-xl" 
-            role="button" id="hero-createBtn">
-            Create tournament
-        </a>
-          <a style="float: right;" class="btn btn-outline-info btn-xl" 
-            role="button" id="hero-createBtn" onclick="myFunction()">
-            Active Tournaments
-        </a>
-     </div>
+            <a style="float: left; margin-right: 3cm;" href="/tournament/create" class="btn btn-outline-danger btn-xl" 
+                role="button" id="hero-createBtn">
+                Create tournament
+            </a>
+            <a style="float: right;" class="btn btn-outline-info btn-xl" 
+                role="button" id="hero-createBtn" onclick="myFunction()">
+                Active Tournaments
+            </a>
+        </div>
     </span>
 </div>
+
 <div class="container" id="tournamentTable">
     <table class="table bg-dark-80 text-light">
-            <thead class="thead-dark">
-                <tr class="text-center">
-                  <th>Active Tournaments</th>
-                </tr>
-            </thead>
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th>Active Tournaments</th>
+            </tr>
+        </thead>
+
         <!-- Header Row-->
         <tr class="d-flex">
             <td class="text-center col-2">Title</td>
@@ -53,14 +55,14 @@
                     <td class="text-center col-3">
                         <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
                     </td>
+                    
                     <td class="text-center col-1">
                         <a href="/tournament/brackets/<%= TournamentList[i]._id %>" class="btn btn-danger btn-sm">
                         VIEW</a>
                     </td>
                 </tr>
             <% } %>
-        <% } %>
-        
+        <% } %> 
     </table>
 </div>
 

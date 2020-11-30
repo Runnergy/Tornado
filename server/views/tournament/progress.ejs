@@ -56,10 +56,10 @@
                 <% } %> 
                 
                 <div class="offset-2 col-3 mt-4">
-                <!-- Last round button -->
-                <% if(parseInt(roundNumber) > 0) { %>
-                        <a class="btn btn-primary btn-sm" href="/tournament/progress/<%= tournament._id %>/<%= parseInt(roundNumber) - 1 %>">PREVIOUS</a>
-                <% } %>
+                    <!-- Last round button -->
+                    <% if(parseInt(roundNumber) > 0) { %>
+                            <a class="btn btn-primary btn-sm" href="/tournament/progress/<%= tournament._id %>/<%= parseInt(roundNumber) - 1 %>">PREVIOUS</a>
+                    <% } %>
                 </div>
                 
                 <div class="col-2 text-center mt-4">
@@ -71,9 +71,6 @@
                     <button class="btn btn-primary btn-sm" type="submit">NEXT</button>
                 </div>
 
-                
-                
-                
             <% } else { %> 
                 <!-- check the result button -->
                 <div class="col-12 text-center mt-4">
@@ -85,36 +82,34 @@
 
             <!-- invisible text input fields containing winners for each round -->
             <input type="text" class="form-control invisible" id="firstRoundParticipants" 
-            <% if(tournament.rounds[0].participants) { %>
-                value="<%= tournament.rounds[0].participants %>"
-            <% } %>
-            name="firstRoundParticipants">
+                <% if(tournament.rounds[0].participants) { %>
+                    value="<%= tournament.rounds[0].participants %>"
+                <% } %>
+                name="firstRoundParticipants">
 
             <input type="text" class="form-control invisible"  id="secondRoundParticipants"  
-            <% if(tournament.rounds[1].participants) { %>
-                value="<%= tournament.rounds[1].participants %>"
-            <% } %>
-            name="secondRoundParticipants">
+                <% if(tournament.rounds[1].participants) { %>
+                    value="<%= tournament.rounds[1].participants %>"
+                <% } %>
+                name="secondRoundParticipants">
 
             <input type="text" class="form-control invisible"  id="thirdRoundParticipants"   
-            <% if(tournament.rounds[2].participants) { %>
-                value="<%= tournament.rounds[2].participants %>"
-            <% } %>
-            name="thirdRoundParticipants">
+                <% if(tournament.rounds[2].participants) { %>
+                    value="<%= tournament.rounds[2].participants %>"
+                <% } %>
+                name="thirdRoundParticipants">
 
             <input type="text" class="form-control invisible"  id="forthRoundParticipants"  
-            <% if(tournament.rounds[3].participants) { %>
-                value="<%= tournament.rounds[3].participants %>"
-            <% } %>
-            name="forthRoundParticipants">
+                <% if(tournament.rounds[3].participants) { %>
+                    value="<%= tournament.rounds[3].participants %>"
+                <% } %>
+                name="forthRoundParticipants">
 
             <input type="text" class="form-control invisible"  id="fifthRoundParticipants" 
-            <% if(tournament.rounds[4].participants) { %>
-                value="<%= tournament.rounds[4].participants %>"
-            <% } %>
-            name="fifthRoundParticipants">
-
+                <% if(tournament.rounds[4].participants) { %>
+                    value="<%= tournament.rounds[4].participants %>"
+                <% } %>
+                name="fifthRoundParticipants">
         </div>
-        
     </form>
 </div>

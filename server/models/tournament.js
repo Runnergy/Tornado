@@ -16,7 +16,7 @@ let tournamentModel= mongoose.Schema({
 },
 {
 collection :"tournaments"
+});
 
-}); 
 module.exports=mongoose.model('Tournament',tournamentModel);
 

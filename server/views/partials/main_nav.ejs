@@ -1,68 +1,70 @@
 <!--main nav-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
 
-    <!--website logo-->
-    <a class="navbar-brand" href="/"><img src="/assets/images/TORNADO.png" alt="team logo and site name" height="30"></a>
+  <!--website logo-->
+  <a class="navbar-brand" href="/">
+    <img src="/assets/images/TORNADO.png" alt="team logo and site name" height="30">
+  </a>
 
-    <!--button for nav bar that appears for small screen devices -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!--button for nav bar that appears for small screen devices -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <!--main nav bar links-->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
+  <!--main nav bar links-->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
 
-        <!--checking which page is active to set the active property to the nav bar item-->
-        <% if (title == "Home") {%>
+      <!--checking which page is active to set the active property to the nav bar item-->
+      <% if (title == "Home") {%>
         <li class="nav-item active">
-          <% } else { %>
+      <% } else { %>
         <li class="nav-item">
-          <% } %>
-          <a class="nav-link" href="/home">
-            <!-- <i class="fas fa-lg fa-home"></i>  -->
-            HOME </a>
+      <% } %>
+        <a class="nav-link" href="/home">
+          <!-- <i class="fas fa-lg fa-home"></i>  -->
+          HOME </a>
         </li>
 
-        <% if (title == "About Us") {%>
+      <% if (title == "About Us") {%>
         <li class="nav-item active">
-          <% } else { %>
+      <% } else { %>
         <li class="nav-item">
-          <% } %>
-          <a class="nav-link" href="/about">
-            ABOUT US </a>
+      <% } %>
+        <a class="nav-link" href="/about">
+          ABOUT US </a>
         </li>
-        
+      
 
-        <% if (title == "Tournaments") { %>
-          <li class="nav-item active">
-          <% } else  { %>
-          <li class="nav-item">
-          <% } %>
-            <a class="nav-link" href="/tournament">
-              <!-- <i class="fas fa-trophy"></i>  -->
-              TOURNAMENT </a>
-          </li>
-
-        <% if (title == "Contact Us") {%>
+      <% if (title == "Tournaments") { %>
         <li class="nav-item active">
-          <% } else { %>
+      <% } else  { %>
         <li class="nav-item">
-          <% } %>
-          <a class="nav-link" href="/contact"> CONTACT US </a>
+      <% } %>
+        <a class="nav-link" href="/tournament">
+        <!-- <i class="fas fa-trophy"></i>  -->
+          TOURNAMENT </a>
         </li>
-        
 
-        <% if(typeof displayName == 'string' && displayName ){ %>
-          <li class="navbar-text"><i class="fas fa-lg fa-user"></i> Welcome, <%= displayName %></li>
-          <li class="nav-item">
+      <% if (title == "Contact Us") {%>
+        <li class="nav-item active">
+      <% } else { %>
+        <li class="nav-item">
+      <% } %>
+        <a class="nav-link" href="/contact"> CONTACT US </a>
+        </li>
+      
+      <% if(typeof displayName == 'string' && displayName ){ %>
+        <li class="navbar-text"><i class="fas fa-lg fa-user"></i> Welcome, <%= displayName %></li>
+        <li class="nav-item">
           <a href="/logout" class="nav-link">
-            <i class="fas fa-lg fa-sign-out-alt"></i> Logout</a>
+            <i class="fas fa-lg fa-sign-out-alt"></i> Logout
+          </a>
         </li>
-        <% } else {%>
-          <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
-        <% } %>
+      <% } else {%>
+        <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
+      <% } %>
 
-      </ul>
-    </div>
-  </nav>
+    </ul>
+  </div>
+</nav>
