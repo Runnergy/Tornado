@@ -16,13 +16,13 @@ router.get('/create', tournamentController.displayCreatePage );
 router.post('/create', tournamentController.processCreatePage);
 
 /* GET Route for displaying the Edit page - UPDATE Operation */
-router.get('/update/:id/:host', tournamentController.displayUpdatePage);
+router.get('/update/:id', tournamentController.displayUpdatePage);
 
 /* POST Route for processing the Edit page - UPDATE Operation */
-router.post('/update/:id/:host', tournamentController.processUpdatePage );
+router.post('/update/:id', tournamentController.processUpdatePage );
 
 /* GET to perform  Deletion - DELETE Operation */
-router.get('/delete/:id/:host', tournamentController.performDelete);
+router.get('/delete/:id', tournamentController.performDelete);
 
 /* GET Route for the Tournament bracket page - READ Operation */
 router.get('/brackets/:id', tournamentController.displayBrackets);
