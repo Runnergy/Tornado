@@ -57,9 +57,9 @@
 
                     <!-- update and delete button are enabled only for the user who created the tournament -->
                     <% if( TournamentList[i].host == username ){ %>
-                        <a href="/tournament/update/<%= TournamentList[i]._id %>" class="btn color-red2 active-btn btn-sm">
+                        <a href="/tournament/update/<%= TournamentList[i]._id %>/<%= TournamentList[i].host %>" class="btn color-red2 active-btn btn-sm">
                         <i class="fas fa-pencil-alt"></i></a>
-                        <a href="/tournament/delete/<%= TournamentList[i]._id %>" class="btn color-red1 active-btn btn-sm btn-delete">
+                        <a href="/tournament/delete/<%= TournamentList[i]._id %>/<%= TournamentList[i].host %>" class="btn color-red1 active-btn btn-sm btn-delete">
                         <i class="fas fa-trash-alt"></i></a>
                     <% } else {%>
                         <a class="btn btn-sm inactive-btn">

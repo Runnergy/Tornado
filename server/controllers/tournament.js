@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
+let alert = require('alert');
 
 // create a reference to the model
 let Tournament = require('../models/tournament');
@@ -101,6 +102,7 @@ module.exports.processCreatePage = (req, res, next) => {
 
 module.exports.displayUpdatePage = (req, res, next) => {
     let id = req.params.id;
+    let host = req.params.host;
 
     Tournament.findById(id, (err, tournamentToEdit) => {
         if(err)
@@ -114,11 +116,17 @@ module.exports.displayUpdatePage = (req, res, next) => {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
             } else {
-                //show the update view
-                res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', 
-                            tournament: tournamentToEdit, 
-                    displayName: req.user ? req.user.displayName : ''
-                });
+                if (host != req.user.username) {
+                    alert("You dont have permission to visit this page");
+                }
+                else {
+                    //show the update view
+                    res.render('index', {
+                        title: 'Update Tournament', file: '../views/tournament/update',
+                        tournament: tournamentToEdit,
+                        displayName: req.user ? req.user.displayName : ''
+                    });
+                }
             }
         }
     });
@@ -126,6 +134,7 @@ module.exports.displayUpdatePage = (req, res, next) => {
 
 module.exports.processUpdatePage = (req, res, next) => {
     let id = req.params.id;
+    let host = req.params.host;
 
     // User will add one participant in each line
     let participantString = req.body.participants;
@@ -182,7 +191,36 @@ module.exports.processUpdatePage = (req, res, next) => {
         req.session.returnTo = req.originalUrl; 
         res.redirect('/login');
     } else {
-        Tournament.updateOne({_id: id}, updatedTounament, (err) => {
+        if (host != req.user.username) {
+            alert("You dont have permission to visit this page");
+        }
+        else {
+            Tournament.updateOne({ _id: id }, updatedTounament, (err) => {
+                if (err) {
+                    console.log(err);
+                    res.end(err);
+                }
+                else {
+                    // refresh 
+                    res.redirect('back');
+                }
+            });
+        }
+    }
+}
+
+module.exports.performDelete = (req, res, next) => {
+    let id = req.params.id;
+    let host = req.params.host;
+    if (!req.user) {
+                req.session.returnTo = req.originalUrl; 
+                res.redirect('/login');
+    } else {
+        if (host != req.user.username) { 
+            alert("You dont have permission to visit this page");
+        }
+        else{
+            Tournament.remove({_id: id}, (err) => {
             if(err)
             {
                 console.log(err);
@@ -190,31 +228,11 @@ module.exports.processUpdatePage = (req, res, next) => {
             }
             else
             {
-                // refresh 
-                res.redirect('back');
-            }
-        });
-    }
-}
-
-module.exports.performDelete = (req, res, next) => {
-    let id = req.params.id;
-    if (!req.user) {
-                req.session.returnTo = req.originalUrl; 
-                res.redirect('/login');
-    } else {
-                Tournament.remove({_id: id}, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
+                // refresh
+                res.redirect('/tournament');
+                }
+            });
         }
-        else
-        {
-            // refresh
-            res.redirect('/tournament');
-        }
-    });
     }
 }
 
