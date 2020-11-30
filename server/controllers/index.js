@@ -105,7 +105,7 @@ module.exports.processRegisterPage = (req, res, next) => {
             if (err.name == "UserExistsError") {
                 req.flash(
                     'registerMessage',
-                    'Registration Error: User Already Exists!'
+                    'Registration Error! Please try with different username.'
                 );
                 console.log('Error, user already exists');
             }
