@@ -3,7 +3,7 @@
     <div class="offset-md-3 col-md-6 p-5 bg-dark-80">
         <form class="form p-5" method="POST">
 
-            <% if(new Date(Date.parse(tournament.enddate) + (29 * 60 * 60 * 1000)) < Date.now()) { %>
+            <% if(new Date(Date.parse(tournament.enddate) - (1 * 1000 * 60 * 60 * 24)+ (29 * 60 * 60 * 1000)) <= Date.now()) { %>
                 <div class="alert alert-danger" role="alert">
                     This tournament already ended.
                 </div>
@@ -85,7 +85,7 @@
                 <!-- tournament start/resume button -->
                 <div class="col-4">
                     <td class="text-center col-1">
-                        <% if(new Date(Date.parse(tournament.enddate) + (29 * 60 * 60 * 1000)) >= Date.now() &&
+                        <% if(new Date(Date.parse(tournament.enddate) - (1 * 1000 * 60 * 60 * 24)+ (29 * 60 * 60 * 1000)) > Date.now() &&
                                 new Date(Date.parse(tournament.startdate) + (29 * 60 * 60 * 1000)) <= Date.now() &&
                                 tournament.rounds[0].participants.length == parseInt(tournament.type) * 2) { %>
                                 <a href="/tournament/progress/<%= tournament._id %>/0" class="btn btn-danger btn-flexible">
