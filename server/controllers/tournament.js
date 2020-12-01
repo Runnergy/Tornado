@@ -260,8 +260,8 @@ module.exports.displayBrackets = (req, res, next) => {
             // } else {
                 //show the update view
                 res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
-                        tournament: tournamentToView, 
-                        displayName: req.user ? req.user.displayName : ''  });
+                    tournament: tournamentToView, 
+                    displayName: req.user ? req.user.displayName : ''  });
             // }
         }
     });
