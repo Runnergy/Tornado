@@ -87,7 +87,7 @@ module.exports.processCreatePage = (req, res, next) => {
         "description": req.body.description
     });
 
-    Tournament.create(newTournament, (err, Tournament) =>{
+    Tournament.create(newTournament, (err) =>{
         if(err)
         {
             console.log(err);
@@ -176,51 +176,70 @@ module.exports.processUpdatePage = (req, res, next) => {
     // placeholder object that will be inserted in rounds array
     let emptyParticipantArray = {"participants": []};
     
-    let updatedTounament = Tournament({
-        "_id": id,
-        "title": req.body.title,
-        "rounds": [ParticipantArray, emptyParticipantArray, emptyParticipantArray, emptyParticipantArray, emptyParticipantArray],
-        "startdate": req.body.startdate,
-        "enddate": req.body.enddate,
-        "roundTotal": roundTotal,
-        "type": req.body.type,
-        "host": req.user.username,
-        "status": status,
-        "description": req.body.description
-    });
+    let R1 = {"participants": []};
+    let R2 = {"participants": []};
+    let R3 = {"participants": []};
+    let R4 = {"participants": [] };
 
-    if (!req.user) {
-        req.session.returnTo = req.originalUrl; 
-        res.redirect('/login');
-    } else {
-        Tournament.findById(id, function (err, findHost) {
-            if (err) { 
-                console.log(err);
-                res.end(err);
-            }
-            else { 
-                let host = findHost.host; 
-                console.log(host);
-                if (req.user.username != host) {
+    Tournament.findById(id, (err, tournamentToUpdate) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            R1 = {"participants": tournamentToUpdate.rounds[1].participants};
+            R2 = {"participants": tournamentToUpdate.rounds[2].participants};
+            R3 = {"participants": tournamentToUpdate.rounds[3].participants};
+            R4 = { "participants": tournamentToUpdate.rounds[4].participants };
+            
+            let updatedTounament = Tournament({
+                "_id": id,
+                "title": req.body.title,
+                "rounds": [ParticipantArray, R1, R2, R3, R4],
+                "startdate": req.body.startdate,
+                "enddate": req.body.enddate,
+                "roundTotal": roundTotal,
+                "type": req.body.type,
+                "host": req.user.username,
+                "status": status,
+                "description": req.body.description
+            });
+            if (!req.user) {
+                req.session.returnTo = req.originalUrl; 
+                res.redirect('/login');
+            } else {
+                Tournament.findById(id, function (err, findHost) {
                     if (err) { 
                         console.log(err);
+                        res.end(err);
                     }
-                    dialog.info('Access Denied!');
-                    res.redirect('/login');
-                } else { 
-                    Tournament.updateOne({_id: id}, updatedTounament, (err) => {
-                        if(err) {
-                            console.log(err);
-                            res.end(err);
-                        } else {
-                            // refresh 
-                            res.redirect('back');
+                    else { 
+                        let host = findHost.host; 
+                        console.log(host);
+                        if (req.user.username != host) {
+                            if (err) { 
+                                console.log(err);
+                            }
+                            dialog.info('Access Denied!');
+                            res.redirect('/login');
+                        } else { 
+                            Tournament.updateOne({_id: id}, updatedTounament, (err) => {
+                                if(err) {
+                                    console.log(err);
+                                    res.end(err);
+                                } else {
+                                    // refresh 
+                                    res.redirect('back');
+                                }
+                            });
                         }
-                    });
-                }
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 }
 
 module.exports.performDelete = (req, res, next) => {
