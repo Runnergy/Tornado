@@ -1,22 +1,60 @@
 <!--homepage-->
 <div class="hero-content">
     <span class="vertical-center">
-        <h1 id="hero-text">Welcome to Tornado!</h1><br>
-        <h3 id="hero-description">Want to create a single elimination tournament? <br>Start here!</h3><br><br>
-        <div class="btn-toolbar">
-            <a style="float: left; margin-right: 3cm;" href="/tournament/create" class="btn btn-outline-danger btn-xl" 
-                role="button" id="hero-createBtn">
-                Create tournament
-            </a>
-            <a style="float: right;" class="btn btn-outline-info btn-xl" 
-                role="button" id="hero-createBtn" onclick="myFunction()">
-                Active Tournaments
-            </a>
-        </div>
+      
+     <div class="row">
+     <div class="col-12">
+    <img src="/assets/images/tornado_big_icon.png" alt="team logo and site name" height="200px">
+    </div>
+    <div class="col-12">
+    <img src="/assets/images/tornado_text.png" alt="team logo and site name" height="160px">
+    </div>
+    </div>
+   
+        <h6 id="hero-text" style="font-family: 'Anton', sans-serif; color:honeydew; font-size: 18px;">Welcome to Tornado!</h6>
     </span>
 </div>
 
-<div class="container" id="tournamentTable">
+
+<div  style="background-color: black; width: 100vw; margin-top:0%; ">
+    <div class="row justify-content-md-center;" >
+       
+       <div class="col-3 offset-1 p-3" >
+        <a class="active" onclick="myFunction()"><img src="/assets/images/play1.png" alt="" style="width: 100px; height: 100px;margin-left: 3.5cm;"></a><br><br>
+         <h3 style="font-family:  'Oswald', sans-serif; font-size: 22px; text-align: center;">ACTIVE TOURNAMENTS</h3>
+          <p style="font-weight: 20;font-family:  'Oswald', sans-serif; font-size: 16px; text-align:center;">There are many tournaments 
+              in progress now. Check out our active tournaments!</p>
+       </div>
+ 
+        <div class="col-2 offset-1 p-3" >
+             <div>
+               <a href="/login"><img src="/assets/images/gp.png" alt="" style="width: 100px; height: 100px;margin-left: 1.5cm;"></a><br><br>
+                 <div class="contact-column mr-3">
+                    <h3 style="font-family:  'Oswald', sans-serif; font-size: 22px; text-align: center;">SIGN IN</h3>
+                    <p style="font-weight: 20;font-family:  'Oswald', sans-serif; font-size: 16px; text-align:center;">Sign In to create
+                    a new tournament or update an existing tournament!</p>
+                 </div>
+            </div>
+        </div>
+
+        <div class="col-3 offset-1 p-3" >
+            <div>
+              <a href="/tournament/create"><img src="/assets/images/gloveR.png" alt="" style="width: 100px; height: 100px;margin-left: 3cm;"></a><br><br>
+                <div class="contact-column mr-3">
+                    <h3 style="font-family:  'Oswald', sans-serif; font-size: 22px;text-align: center;">CREATE TOURNAMENT</h3>
+                    <p style="font-weight: 20;font-family:  'Oswald', sans-serif; font-size: 16px; text-align:center;">After registration
+                        or login, you can create your own tournament!</p>
+                </div>
+           </div>
+       </div>
+
+    </div>
+</div> <br><br><br>
+
+
+
+
+<div class="container" id="tournamentTable" style="margin-top: 40px;">
     <table class="table bg-dark-80 text-light">
         <thead class="thead-dark">
             <tr class="text-center">
@@ -64,5 +102,7 @@
             <% } %>
         <% } %> 
     </table>
-</div>
+</div><br><br>
+
+
 
