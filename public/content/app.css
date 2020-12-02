@@ -157,16 +157,14 @@ i {
   }
 
 
-  /* participant container in the brackets */
+   /* participant container in the brackets */
 .participant {
     background-color: #363636e3;
-    /* padding: 5px 0px; */
-    /* box-shadow: rgb(92, 36, 36) 2px 2px 2px; */
-    width: 170px;
+    width: 150px;
     text-align: left;
     margin: 10px;
     border-radius: 3px;
-    
+    height: 50px;    
 }
 
 .participant:hover {
@@ -176,18 +174,24 @@ i {
 
 /* participant number */
 .participant-num {
+    float: left;
     text-align: center;
     background-color: rgba(197, 197, 197, 0.205);
-    display: inline-block;
     width: 30px;
+    height: 100%;
     padding: 5px;
     color: black;
+    display: grid;
 }
 
 /* name of the participant */
 .participant-name {
-    display: inline-block;
+    float: left;
     padding: 5px 10px;
+    width: 110px;
+    height: 100%;
+    font-size: 13px;
+    display: grid;
 }
 
   
