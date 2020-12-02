@@ -1,10 +1,12 @@
 let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
+//let router = express.Router();
+//let mongoose = require('mongoose');
+//let passport = require('passport');
+var dialog = require('dialog');
 
 // create a reference to the model
 let Tournament = require('../models/tournament');
-let Round = require('../models/tournament_round');
+//let Round = require('../models/tournament_round');
 
 module.exports.displayTournamentList = (req, res, next) => {
     Tournament.find((err, tournamentList) => {
@@ -110,15 +112,24 @@ module.exports.displayUpdatePage = (req, res, next) => {
         }
         else
         {
+            let host = tournamentToEdit.host;
             if (!req.user) {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
             } else {
-                //show the update view
-                res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', 
-                            tournament: tournamentToEdit, 
-                    displayName: req.user ? req.user.displayName : ''
-                });
+                if (req.user.username != host) {
+                    if (err) { 
+                        console.log(err);
+                    }
+                    dialog.info('Access Denied!');
+                    res.redirect('/login');
+                } else { 
+                    //show the update view
+                    res.render('index', { title: 'Update Tournament', file: '../views/tournament/update', 
+                                tournament: tournamentToEdit, 
+                        displayName: req.user ? req.user.displayName : ''
+                    });
+                }
             }
         }
     });
@@ -182,16 +193,31 @@ module.exports.processUpdatePage = (req, res, next) => {
         req.session.returnTo = req.originalUrl; 
         res.redirect('/login');
     } else {
-        Tournament.updateOne({_id: id}, updatedTounament, (err) => {
-            if(err)
-            {
+        Tournament.findById(id, function (err, findHost) {
+            if (err) { 
                 console.log(err);
                 res.end(err);
             }
-            else
-            {
-                // refresh 
-                res.redirect('back');
+            else { 
+                let host = findHost.host; 
+                console.log(host);
+                if (req.user.username != host) {
+                    if (err) { 
+                        console.log(err);
+                    }
+                    dialog.info('Access Denied!');
+                    res.redirect('/login');
+                } else { 
+                    Tournament.updateOne({_id: id}, updatedTounament, (err) => {
+                        if(err) {
+                            console.log(err);
+                            res.end(err);
+                        } else {
+                            // refresh 
+                            res.redirect('back');
+                        }
+                    });
+                }
             }
         });
     }
@@ -203,18 +229,36 @@ module.exports.performDelete = (req, res, next) => {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
     } else {
-                Tournament.remove({_id: id}, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            // refresh
-            res.redirect('/tournament');
-        }
-    });
+        Tournament.findById(id, function (err, findHost) {
+            if (err) { 
+                console.log(err);
+                res.end(err);
+            }
+            else { 
+                let host = findHost.host; 
+                console.log(host);
+                if (req.user.username != host) {
+                    if (err) { 
+                        console.log(err);
+                    }
+                    dialog.info('Access Denied!');
+                    res.redirect('/login');
+                } else { 
+                    Tournament.remove({_id: id}, (err) => {
+                        if(err)
+                        {
+                            console.log(err);
+                            res.end(err);
+                        }
+                        else
+                        {
+                            // refresh
+                            res.redirect('/tournament');
+                        }
+                    });
+                }
+            }
+        });
     }
 }
 
@@ -272,6 +316,7 @@ module.exports.displayProgress = (req, res, next) => {
     let roundNumber = req.params.roundNumber;
 
     Tournament.findById(id, (err, tournamentToView) => {
+        let host = tournamentToView.host;
         if(err)
         {
             console.log(err);
@@ -283,11 +328,19 @@ module.exports.displayProgress = (req, res, next) => {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
             } else {
-                //show the update view
-                res.render('index', { title: 'Progress Tournament', file: '../views/tournament/progress', 
-                tournament: tournamentToView, 
-                displayName: req.user ? req.user.displayName : '',
-                roundNumber: roundNumber });
+                if (req.user.username != host) {
+                    if (err) { 
+                        console.log(err);
+                    }
+                    dialog.info('Access Denied!');
+                    res.redirect('/login');
+                } else { 
+                    //show the update view
+                    res.render('index', { title: 'Progress Tournament', file: '../views/tournament/progress', 
+                    tournament: tournamentToView, 
+                    displayName: req.user ? req.user.displayName : '',
+                    roundNumber: roundNumber });
+                }
             }
         }
     });
@@ -321,29 +374,46 @@ module.exports.processProgress = (req, res, next) => {
         "rounds.4": fifthParticipantArray,
     });
 
-    Tournament.updateOne({_id: id}, updatedTounament, (err) => {
-        if(err)
-        {
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            if (!req.user) {
-                req.session.returnTo = req.originalUrl; 
-                res.redirect('/login');
-            } else {
-                // redirect to next round page
-            res.redirect(`/tournament/progress/${id}/${parseInt(roundNumber) + 1}`);
+    Tournament.findById(id, function (err, findHost) {
+            if (err) { 
+                console.log(err);
+                res.end(err);
+            }
+            else { 
+                let host = findHost.host; 
+                console.log(host);
+                if (req.user.username != host) {
+                    if (err) { 
+                        console.log(err);
+                    }
+                    dialog.info('Access Denied!');
+                    res.redirect('/login');
+                } else { 
+                    Tournament.updateOne({_id: id}, updatedTounament, (err) => {
+                    if(err)
+                    {
+                        console.log(err);
+                        res.end(err);
+                    }
+                    else
+                    {
+                        if (!req.user) {
+                            req.session.returnTo = req.originalUrl; 
+                            res.redirect('/login');
+                        } else {
+                            // redirect to next round page
+                        res.redirect(`/tournament/progress/${id}/${parseInt(roundNumber) + 1}`);
+                        }
+                    }
+                });
             }
         }
     });
+    //     //node cron
+    //     let cron = require('node-cron');
+    //     cron.schedule('* * * * *', () => {
 
-//     //node cron
-//     let cron = require('node-cron');
-//     cron.schedule('* * * * *', () => {
+    //     console.log('running a task every minute');
 
-//     console.log('running a task every minute');
-
-// });
+    // });
 }
