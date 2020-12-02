@@ -12,6 +12,60 @@ let passportLocal = require('passport-local');
 let localStrategy = passportLocal.Strategy;
 let flash = require('connect-flash');
 
+// modules for updating tournament records every minute
+let Tournament = require('../models/tournament');
+let cron = require('node-cron');
+
+// execute it every minute
+cron.schedule('* * * * *', () => 
+{
+  // find all tournaments
+  Tournament.find((err, tournamentList) => {
+    if(err)
+    {
+        return console.error(err);
+    }
+    else
+    {
+      // loop the list of tournaments
+      for (const tournament of tournamentList) {
+        // console.log(tournament._id);
+        // console.log('running a task every minute');
+
+        let status = '';
+        
+        // it returns current time + 5hrs
+        let today = new Date();
+
+        // subtract 5hrs to get current time
+        let currentDate = new Date(today.setTime(today.getTime() - (5*60*60*1000)));
+
+        // it returns the beginning of enddate. to make it the end of enddate,  added 23hr 59min
+        let enddate = new Date(tournament.enddate.setTime(tournament.enddate.getTime() + (23*60*60*1000) + (59*60*1000)));
+        // console.log(currentDate);
+        // console.log(enddate);
+
+        if(tournament.startdate <= currentDate && 
+          enddate >= currentDate &&
+          tournament.rounds[0].participants.length == tournament.type * 2)
+          {
+              status = 'active';
+          }
+
+        // set status
+        Tournament.updateOne({_id: tournament._id}, { $set:{"status": status}}, (err) => {
+          if(err)
+          {
+              console.log(err);
+          }
+        });
+      }
+    }
+});
+
+
+});
+
 // database setup
 let mongoose = require('mongoose');
 let DB = require('./db');

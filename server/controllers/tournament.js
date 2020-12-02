@@ -338,4 +338,12 @@ module.exports.processProgress = (req, res, next) => {
             }
         }
     });
+
+//     //node cron
+//     let cron = require('node-cron');
+//     cron.schedule('* * * * *', () => {
+
+//     console.log('running a task every minute');
+
+// });
 }
