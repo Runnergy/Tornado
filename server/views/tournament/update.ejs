@@ -3,6 +3,7 @@
     <div class="offset-md-3 col-md-6 p-5 bg-dark-80">
         <form class="form p-5" method="POST">
 
+            
             <% if(new Date(Date.parse(tournament.enddate)+ (28 * 60 * 60 * 1000)+(59 *60 *1000)) < Date.now()) { %>
                 <div class="alert alert-danger" role="alert">
                     This tournament already ended.
