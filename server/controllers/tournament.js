@@ -176,11 +176,11 @@ module.exports.processUpdatePage = (req, res, next) => {
     // placeholder object that will be inserted in rounds array
     let emptyParticipantArray = {"participants": []};
     
-    let R1 = {"participants": []};
-    let R2 = {"participants": []};
-    let R3 = {"participants": []};
-    let R4 = {"participants": [] };
-
+    let R1 = { "participants": [] };
+    let R2 = { "participants": [] };
+    let R3 = { "participants": [] };
+    let R4 = { "participants": [] };
+    
     Tournament.findById(id, (err, tournamentToUpdate) => {
         if(err)
         {
@@ -194,6 +194,8 @@ module.exports.processUpdatePage = (req, res, next) => {
             R3 = {"participants": tournamentToUpdate.rounds[3].participants};
             R4 = { "participants": tournamentToUpdate.rounds[4].participants };
             
+            
+
             let updatedTounament = Tournament({
                 "_id": id,
                 "title": req.body.title,
@@ -216,8 +218,8 @@ module.exports.processUpdatePage = (req, res, next) => {
                         res.end(err);
                     }
                     else { 
-                        let host = findHost.host; 
-                        console.log(host);
+                        let host = findHost.host;
+                        
                         if (req.user.username != host) {
                             if (err) { 
                                 console.log(err);
@@ -225,14 +227,72 @@ module.exports.processUpdatePage = (req, res, next) => {
                             dialog.info('Access Denied!');
                             res.redirect('/login');
                         } else { 
-                            Tournament.updateOne({_id: id}, updatedTounament, (err) => {
-                                if(err) {
+                            Tournament.updateOne({ _id: id }, updatedTounament, (err) => {
+                                if (err) {
                                     console.log(err);
                                     res.end(err);
-                                } else {
-                                    // refresh 
-                                    res.redirect('back');
                                 }
+
+                                // checking if all the remaining round participants are winners of rounds before
+                                
+                                if (JSON.stringify(tournamentToUpdate.rounds[0].participants) === JSON.stringify(participants)) {
+                                    console.log('They are equal!');
+                                    R1 = {"participants": tournamentToUpdate.rounds[1].participants};
+                                    R2 = {"participants": tournamentToUpdate.rounds[2].participants};
+                                    R3 = {"participants": tournamentToUpdate.rounds[3].participants};
+                                    R4 = { "participants": tournamentToUpdate.rounds[4].participants };
+                                }
+                                else { 
+                                    R1 = { "participants": [] };
+                                    R2 = { "participants": [] };
+                                    R3 = { "participants": [] };
+                                    R4 = { "participants": [] };
+                                }
+                                
+                                if (tournamentToUpdate.rounds[4].participants.every(i => tournamentToUpdate.rounds[3].participants.includes(i)) == false) { 
+                                    R4 = { "participants": [] };
+                                }
+                                
+                                if (tournamentToUpdate.rounds[3].participants.every(i => tournamentToUpdate.rounds[2].participants.includes(i)) == false) { 
+                                    R3 = { "participants": [] };
+                                    R4 = { "participants": [] };
+                                }
+
+                                if (tournamentToUpdate.rounds[2].participants.every(i => tournamentToUpdate.rounds[1].participants.includes(i)) == false) { 
+                                    R2 = { "participants": [] };
+                                    R3 = { "participants": [] };
+                                    R4 = { "participants": [] };
+                                }
+
+                                if (tournamentToUpdate.rounds[1].participants.every(i => tournamentToUpdate.rounds[0].participants.includes(i)) == false) { 
+                                    R1 = { "participants": [] };
+                                    R2 = { "participants": [] };
+                                    R3 = { "participants": [] };
+                                    R4 = { "participants": [] };
+                                }
+
+                                let validatedTounament = Tournament({
+                                    "_id": id,
+                                    "title": req.body.title,
+                                    "rounds": [ParticipantArray, R1, R2, R3, R4],
+                                    "startdate": req.body.startdate,
+                                    "enddate": req.body.enddate,
+                                    "roundTotal": roundTotal,
+                                    "type": req.body.type,
+                                    "host": req.user.username,
+                                    "status": status,
+                                    "description": req.body.description
+                                });
+
+                                Tournament.update({ _id: id }, validatedTounament, (err) => {
+                                    if(err) {
+                                        console.log(err);
+                                        res.end(err);
+                                    } else {
+                                        // refresh 
+                                        res.redirect('back');
+                                    }
+                                });
                             });
                         }
                     }
