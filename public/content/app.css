@@ -10,6 +10,7 @@ body{
     background-size: cover;
     /* background-attachment: fixed; */
     color: white;
+    font-family: 'Montserrat', sans-serif;
 }
 
 a:hover {
@@ -94,6 +95,10 @@ footer a:hover {
 }
 
 /* colors from colour swatches */
+.color-red4 {
+    background-color: #2b0000;
+}
+
 .color-red3 {
     background-color: #430505;
 }

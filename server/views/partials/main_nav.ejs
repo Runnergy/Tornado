@@ -1,5 +1,5 @@
 <!--main nav-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom py-4">
 
   <!--website logo-->
   <a class="navbar-brand" href="/">
@@ -55,17 +55,31 @@
         <a class="nav-link" href="/contact"> CONTACT US </a>
         </li>
       
-      <% if(typeof displayName == 'string' && displayName ){ %>
-        <li class="navbar-text"><i class="fas fa-lg fa-user"></i> Welcome, <%= displayName %></li>
-        <li class="nav-item">
-          <a href="/logout" class="nav-link">
-            <i class="fas fa-lg fa-sign-out-alt"></i> Logout
-          </a>
-        </li>
-      <% } else {%>
-        <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
-      <% } %>
+      <div class="d-xl-none">
+        <% if(typeof displayName == 'string' && displayName ){ %>
+          <li class="navbar-text"><i class="fas fa-lg fa-user"></i> Welcome, <%= displayName %></li>
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">
+              <i class="fas fa-lg fa-sign-out-alt"></i> Logout
+            </a>
+          </li>
+        <% } else {%>
+          <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a></li>
+        <% } %>
+    </div>
 
     </ul>
+  </div>
+
+  <div class=" d-none d-sm-block">
+    <% if(typeof displayName == 'string' && displayName ){ %>
+      <p><i class="fas fa-lg fa-user"></i> Hello, <%= displayName %> &nbsp;
+        <a href="/logout" class="btn btn-small text-light color-red3 active-btn ">
+          <i class="fas fa-lg fa-sign-out-alt"></i> Logout
+        </a>
+      </p>
+    <% } else {%>
+      <a href="/login" class="btn btn-small text-light color-red3 active-btn"><i class="fas fa-lg fa-sign-in-alt"></i> Login</a>
+    <% } %>
   </div>
 </nav>

@@ -58,6 +58,17 @@
             });
         }
 
+        if(title === 'About Us')
+        {
+            gsap.from('.team-member', {
+                y: 10, 
+                duration: 2, 
+                opacity:0, 
+                stagger: 0.3,
+                ease: "expo"
+            });
+        }
+
         if(title === 'Progress Tournament')
         {
             let currentPage = window.location.href;
