@@ -382,19 +382,19 @@ a.active { cursor: pointer; }
     }
 
     /*tables*/
-    table.responsive span[data-type="responsive"] {
+    .responsive span[data-type="responsive"] {
         display: inline-block;
         width: 45%;
         color: #a8a8a8;
         vertical-align: top;
     }
 
-    table.responsive,
-    table.responsive thead,
-    table.responsive tbody,
-    table.responsive th,
-    table.responsive td,
-    table.responsive tr {
+    .responsive,
+    .responsive thead,
+    .responsive tbody,
+    .responsive th,
+    .responsive td,
+    .responsive tr {
         -webkit-box-sizing: border-box;
         /* Safari/Chrome, other WebKit */
         -moz-box-sizing: border-box;
@@ -405,27 +405,27 @@ a.active { cursor: pointer; }
         text-align: center;
     }
 
-    html.ie9 table.responsive,
-    html.ie9 table.responsive thead,
-    html.ie9 table.responsive tbody,
-    html.ie9 table.responsive th,
-    html.ie9 table.responsive td,
-    html.ie9 table.responsive tr {
+    html.ie9 .responsive,
+    html.ie9 .responsive thead,
+    html.ie9 .responsive tbody,
+    html.ie9 .responsive th,
+    html.ie9 .responsive td,
+    html.ie9 .responsive tr {
         float: left;
         clear: both;
         width: 100%
     }
 
-    table.responsive tr {
+    .responsive tr {
         border: 1px solid #ccc;
     }
 
-    table.responsive td {
+    .responsive td {
         border: none;
         text-align: center;
     }
 
-    table.responsive th {
+    .responsive th {
         display: none;
         text-align: center;
     }
@@ -447,41 +447,41 @@ a.active { cursor: pointer; }
 }
 
 /*responsive table css*/
-table.responsive span[data-type="responsive"] {
+.responsive span[data-type="responsive"] {
     display: none;
 }
 
-table {
+.responsive {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
     border-radius: 25px;
 }
 
-table td,
-table th {
+.responsive td,
+.responsive th {
     border: none;
     padding: 8px;
     text-align: center;
 }
 
-table tr:first-child td {
+.responsive tr:first-child td {
     background-color: #000000;
 }
 
-table tr:nth-child(even) {
+.responsive tr:nth-child(even) {
     background-color: #333333;
 }
 
-table tr:nth-child(odd) {
+.responsive tr:nth-child(odd) {
     background-color: #404040;
 }
 
-table tr:hover {
+.responsive tr:hover {
     background-color: #262626;
 }
 
-table th {
+.responsive th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
