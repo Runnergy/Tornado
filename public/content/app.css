@@ -13,6 +13,10 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
+#main-nav {
+    z-index: 100;
+}
+
 a:hover {
     color: #9c0404;
     text-decoration: none;
@@ -232,12 +236,14 @@ a.active { cursor: pointer; }
     transform:translate(-50%, -50%);
 }
 
+/* home page dragon */
 #hero-dragon {
     height: 100%;
     bottom:20px;
     right:-350px;
 }
 
+/* home page h6 under text logo */
 #hero-description h6 {
     font-family: 'Nova Slim', cursive;
     text-decoration: underline overline;
@@ -247,6 +253,7 @@ a.active { cursor: pointer; }
     text-align: center;
 }
 
+/* home page option container */
 .home-options {
     text-align: center;
     padding: 10% 0;
@@ -269,9 +276,9 @@ a.active { cursor: pointer; }
     background-color: #A72424;
 }
 
+/* home page image */
 .home-page img {
     height: 100%;
-    
 }
 
 .option-image img {
@@ -285,6 +292,39 @@ a.active { cursor: pointer; }
 .option-image {
     width: 120px;
     margin: 0px auto;
+}
+
+#tournament-card-page img {
+    width: 100%;
+}
+
+#touament-logo-txt {
+    width: 80%;
+}
+
+.tournament-card-overlay {
+    background-image: linear-gradient(360deg, rgba(0,0,0,1) 0%, rgba(0, 0, 0, 0.555) 100%);    
+    opacity: 0;
+}
+
+.tournament-card:hover .tournament-card-overlay {
+    opacity: 1;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+    z-index: 50;
+}
+
+/* hidden active button when tournament is not active (tournament card page) */
+.btn-hidden {
+    opacity: 0;
+}
+
+/* absolute active div in tournament card page */
+.status-active-btn {
+    top: 85px;
+    left:50%;
+    transform:translate(-50%, -50%);
 }
 
 /* tablet */

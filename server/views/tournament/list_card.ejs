@@ -1,0 +1,127 @@
+<div class="container text-center" id="tournament-card-page">
+    <div class="position-absolute d-none d-sm-block" id="hero-dragon"><img src="/assets/images/dragon.png" alt="" srcset=""></div>
+    <div id="touament-logo-txt" class="mx-auto my-5">
+        <img id="touament-logo-txt-img" src="/assets/images/tournament_text.png" alt="" srcset="">
+    </div>
+    <div class="row">
+        <div class="offset-md-1 col-md-5 mt-3">
+            <a class="btn btn-md btn-outline-danger w-100 p-3" href="/tournament" role="button">View tournaments table</a>
+        </div>
+        <div class="col-md-5 mt-3">
+            <a class="btn btn-md btn-outline-danger w-100 p-3" href="/tournament/create" role="button">Create a new tournament</a>
+        </div>
+    </div>
+    <div class="row text-center mt-5">
+        <% for(let i = 0; i < tournamentList.length; i++) { %>
+            <% if(tournamentList[0 + (i * 3)]  != null ) { %>
+                <% if(typeof displayName == 'string' && displayName ||
+                         tournamentList[0 + (i * 3)].status == 'active') { %>
+                    <div class="col-lg-4 col-md-6 tournament-card">
+                        <div class="color-red4 m-2 p-3 rounded position-relative">
+                            <!-- overlay -->
+                            <div class="tournament-card-overlay position-absolute w-100 h-100 p-4 py-5">
+                                <p><b>Title</b><br> <%= tournamentList[0 + (i * 3)].title %></p>
+                                <p><b>Description</b><br> 
+                                    <%= tournamentList[0 + (i * 3)].description.substr(0, 30) %><% if( tournamentList[0 + (i * 3)].description.substr(0, 30).length >= 30 ){ %>....<% } %>
+                                </p>
+                                <p><b>End date</b><br> <%= tournamentList[0 + (i * 3)].enddate.toISOString().replace('T', ' ').substr(0, 10) %></p>
+                                <a class="btn color-red2 active-btn mt-3 text-light" href="/tournament/brackets/<%= tournamentList[0 + (i * 3)]._id %>" role="button">VIEW</a>
+                                <a class="btn color-red1 active-btn mt-3 text-light" href="/tournament/update/<%= tournamentList[0 + (i * 3)]._id %>" role="button">EDIT</a>
+                            </div>
+
+                            <!-- leaf crown img -->
+                            <div class="leaf-crown-icon w-50 mx-auto my-3">
+                                <img src="/assets/images/leaf_crown_gold.png" alt="" srcset="">
+                            </div>
+                            
+                            <!-- tournament title -->
+                            <div class="py-3 px-3 position-relative">
+                                <h6 class="pb-5"><%= tournamentList[0 + (i * 3)].title %></h6>
+                                <div class="position-absolute status-active-btn
+                                    <% if(tournamentList[0 + (i * 3)].status != 'active') { %>
+                                        btn-hidden
+                                    <% } %>">
+                                    <p class="btn btn-outline-success disabled"><%= tournamentList[0 + (i * 3)].status %></p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+
+            <% if(tournamentList[1 + (i * 3)]  != null) { %>
+                <% if(typeof displayName == 'string' && displayName ||
+                         tournamentList[1 + (i * 3)].status == 'active') { %>
+                    <div class="col-lg-4 col-md-6 tournament-card">
+                        <div class="color-red4 m-2 p-3 rounded position-relative">
+                            <!-- overlay -->
+                            <div class="tournament-card-overlay position-absolute w-100 h-100 p-4 py-5">
+                                <p><b>Title</b><br> <%= tournamentList[1 + (i * 3)].title %></p>
+                                <p><b>Description</b><br> 
+                                    <%= tournamentList[1 + (i * 3)].description.substr(0, 30) %><% if( tournamentList[1 + (i * 3)].description.substr(0, 30).length >= 30 ){ %>....<% } %>
+                                </p>
+                                <p><b>End date</b><br> <%= tournamentList[1 + (i * 3)].enddate.toISOString().replace('T', ' ').substr(0, 10) %></p>
+                                <a class="btn color-red2 active-btn mt-3 text-light" href="/tournament/brackets/<%= tournamentList[1 + (i * 3)]._id %>" role="button">VIEW</a>
+                                <a class="btn color-red1 active-btn mt-3 text-light" href="/tournament/update/<%= tournamentList[1 + (i * 3)]._id %>" role="button">EDIT</a>
+                            </div>
+
+                            <!-- leaf crown img -->
+                            <div class="leaf-crown-icon w-50 mx-auto my-3">
+                                <img src="/assets/images/leaf_crown_gold.png" alt="" srcset="">
+                            </div>
+
+                            <!-- tournament title -->
+                            <div class="py-3 px-3 position-relative">
+                                <h6 class="pb-5"><%= tournamentList[1 + (i * 3)].title %></h6>
+                                <div class="position-absolute status-active-btn
+                                    <% if(tournamentList[1 + (i * 3)].status != 'active') { %>
+                                        btn-hidden
+                                    <% } %>">
+                                    <p class="btn btn-outline-success disabled"><%= tournamentList[1 + (i * 3)].status %></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+
+            <% if(tournamentList[2 + (i * 3)]  != null) { %>
+                <% if(typeof displayName == 'string' && displayName ||
+                         tournamentList[1 + (i * 3)].status == 'active') { %>
+                    <div class="col-lg-4 col-md-6 tournament-card">
+                        <div class="color-red4 m-2 p-3 rounded position-relative">
+
+                            <!-- overlay -->
+                            <div class="tournament-card-overlay position-absolute w-100 h-100 p-4 py-5">
+                                <p><b>Title</b><br> <%= tournamentList[2 + (i * 3)].title %></p>
+                                <p><b>Description</b><br> 
+                                    <%= tournamentList[2 + (i * 3)].description.substr(0, 30) %><% if( tournamentList[2 + (i * 3)].description.substr(0, 30).length >= 30 ){ %>....<% } %>
+                                </p>
+                                <p><b>End date</b><br> <%= tournamentList[2 + (i * 3)].enddate.toISOString().replace('T', ' ').substr(0, 10) %></p>
+                                <a class="btn color-red2 active-btn mt-3 text-light" href="/tournament/brackets/<%= tournamentList[2 + (i * 3)]._id %>" role="button">VIEW</a>
+                                <a class="btn color-red1 active-btn mt-3 text-light" href="/tournament/update/<%= tournamentList[2 + (i * 3)]._id %>" role="button">EDIT</a>
+                            </div>
+                            
+                            <!-- leaf crown img -->
+                            <div class="leaf-crown-icon w-50 mx-auto my-3">
+                                <img src="/assets/images/leaf_crown_gold.png" alt="" srcset="">
+                            </div>
+
+                            <!-- tournament title -->
+                            <div class="py-3 px-3 position-relative">
+                                <h6 class="pb-5"><%= tournamentList[2 + (i * 3)].title %></h6>
+                                <div class="position-absolute status-active-btn
+                                    <% if(tournamentList[2 + (i * 3)].status != 'active') { %>
+                                        btn-hidden
+                                    <% } %>">
+                                    <p class="btn btn-outline-success disabled"><%= tournamentList[2 + (i * 3)].status %></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+        <% } %>
+    </div>
+</div>

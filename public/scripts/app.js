@@ -69,6 +69,25 @@
             });
         }
 
+        if(title === 'Tournaments Cards')
+        {
+            gsap.from('.tournament-card', {
+                y: 10, 
+                duration: 2, 
+                opacity:0, 
+                stagger: 0.3,
+                delay: 1,
+                ease: "expo"
+            });
+        }
+
+        gsap.from('#touament-logo-txt-img', {
+            y: -50, 
+            duration: 1, 
+            opacity:0, 
+            ease: "bounce"
+        });
+
         if(title === 'Progress Tournament')
         {
             let currentPage = window.location.href;

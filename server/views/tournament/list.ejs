@@ -1,17 +1,23 @@
 <div class="container vh-100 pt-5 text-light text-center">
-    <a href="/tournament/create" class="btn text-light color-red3 active-btn btn-md mb-4" role="button">
-    Create tournament</a><br>
+    <div id="touament-logo-txt" class="mx-auto my-5">
+        <img id="touament-logo-txt-img" src="/assets/images/tournament_text.png" alt="" srcset="" width="100%">
+    </div>
+    
+    <div class="row">
+        <div class="offset-md-1 col-md-5 mt-3">
+            <a href="/tournament/card" class="btn btn-md btn-outline-danger w-100 p-3" role="button">View in cards</a>
+        </div>
+        <div class="col-md-5 mt-3">
+            
+            <a href="/tournament/create" class="btn btn-md btn-outline-danger w-100 p-3" role="button">Create a new tournament</a>
+        </div>
+    </div>
 
     <!-- when the user is logged in -->
     <% if(typeof displayName == 'string' && displayName ){ %>
 
     <div class="container  d-none d-sm-block" id="tournamentTable" style="margin-top: 40px;">
     <table class="responsive">
-        <!-- <th>
-            <tr>
-                <th>Active Tournaments</th>
-            </tr>
-        </th> */-->
 
         <!-- Header Row-->
         <tr>
@@ -77,46 +83,46 @@
     
     else {%>
         <!-- message for the user who is not logged in -->
-        <h6>Please <a href="/login">login</a> to View, Edit or Delete tournament options.</h6>
-        <div class="container  d-none d-sm-block" id="tournamentTable" style="margin-top: 40px;">
-        <table class="responsive">
-            <!-- Header Row-->
+        <h6 class="my-5">Please <a href="/login">login</a> to View, Edit or Delete tournament options.</h6>
+        <div class="container vh-100" id="tournamentTable">
+            <table class="responsive my-5">
+                <!-- Header Row-->
+                
+
             
-
-        
-            <tr>
-                <td>Title</td>
-                <td>Status</td>
-                <td>Type</td>
-                <td>Description</td>
-                <td>End date</td>
-            </tr>
-
-            <!-- Repeatable Template Row -->
-            <% for(let i = 0; i < TournamentList.length; i++) { %>
-                <% if( TournamentList[i].status == 'active' ){ %>
                 <tr>
-                    <td><%= TournamentList[i].title %></td>
-
-                    <td>
-                        <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
-                    </td>
-
-                    <td>
-                        <%= TournamentList[i].type %> bouts
-                    </td>
-
-                    <td>
-                        <%= TournamentList[i].description.substr(0, 35) %><% if( TournamentList[i].description.substr(0, 35).length >= 35 ){ %>....<% } %> 
-                   </td>
-
-                    <td>
-                        <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
-                    </td>
+                    <td>Title</td>
+                    <td>Status</td>
+                    <td>Type</td>
+                    <td>Description</td>
+                    <td>End date</td>
                 </tr>
+
+                <!-- Repeatable Template Row -->
+                <% for(let i = 0; i < TournamentList.length; i++) { %>
+                    <% if( TournamentList[i].status == 'active' ){ %>
+                    <tr>
+                        <td><%= TournamentList[i].title %></td>
+
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
+                        </td>
+
+                        <td>
+                            <%= TournamentList[i].type %> bouts
+                        </td>
+
+                        <td>
+                            <%= TournamentList[i].description.substr(0, 35) %><% if( TournamentList[i].description.substr(0, 35).length >= 35 ){ %>....<% } %> %>
+                    </td>
+
+                        <td>
+                            <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
+                        </td>
+                    </tr>
+                    <% } %>
                 <% } %>
-            <% } %>
-        </table>
+            </table>
         </div>
     <% } %>    
 </div>

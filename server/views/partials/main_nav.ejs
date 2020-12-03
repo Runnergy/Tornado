@@ -1,5 +1,5 @@
 <!--main nav-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-custom py-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom py-4" id="main-nav">
   <!--website logo-->
   <a class="navbar-brand" href="/">
     <img src="/assets/images/tornado_big_icon.png" alt="team logo and site name" class="imgabt" height="40" style="margin-right: 0px;" >
@@ -41,7 +41,7 @@
       <% } else  { %>
         <li class="nav-item">
       <% } %>
-        <a class="nav-link" href="/tournament">
+        <a class="nav-link" href="/tournament/card">
         <!-- <i class="fas fa-trophy"></i>  -->
           TOURNAMENT </a>
         </li>
@@ -54,7 +54,7 @@
         <a class="nav-link" href="/contact"> CONTACT US </a>
         </li>
       
-      <div class="d-xl-none">
+      <div class="d-lg-none d-xl-none">
         <% if(typeof displayName == 'string' && displayName ){ %>
           <li class="navbar-text"><i class="fas fa-lg fa-user"></i> Welcome, <%= displayName %></li>
           <li class="nav-item">
@@ -70,7 +70,7 @@
     </ul>
   </div>
 
-  <div class=" d-none d-sm-block">
+  <div class=" d-none d-lg-block">
     <% if(typeof displayName == 'string' && displayName ){ %>
       <p><i class="fas fa-lg fa-user"></i> Hello, <%= displayName %> &nbsp;
         <a href="/logout" class="btn btn-small text-light color-red3 active-btn ">

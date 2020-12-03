@@ -21,6 +21,24 @@ module.exports.displayTournamentList = (req, res, next) => {
     });
 }
 
+// GET controller for tournament list card page
+module.exports.displayTournamentListCard = (req, res, next) => {
+    Tournament.find((err, tournamentList) => {
+        if(err)
+        {
+            return console.error(err);
+        }
+        else
+        {
+            res.render('index', {title: 'Tournaments Cards',file: '../views/tournament/list_card', 
+                tournamentList: tournamentList, 
+                displayName: req.user ? req.user.displayName : '', 
+                username: req.user ? req.user.username : ''
+            }); 
+        }
+    });
+}
+
 // GET controller for create page
 module.exports.displayCreatePage = (req, res, next) => {
     if (!req.user) {
@@ -369,31 +387,6 @@ module.exports.performDelete = (req, res, next) => {
         });
     }
 }
-
-// module.exports.editBrackets = (req, res, next) => {
-//     let id = req.params.id;
-
-//     Tournament.findById(id, (err, tournamentToView) => {
-//         if(err)
-//         {
-//             console.log(err);
-//             res.end(err);
-//         }
-//         else
-//         {
-//             if (!req.user) {
-//                 req.session.returnTo = req.originalUrl; 
-//                 res.redirect('/login');
-//             } else {
-//                 //show the update view
-//                 res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
-//                         tournament: tournamentToView, 
-//                     displayName: req.user ? req.user.displayName : ''
-//                 });
-//             }
-//         }
-//     });
-// }
 
 // GET controller for display bracket page
 module.exports.displayBrackets = (req, res, next) => {

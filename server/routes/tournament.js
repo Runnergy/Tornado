@@ -9,6 +9,9 @@ let tournamentController = require('../controllers/tournament');
 /* GET Route for the Tournament List page - READ Operation */
 router.get('/', tournamentController.displayTournamentList );
 
+/* GET Route for the Tournament List page - READ Operation */
+router.get('/card', tournamentController.displayTournamentListCard );
+
 /* GET Route for displaying the Add page - CREATE Operation */
 router.get('/create', tournamentController.displayCreatePage );
 
