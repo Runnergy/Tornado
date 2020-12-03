@@ -20,6 +20,45 @@
             });
         }
 
+        if(title === 'Home')
+        {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.from('#tornado-icon', {
+                height: 400, 
+                duration: 1, 
+                opacity:0, 
+                ease: "bounce"
+            });
+
+            gsap.to('#hero-dragon', {
+                scrollTrigger: {
+                    start: "100px 80px",
+                    end: "1500px 80px",
+                    scrub: 2,
+                    toggleActions: "restart none none none"
+                },
+                x:900
+            });
+
+            gsap.from('#tornado-icon-txt', {y: 50, duration: 1, opacity:0, ease: "expo", delay: 0.5});
+            gsap.from('#hero-description', {y: 50, duration: 1, opacity:0, ease: "expo", delay: 1});
+
+            gsap.from('.home-options', {
+                scrollTrigger: {
+                    start: "200px 80px",
+                    end: "200px 80px",
+                    markers: true,
+                    toggleActions: "restart none none none"
+                },
+                y: 50, 
+                duration: 1.5, 
+                opacity:0, 
+                stagger: 0.6,
+                ease: "expo"
+            });
+        }
+
         if(title === 'Progress Tournament')
         {
             let currentPage = window.location.href;
