@@ -48,7 +48,6 @@
                 scrollTrigger: {
                     start: "200px 80px",
                     end: "200px 80px",
-                    markers: true,
                     toggleActions: "restart none none none"
                 },
                 y: 50, 
