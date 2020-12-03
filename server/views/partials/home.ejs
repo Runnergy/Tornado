@@ -52,46 +52,46 @@
 
 
     <div class="container  d-none d-sm-block" id="tournamentTable" style="margin-top: 40px;">
-        <table class="table bg-dark-80 text-light">
-            <thead class="thead-dark">
-                <tr class="text-center">
+        <table class="responsive">
+            <!--<th>
+                <tr>
                     <th>Active Tournaments</th>
                 </tr>
-            </thead>
+            </th>-->
 
             <!-- Header Row-->
-            <tr class="d-flex">
-                <td class="text-center col-2">Title</td>
-                <td class="text-center col-1">Status</td>
-                <td class="text-center col-1">Type</td>
-                <td class="text-center col-4">Description</td>
-                <td class="text-center col-3">End date</td>
-                <td class="text-center col-1"></td>
+            <tr>
+                <td>Title</td>
+                <td>Status</td>
+                <td>Type</td>
+                <td>Description</td>
+                <td>End date</td>
+                <td></td>
             </tr>
 
             <!-- Repeatable Template Row / Active tournaments list -->
             <% for(let i = 0; i < TournamentList.length; i++) { %>
                 <% if( TournamentList[i].status == 'active' ){ %>
-                    <tr class="d-flex">
-                        <td class="text-center col-2"><%= TournamentList[i].title %></td>
+                    <tr>
+                        <td><%= TournamentList[i].title %></td>
 
-                        <td class="text-center col-1">
+                        <td>
                             <button type="button" class="btn btn-success btn-sm" disabled>Active</button>
                         </td>
 
-                        <td class="text-center col-1">
+                        <td>
                             <%= TournamentList[i].type %> bouts
                         </td>
 
-                        <td class="text-center col-4">
+                        <td>
                             <%= TournamentList[i].description.substr(0, 35) %><% if( TournamentList[i].description.substr(0, 35).length >= 35 ){ %>....<% } %> 
                         </td>
 
-                        <td class="text-center col-3">
+                        <td>
                             <%= TournamentList[i].enddate.toISOString().replace('T', ' ').substr(0, 10) %>
                         </td>
                         
-                        <td class="text-center col-1">
+                        <td>
                             <a href="/tournament/brackets/<%= TournamentList[i]._id %>" class="btn btn-danger btn-sm">
                             VIEW</a>
                         </td>
