@@ -1,4 +1,4 @@
-import * as ll from '../leader-line/leader-line.min.js';
+import * as ll from './leader-line/leader-line.min.js';
 let start;
 let child;
 let count = 0;
