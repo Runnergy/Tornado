@@ -307,6 +307,55 @@ a.active { cursor: pointer; }
         color: rgb(190, 190, 190);
         font-size: 7px;
     }
+
+    /*tables*/
+    table.responsive span[data-type="responsive"] {
+        display: inline-block;
+        width: 45%;
+        color: #a8a8a8;
+        vertical-align: top;
+    }
+
+    table.responsive,
+    table.responsive thead,
+    table.responsive tbody,
+    table.responsive th,
+    table.responsive td,
+    table.responsive tr {
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+        /* Opera/IE 8+ */
+        display: block;
+        text-align: center;
+    }
+
+    html.ie9 table.responsive,
+    html.ie9 table.responsive thead,
+    html.ie9 table.responsive tbody,
+    html.ie9 table.responsive th,
+    html.ie9 table.responsive td,
+    html.ie9 table.responsive tr {
+        float: left;
+        clear: both;
+        width: 100%
+    }
+
+    table.responsive tr {
+        border: 1px solid #ccc;
+    }
+
+    table.responsive td {
+        border: none;
+        text-align: center;
+    }
+
+    table.responsive th {
+        display: none;
+        text-align: center;
+    }
 }
 
 /* mobile */
@@ -331,6 +380,55 @@ a.active { cursor: pointer; }
         color: rgb(190, 190, 190);
         font-size: 7px;
     }
+
+    /*tables*/
+    table.responsive span[data-type="responsive"] {
+        display: inline-block;
+        width: 45%;
+        color: #a8a8a8;
+        vertical-align: top;
+    }
+
+    table.responsive,
+    table.responsive thead,
+    table.responsive tbody,
+    table.responsive th,
+    table.responsive td,
+    table.responsive tr {
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+        /* Opera/IE 8+ */
+        display: block;
+        text-align: center;
+    }
+
+    html.ie9 table.responsive,
+    html.ie9 table.responsive thead,
+    html.ie9 table.responsive tbody,
+    html.ie9 table.responsive th,
+    html.ie9 table.responsive td,
+    html.ie9 table.responsive tr {
+        float: left;
+        clear: both;
+        width: 100%
+    }
+
+    table.responsive tr {
+        border: 1px solid #ccc;
+    }
+
+    table.responsive td {
+        border: none;
+        text-align: center;
+    }
+
+    table.responsive th {
+        display: none;
+        text-align: center;
+    }
 }
 
 /*imgabt function to scale the image on hover*/
@@ -346,4 +444,47 @@ a.active { cursor: pointer; }
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);
+}
+
+/*responsive table css*/
+table.responsive span[data-type="responsive"] {
+    display: none;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 25px;
+}
+
+table td,
+table th {
+    border: none;
+    padding: 8px;
+    text-align: center;
+}
+
+table tr:first-child td {
+    background-color: #000000;
+}
+
+table tr:nth-child(even) {
+    background-color: #333333;
+}
+
+table tr:nth-child(odd) {
+    background-color: #404040;
+}
+
+table tr:hover {
+    background-color: #262626;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
 }
