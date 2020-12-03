@@ -1,4 +1,4 @@
-<div class="container vh-100 pt-5 text-light text-center">
+<div class="container text-light text-center">
     <div id="touament-logo-txt" class="mx-auto my-5">
         <img id="touament-logo-txt-img" src="/assets/images/tournament_text.png" alt="" srcset="" width="100%">
     </div>
@@ -11,8 +11,8 @@
             
             <a href="/tournament/create" class="btn btn-md btn-outline-danger w-100 p-3" role="button">Create a new tournament</a>
         </div>
+    
     </div>
-
     <!-- when the user is logged in -->
     <% if(typeof displayName == 'string' && displayName ){ %>
 
@@ -84,7 +84,7 @@
     else {%>
         <!-- message for the user who is not logged in -->
         <h6 class="my-5">Please <a href="/login">login</a> to View, Edit or Delete tournament options.</h6>
-        <div class="container vh-100" id="tournamentTable">
+        <div class="container  d-none d-sm-block" id="tournamentTable" style="margin-top: 40px;">
             <table class="responsive my-5">
                 <!-- Header Row-->
                 
