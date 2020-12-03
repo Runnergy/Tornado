@@ -14,7 +14,8 @@ body{
 }
 
 a:hover {
-    color: #9c0404;;
+    color: #9c0404;
+    text-decoration: none;
 }
 
 fieldset {
@@ -330,4 +331,19 @@ a.active { cursor: pointer; }
         color: rgb(190, 190, 190);
         font-size: 7px;
     }
+}
+
+/*about us page images*/
+.imgabt {
+    -moz-transition: -moz-transform 0.2s ease-out;
+    -webkit-transition: -webkit-transform 0.2s ease-out;
+    -ms-transition: -ms-transform 0.2s ease-out;
+    transition: transform 0.2s ease-out;
+}
+
+.imgabt:hover {
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
 }
