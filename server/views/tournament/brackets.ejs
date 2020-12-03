@@ -36,7 +36,7 @@
             </div>
             <!-- go to result table -->
             <div class="pb-2">
-            <a class="btn color-red2 active-btn text-light w-100" href="#resultTable"><i class="fas fa-table"></i> Check Result Table</a>
+                <a class="btn color-red2 active-btn text-light w-100" href="#resultTable"><i class="fas fa-table"></i> Check Result Table</a>
             </div>
             <!-- export PDF button -->
             <div class="pb-2">
@@ -45,202 +45,204 @@
         </div>
     </div>
 
-        <!-- result bracket -->
-        <div class="row d-none d-md-block">
-            <div class="offset-lg-1 col-lg-10 mb-5">
-                <table class="mt-5" id="resultBracket">
-                    <tr>
-                        <!-- repeats the number of rounds -->
-                        <% for(let count = 0; count <= tournament.roundTotal; count++) { %>
-                            <td class="text-center">ROUND <%= count %></td>
-                        <% } %>
-                    </tr>
+    <!-- result bracket -->
+    <div class="row d-none d-md-block">
+        <div class="offset-lg-1 col-lg-10 mb-5">
+            <table class="mt-5" id="resultBracket">
+                <tr>
+                    <!-- repeats the number of rounds -->
+                    <% for(let count = 0; count <= tournament.roundTotal; count++) { %>
+                        <td class="text-center">ROUND <%= count %></td>
+                    <% } %>
+                </tr>
 
-                    <!-- repeats for the number of participants by multiplying the bouts by 2 -->
-                    <% for(let count = 0; count < tournament.type * 2; count++) { %>
-                        <tr>
-                            <td>
-                                <div class="participant first">
-                                    <div class="participant-num"><div class="m-auto"><%= count + 1 %></div></div>
-                                    <div id="parent<%= count + 1 %>1">
-                                        <div class="participant-name">
-                                            <div class="m-auto">
-                                                <% if(tournament.rounds[0].participants.length != 0) { %>
-                                                    <%= tournament.rounds[0].participants[count] %>
-                                                <% } else { %>
-                                                    player is needed
-                                                <% } %>
-                                            </div>
+                <!-- repeats for the number of participants by multiplying the bouts by 2 -->
+                <% for(let count = 0; count < tournament.type * 2; count++) { %>
+                    <tr>
+                        <td>
+                            <div class="participant first">
+                                <div class="participant-num"><div class="m-auto"><%= count + 1 %></div></div>
+                                <div id="parent<%= count + 1 %>1">
+                                    <div class="participant-name">
+                                        <div class="m-auto">
+                                            <% if(tournament.rounds[0].participants.length != 0) { %>
+                                                <%= tournament.rounds[0].participants[count] %>
+                                            <% } else { %>
+                                                player is needed
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </div>
+                        </td>
 
-                            <!-- 2nd column -->
-                            <% if(count%2 == 0) { %>
-                                <td rowspan="2">
-                                    <div class="participant second">
-                                        <!-- container number -->
-                                        <div class="participant-num"><div class="m-auto"><%= count/2 + 1 %></div></div>
+                        <!-- 2nd column -->
+                        <% if(count%2 == 0) { %>
+                            <td rowspan="2">
+                                <div class="participant second">
+                                    <!-- container number -->
+                                    <div class="participant-num"><div class="m-auto"><%= count/2 + 1 %></div></div>
+                                    <!-- create div with id to determine start and end in leader-line -->
+                                    <div id="parent<%= (count/2) + 1 %>2">
                                         <!-- input text field displaying participant name -->
-                                        <div id="parent<%= (count/2) + 1 %>2">
-                                            <% if(tournament.rounds[1].participants[count/2]) { %>
-                                                <div class="participant-name">
-                                                    <div class="m-auto">
-                                                        <%= tournament.rounds[1].participants[count/2] %>
-                                                    </div>
+                                        <% if(tournament.rounds[1].participants[count/2]) { %>
+                                            <div class="participant-name">
+                                                <div class="m-auto">
+                                                    <%= tournament.rounds[1].participants[count/2] %>
                                                 </div>
-                                            <% } else { %>
-                                                    <!-- input text field displaying participant name -->
-                                                    <div class="participant-name text-muted">
-                                                        <div class="m-auto">no player</div>
-                                                    </div>
-                                            <% } %>
-                                        </div>
-                                    </div>
-                                </td>
-                            <% } else { %>
-                                <td></td> 
-                            <% } %>
-
-                            <!-- 3rd column -->
-                            <% if(count%4 == 0) { %>
-                                <td rowspan="4">
-                                    <div class="participant third">
-                                        <!-- container number -->
-                                        <div class="participant-num"><div class="m-auto"><%= count/4 + 1 %></div></div>
-                                        <!-- input text field displaying participant name -->
-                                        <div id="parent<%= (count/4) + 1 %>3">
-                                            <% if(tournament.rounds[2].participants[count/4]) { %>
-                                                <div class="participant-name">
-                                                    <div class="m-auto">
-                                                        <%= tournament.rounds[2].participants[count/4] %>
-                                                    </div>
-                                                </div>
-                                                <% } else { %>
-                                                    <!-- input text field displaying participant name -->
-                                                    <div class="participant-name text-muted">
-                                                        <div class="m-auto">no player</div>
-                                                    </div>
-                                            <% } %>
-                                        </div>
-                                    </div>
-                                </td>
-                            <% } else { %>
-                                <td></td> 
-                            <% } %>
-
-                            <!-- 4th column -->
-                            <% if(count%8 == 0) { %>
-                                <td rowspan="8">
-                                    <div class="participant third">
-                                        <!-- container number -->
-                                        <div class="participant-num"><div class="m-auto"><%= count/8 + 1 %></div></div>
-                                        <!-- input text field displaying participant name -->
-                                        <div id="parent<%= (count/8) + 1 %>4">
-                                            <% if(tournament.rounds[3].participants[count/8]) { %>
-                                                <div class="participant-name">
-                                                    <div class="m-auto">
-                                                        <%= tournament.rounds[3].participants[count/8] %>
-                                                    </div>
-                                                </div>
-                                            <% } else { %>
-                                                    <!-- input text field displaying participant name -->
-                                                    <div class="participant-name text-muted">
-                                                        <div class="m-auto">no player</div>
-                                                    </div>
-                                            <% } %>
-                                        </div>
-                                    </div>
-                                </td>
-                            <% } else { %>
-                                <td></td> 
-                            <% } %>
-
-                            <!-- only applied when we have 4th rounds / 5th column -->
-                            <% if(tournament.roundTotal == '4') { %>
-                                <% if(count%16 == 0) { %>
-                                    <td rowspan="16">
-                                        <div class="participant third">
-                                            <!-- container number -->
-                                            <div class="participant-num"><div class="m-auto"><%= count/16 + 1 %></div></div>
-                                            <!-- input text field displaying participant name -->
-                                            <div id="parent<%= (count/16) + 1 %>5">
-                                                <% if(tournament.rounds[4].participants[count/16]) { %>
-                                                    <div class="participant-name">
-                                                        <div class="m-auto">
-                                                            <%= tournament.rounds[4].participants[count/16] %>
-                                                        </div>
-                                                    </div>
-                                                <% } else { %>
-                                                    <!-- input text field displaying participant name -->
-                                                    <div class="participant-name text-muted">
-                                                        <div class="m-auto">
-                                                            no player
-                                                        </div>
-                                                    </div>
-                                                <% } %>
                                             </div>
-                                        </div>
-                                    </td>
-                                <% } else { %>
-                                    <td></td> 
-                                <% } %>
-                            <% } %>
-                        </tr>
-                    <% } %>
-                </table>
-            </div>
-            <div class="offset-lg-4 col-lg-4 offset-md-3 col-md-6">
-                <!-- go to result table -->
-                <a class="btn color-red2 active-btn text-light mb-3 w-100" href="#resultTable"><i class="fas fa-table"></i> Check Result Table</a>
-            </div>
-        </div>
-
-        <!-- table displaying tournament result -->
-        <div class="row">
-            <div class="offset-lg-1 col-lg-10">
-                <table class=" table table-sm table-dark table-bordered table-striped table-hover col-xs-6 col-sm-6 col-md-6 col-lg-6" id="resultTable">
-                    <thead class="thead-dark">
-                        <tr class="text-center">
-                        <th scope="col" colspan="<%= parseInt(tournament.roundTotal) + 1 %>">Tornament: <%= tournament.title %></th>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <% for(let i = 1; i <= tournament.roundTotal; i++) { %>
-                                <td class="text-center">Round <%= i %></td>
-                            <% } %>
-                        </tr>
-                    </thead>
-                    
-                    <!-- repeat the number of participants -->
-                    <% for(let i = 0; i < tournament.type * 2; i++) { %>
-                        <tr>
-                            <td class="">
-                                <%= tournament.rounds[0].participants[i] %>
+                                        <% } else { %>
+                                            <!-- input text field displaying participant name -->
+                                            <div class="participant-name text-muted">
+                                                <div class="m-auto">no player</div>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
                             </td>
-                            <% for(let j = 1; j <= tournament.roundTotal; j++) { %>
-                                <!-- display o for winner and x for loser -->
-                                <% if(tournament.rounds[j].participants.includes(tournament.rounds[0].participants[i])) { %>
-                                    <td class="text-center color-red2">
-                                        Win
-                                    </td>
-                                <% } else { %>
-                                    <td class="text-center">
-                                    </td>
-                                <% } %>
-                                
+                        <% } else { %>
+                            <td></td> 
+                        <% } %>
+
+                        <!-- 3rd column -->
+                        <% if(count%4 == 0) { %>
+                            <td rowspan="4">
+                                <div class="participant third">
+                                    <!-- container number -->
+                                    <div class="participant-num"><div class="m-auto"><%= count/4 + 1 %></div></div>
+                                    <!-- create div with id to determine start and end in leader-line -->
+                                    <div id="parent<%= (count/4) + 1 %>3">
+                                        <!-- input text field displaying participant name -->
+                                        <% if(tournament.rounds[2].participants[count/4]) { %>
+                                            <div class="participant-name">
+                                                <div class="m-auto">
+                                                    <%= tournament.rounds[2].participants[count/4] %>
+                                                </div>
+                                            </div>
+                                            <% } else { %>
+                                                <!-- input text field displaying participant name -->
+                                                <div class="participant-name text-muted">
+                                                    <div class="m-auto">no player</div>
+                                                </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </td>
+                        <% } else { %>
+                            <td></td> 
+                        <% } %>
+
+                        <!-- 4th column -->
+                        <% if(count%8 == 0) { %>
+                            <td rowspan="8">
+                                <div class="participant third">
+                                    <!-- container number -->
+                                    <div class="participant-num"><div class="m-auto"><%= count/8 + 1 %></div></div>
+                                    <!-- create div with id to determine start and end in leader-line -->
+                                    <div id="parent<%= (count/8) + 1 %>4">
+                                        <!-- input text field displaying participant name -->
+                                        <% if(tournament.rounds[3].participants[count/8]) { %>
+                                            <div class="participant-name">
+                                                <div class="m-auto">
+                                                    <%= tournament.rounds[3].participants[count/8] %>
+                                                </div>
+                                            </div>
+                                        <% } else { %>
+                                                <!-- input text field displaying participant name -->
+                                                <div class="participant-name text-muted">
+                                                    <div class="m-auto">no player</div>
+                                                </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </td>
+                        <% } else { %>
+                            <td></td> 
+                        <% } %>
+
+                        <!-- only applied when we have 4th rounds / 5th column -->
+                        <% if(tournament.roundTotal == '4') { %>
+                            <% if(count%16 == 0) { %>
+                                <td rowspan="16">
+                                    <div class="participant third">
+                                        <!-- container number -->
+                                        <div class="participant-num"><div class="m-auto"><%= count/16 + 1 %></div></div>
+                                        <!-- create div with id to determine start and end in leader-line -->
+                                        <div id="parent<%= (count/16) + 1 %>5">
+                                            <!-- input text field displaying participant name -->
+                                            <% if(tournament.rounds[4].participants[count/16]) { %>
+                                                <div class="participant-name">
+                                                    <div class="m-auto">
+                                                        <%= tournament.rounds[4].participants[count/16] %>
+                                                    </div>
+                                                </div>
+                                            <% } else { %>
+                                                <!-- input text field displaying participant name -->
+                                                <div class="participant-name text-muted">
+                                                    <div class="m-auto">
+                                                        no player
+                                                    </div>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </td>
+                            <% } else { %>
+                                <td></td> 
                             <% } %>
-                        </tr>
-                    <% } %>
-                </table>
-            </div>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </table>
         </div>
-        <div class="offset-lg-4 col-lg-4 offset-md-3 col-md-6 mt-5">
-            <!-- go to result bracket -->
-            <a class="mb-2 btn color-red1 active-btn text-light w-100 d-none d-sm-block" href="#resultBracket"><i class="fas fa-trophy"></i> Check Bracket</a>
-            <!-- export PDF button -->
-            <button class="mb-2 btn color-red3 active-btn text-light w-100 btnExport d-none d-sm-block"><i class="fas fa-file-pdf"></i> Export PDF</button>
+        <div class="offset-lg-4 col-lg-4 offset-md-3 col-md-6">
+            <!-- go to result table -->
+            <a class="btn color-red2 active-btn text-light mb-3 w-100" href="#resultTable"><i class="fas fa-table"></i> Check Result Table</a>
         </div>
-    
+    </div>
+
+    <!-- table displaying tournament result -->
+    <div class="row">
+        <div class="offset-lg-1 col-lg-10">
+            <table class=" table table-sm table-dark table-bordered table-striped table-hover col-xs-6 col-sm-6 col-md-6 col-lg-6" id="resultTable">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                    <th scope="col" colspan="<%= parseInt(tournament.roundTotal) + 1 %>">Tornament: <%= tournament.title %></th>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <% for(let i = 1; i <= tournament.roundTotal; i++) { %>
+                            <td class="text-center">Round <%= i %></td>
+                        <% } %>
+                    </tr>
+                </thead>
+                
+                <!-- repeat the number of participants -->
+                <% for(let i = 0; i < tournament.type * 2; i++) { %>
+                    <tr>
+                        <td class="">
+                            <%= tournament.rounds[0].participants[i] %>
+                        </td>
+                        <% for(let j = 1; j <= tournament.roundTotal; j++) { %>
+                            <!-- display o for winner and x for loser -->
+                            <% if(tournament.rounds[j].participants.includes(tournament.rounds[0].participants[i])) { %>
+                                <td class="text-center color-red2">
+                                    Win
+                                </td>
+                            <% } else { %>
+                                <td class="text-center">
+                                </td>
+                            <% } %>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+    <div class="offset-lg-4 col-lg-4 offset-md-3 col-md-6 mt-5">
+        <!-- go to result bracket -->
+        <a class="mb-2 btn color-red1 active-btn text-light w-100 d-none d-sm-block" href="#resultBracket"><i class="fas fa-trophy"></i> Check Bracket</a>
+        <!-- export PDF button -->
+        <button class="mb-2 btn color-red3 active-btn text-light w-100 btnExport d-none d-sm-block"><i class="fas fa-file-pdf"></i> Export PDF</button>
+    </div>
 </div> 

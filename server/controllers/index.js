@@ -1,6 +1,3 @@
-let express = require('express');
-//let router = express.Router();
-//let mongoose = require('mongoose');
 let passport = require('passport');
 
 //create the User Model instance\
@@ -10,6 +7,7 @@ let User = userModel.User; // alias
 // create a reference to the model
 let Tournament = require('../models/tournament');
 
+// GET controller for home page
 module.exports.displayHomePage = (req, res, next) => {
     Tournament.find((err, tournamentList) => {
         if(err)
@@ -18,22 +16,24 @@ module.exports.displayHomePage = (req, res, next) => {
         }
         else
         {
-            // console.log(tournamentList);
             res.render('index', {title: 'Home',file: './partials/home', TournamentList: tournamentList, displayName: req.user ? req.user.displayName : ''});      
         }
     });
-    // res.render('index', { title: 'Home', file: './partials/home', displayName: req.user ? req.user.displayName : ''});
 }
 
+// GET controller for about page
 module.exports.displayAboutPage = (req, res, next) => {
     res.render('index', { title: 'About Us', file: './partials/about', displayName: req.user ? req.user.displayName : '' });
 }
 
+// GET controller for contact page
 module.exports.displayContactPage = (req, res, next) => {
     res.render('index', { title: 'Contact Us', file: './partials/contact', displayName: req.user ? req.user.displayName : '' });
 }
 
+// GET controller for login page
 module.exports.displayLoginPage = (req, res, next) => {
+
     //check if the user is already logged in
     if (!req.user) {
         res.render('index', {
@@ -50,6 +50,7 @@ module.exports.displayLoginPage = (req, res, next) => {
     }
 }
 
+// POST controller for login page
 module.exports.processLoginPage = (req, res, next) => {
     passport.authenticate('local',
         (err, user, info) => {
@@ -74,6 +75,7 @@ module.exports.processLoginPage = (req, res, next) => {
         })(req, res, next);
 }
 
+// GET controller for register page
 module.exports.displayRegisterPage = (req, res, next) => {
     //if user is not already logged in
     if (!req.user) {
@@ -90,6 +92,7 @@ module.exports.displayRegisterPage = (req, res, next) => {
     }
 }
 
+// POST controller for register page
 module.exports.processRegisterPage = (req, res, next) => {
     // instantiate a user object
     let newUser = new User({
@@ -101,13 +104,12 @@ module.exports.processRegisterPage = (req, res, next) => {
 
     User.register(newUser, req.body.password, (err) => {
         if (err) {
-            console.log("Error: Inserting New user");
+            // show error if user already exists
             if (err.name == "UserExistsError") {
                 req.flash(
                     'registerMessage',
                     'Registration Error! Please try with different username.'
                 );
-                console.log('Error, user already exists');
             }
             return res.render('index', {
                 title: 'Register',
@@ -126,6 +128,7 @@ module.exports.processRegisterPage = (req, res, next) => {
     });
 }
 
+// GET controller for logout
 module.exports.performLogout = (req, res, next) => {
     req.logout();
     res.redirect('/');

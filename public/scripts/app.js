@@ -1,5 +1,4 @@
 // IIFE
-
 (function () {
     function Start() {
 
@@ -9,6 +8,7 @@
 
         let deleteButtons = document.querySelectorAll('.btn-delete');
         
+        // confirm msg if delete btn is clicked
         for(button of deleteButtons)
         {
             button.addEventListener('click', (event)=>{
@@ -119,13 +119,47 @@
                     }).from(resultBracket).toContainer().toCanvas().toPdf().save();
                 });
             }
-
-            
         }
 
         if(title === "Update Tournament"|| title === "Create Tournament")
         {
-            dateValidation();
+            let submitButton = document.getElementById('btnSubmit');
+
+            submitButton.addEventListener('click', (event) => {
+            
+                let startdate = new Date(document.getElementById('startdate').value);
+                let enddate = new Date(document.getElementById('enddate').value);
+
+                // time difference in milliseconds
+                const diffTime = enddate - startdate;
+
+                // difference in days
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+                // date input fields
+                let dateStartdate = document.getElementById('startdate');
+                let dateEnddate = document.getElementById('enddate');
+
+                // if enddate - startdate is less then 0, call preventDefault function, displaying error
+                if(diffDays < 0)
+                {
+                    event.preventDefault();
+
+                    // invalid input class
+                    dateStartdate.classList.add("is-invalid");
+                    dateEnddate.classList.add("is-invalid");
+                }
+                else
+                {
+                    // remove invalid input class
+                    dateStartdate.classList.remove("is-invalid");
+                    dateEnddate.classList.remove("is-invalid");
+
+                    // add valid input class
+                    dateStartdate.classList.add("is-valid");
+                    dateEnddate.classList.add("is-valid");
+                }
+            });
         }
     }
     
@@ -133,7 +167,7 @@
 
     if(document.title == "Contact Us")
     {
-         let cancelButton = document.getElementById("resetButton");
+        let cancelButton = document.getElementById("resetButton");
     
         cancelButton.addEventListener("click", (event) => {
            event.preventDefault();
@@ -144,36 +178,37 @@
         })
     }
 
-    if(document.title == "Register")
-    {let password = document.getElementById("password");
-    let passwordconfirm = document.getElementById("password1");
-    
-    function checkPassword(){
-        let status = document.getElementById("password_checking");
-         let buttonsubmit =document.getElementById("submitbtn");
-    
-        status.innerHTML = "";
-        buttonsubmit.removeAttribute("disabled");
-    
-        if(password.value === "")
-            return;
-    
-        if(passwordconfirm.value === password.value)
-            return;
-    
-        status.innerHTML = "Passwords do not match";
-        status.style.color="red";
-        buttonsubmit.setAttribute("disabled", "disabled");
-    }
-    
-    password.addEventListener("change", function(event){
-        checkPassword();
-    });
-    passwordconfirm.addEventListener("change", function(event){
-        checkPassword();
-    });
+    // fn to check if password and retype password match
+    if(document.title == "Register"){
+        let password = document.getElementById("password");
+        let passwordconfirm = document.getElementById("password1");
         
-}
+        function checkPassword(){
+            let status = document.getElementById("password_checking");
+            let buttonsubmit =document.getElementById("submitbtn");
+        
+            status.innerHTML = "";
+            buttonsubmit.removeAttribute("disabled");
+        
+            if(password.value === "")
+                return;
+        
+            if(passwordconfirm.value === password.value)
+                return;
+        
+            status.innerHTML = "Passwords do not match";
+            status.style.color="red";
+            buttonsubmit.setAttribute("disabled", "disabled");
+        }
+        
+        password.addEventListener("change", function(event){
+            checkPassword();
+        });
+
+        passwordconfirm.addEventListener("change", function(event){
+            checkPassword();
+        }); 
+    }
 
     function determineWinnerRound(nextRound)
     {
@@ -202,67 +237,28 @@
             });   
         }
     }
-
-    function dateValidation()
-    {
-        let submitButton = document.getElementById('btnSubmit');
-
-        submitButton.addEventListener('click', (event) => {
-            
-            let startdate = new Date(document.getElementById('startdate').value);
-            let enddate = new Date(document.getElementById('enddate').value);
-
-            // time difference in milliseconds
-            const diffTime = enddate - startdate;
-
-            // difference in days
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-
-            // date input fields
-            let dateStartdate = document.getElementById('startdate');
-            let dateEnddate = document.getElementById('enddate');
-
-            // if enddate - startdate is less then 0, call preventDefault function, displaying error
-            if(diffDays < 0)
-            {
-                event.preventDefault();
-
-                // invalid input class
-                dateStartdate.classList.add("is-invalid");
-                dateEnddate.classList.add("is-invalid");
-            }
-            else
-            {
-                // remove invalid input class
-                dateStartdate.classList.remove("is-invalid");
-                dateEnddate.classList.remove("is-invalid");
-
-                // add valid input class
-                dateStartdate.classList.add("is-valid");
-                dateEnddate.classList.add("is-valid");
-            }
-        });
-    }
 })();
 
+// display <small> message tag to convey no of participants req
 function displayParticipant() {
-        let fourBouts = document.getElementById("fourBouts");
-        let eightBouts = document.getElementById("eightBouts");
-        let fourbout = document.getElementById("fourbout");
-        let eightbout = document.getElementById("eightbout");
-        fourbout.style.display = fourBouts.checked ? "block" : "none";
-        eightbout.style.display = eightBouts.checked ? "block" : "none";
+    let fourBouts = document.getElementById("fourBouts");
+    let eightBouts = document.getElementById("eightBouts");
+    let fourbout = document.getElementById("fourbout");
+    let eightbout = document.getElementById("eightbout");
+    fourbout.style.display = fourBouts.checked ? "block" : "none";
+    eightbout.style.display = eightBouts.checked ? "block" : "none";
+};
+//function added to make the id reference scoll smooth
+function smoothScroll() {
+    var element = document.getElementById("tournamentTable");
+    element.scrollIntoView();
 };
 
-function myFunction() {
-  var element = document.getElementById("tournamentTable");
-  element.scrollIntoView();
-};
-
+// contact page form submission confirmation
 function contactFunction()
 {
     if(confirm("Your submission was successfull..."))
-            {
-               document.getElementById("contactForm").reset();
-            }
+    {
+        document.getElementById("contactForm").reset();
+    }
 };

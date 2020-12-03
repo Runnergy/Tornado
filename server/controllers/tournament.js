@@ -1,13 +1,9 @@
-let express = require('express');
-//let router = express.Router();
-//let mongoose = require('mongoose');
-//let passport = require('passport');
 var dialog = require('dialog');
 
 // create a reference to the model
 let Tournament = require('../models/tournament');
-//let Round = require('../models/tournament_round');
 
+// GET controller for tournament list page
 module.exports.displayTournamentList = (req, res, next) => {
     Tournament.find((err, tournamentList) => {
         if(err)
@@ -25,6 +21,7 @@ module.exports.displayTournamentList = (req, res, next) => {
     });
 }
 
+// GET controller for create page
 module.exports.displayCreatePage = (req, res, next) => {
     if (!req.user) {
         req.session.returnTo = req.originalUrl; 
@@ -35,6 +32,7 @@ module.exports.displayCreatePage = (req, res, next) => {
     }       
 }
 
+// POST controller for create page
 module.exports.processCreatePage = (req, res, next) => {
     // User will add one participant in each line
     let participantString = req.body.participants;
@@ -74,7 +72,8 @@ module.exports.processCreatePage = (req, res, next) => {
 
     // placeholder object that will be inserted in rounds array
     let emptyParticipantArray = {"participants": []};
-
+    
+    // creating new tournament object
     let newTournament= Tournament({
         "title": req.body.title,
         "rounds": [participantArray, emptyParticipantArray, emptyParticipantArray, emptyParticipantArray, emptyParticipantArray],
@@ -87,6 +86,7 @@ module.exports.processCreatePage = (req, res, next) => {
         "description": req.body.description
     });
 
+    // creating new tournament in DB
     Tournament.create(newTournament, (err) =>{
         if(err)
         {
@@ -101,9 +101,11 @@ module.exports.processCreatePage = (req, res, next) => {
     });
 }
 
+// GET controller for update page
 module.exports.displayUpdatePage = (req, res, next) => {
     let id = req.params.id;
 
+    // finding tournament by id that will be updated
     Tournament.findById(id, (err, tournamentToEdit) => {
         if(err)
         {
@@ -113,10 +115,14 @@ module.exports.displayUpdatePage = (req, res, next) => {
         else
         {
             let host = tournamentToEdit.host;
+
+            // validating if user is logged in
             if (!req.user) {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
             } else {
+
+                // validating if the user that is updating is the host of tournament
                 if (req.user.username != host) {
                     if (err) { 
                         console.log(err);
@@ -135,6 +141,7 @@ module.exports.displayUpdatePage = (req, res, next) => {
     });
 }
 
+// POST controller for update page
 module.exports.processUpdatePage = (req, res, next) => {
     let id = req.params.id;
 
@@ -174,13 +181,15 @@ module.exports.processUpdatePage = (req, res, next) => {
     let ParticipantArray = {"participants": participants};
 
     // placeholder object that will be inserted in rounds array
-    let emptyParticipantArray = {"participants": []};
+    //let emptyParticipantArray = {"participants": []};
     
+    // declaring empty array variables
     let R1 = { "participants": [] };
     let R2 = { "participants": [] };
     let R3 = { "participants": [] };
     let R4 = { "participants": [] };
     
+    // finding the tournament by id
     Tournament.findById(id, (err, tournamentToUpdate) => {
         if(err)
         {
@@ -189,13 +198,13 @@ module.exports.processUpdatePage = (req, res, next) => {
         }
         else
         {
+            // populating the empty arrays with values (participants) of each round
             R1 = {"participants": tournamentToUpdate.rounds[1].participants};
             R2 = {"participants": tournamentToUpdate.rounds[2].participants};
             R3 = {"participants": tournamentToUpdate.rounds[3].participants};
             R4 = { "participants": tournamentToUpdate.rounds[4].participants };
             
-            
-
+            // creating updated tournament object without changing the round participants
             let updatedTounament = Tournament({
                 "_id": id,
                 "title": req.body.title,
@@ -208,10 +217,14 @@ module.exports.processUpdatePage = (req, res, next) => {
                 "status": status,
                 "description": req.body.description
             });
+
+            // validation if the user is logged in
             if (!req.user) {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
             } else {
+
+                // finding the host of the tournament from DB
                 Tournament.findById(id, function (err, findHost) {
                     if (err) { 
                         console.log(err);
@@ -220,21 +233,23 @@ module.exports.processUpdatePage = (req, res, next) => {
                     else { 
                         let host = findHost.host;
                         
+                        // validating if the logged in user is the host of tournament
                         if (req.user.username != host) {
                             if (err) { 
                                 console.log(err);
                             }
-                            dialog.info('Access Denied!');
+                            //dialog.info('Access Denied!');
                             res.redirect('/login');
                         } else { 
+
+                            // updating tournament with the updatedTournament object
                             Tournament.updateOne({ _id: id }, updatedTounament, (err) => {
                                 if (err) {
                                     console.log(err);
                                     res.end(err);
                                 }
 
-                                // checking if all the remaining round participants are winners of rounds before
-                                
+                                // checking if all the participants are same as before after update
                                 if (JSON.stringify(tournamentToUpdate.rounds[0].participants) === JSON.stringify(participants)) {
                                     console.log('They are equal!');
                                     R1 = {"participants": tournamentToUpdate.rounds[1].participants};
@@ -242,28 +257,34 @@ module.exports.processUpdatePage = (req, res, next) => {
                                     R3 = {"participants": tournamentToUpdate.rounds[3].participants};
                                     R4 = { "participants": tournamentToUpdate.rounds[4].participants };
                                 }
-                                else { 
+                                else {
+
+                                    // if there is a change in participants emptying the winners of each round
                                     R1 = { "participants": [] };
                                     R2 = { "participants": [] };
                                     R3 = { "participants": [] };
                                     R4 = { "participants": [] };
                                 }
                                 
+                                // checking if round 3 has round 4 winners
                                 if (tournamentToUpdate.rounds[4].participants.every(i => tournamentToUpdate.rounds[3].participants.includes(i)) == false) { 
                                     R4 = { "participants": [] };
                                 }
                                 
+                                // checking if round 2 has round 3 winners
                                 if (tournamentToUpdate.rounds[3].participants.every(i => tournamentToUpdate.rounds[2].participants.includes(i)) == false) { 
                                     R3 = { "participants": [] };
                                     R4 = { "participants": [] };
                                 }
 
+                                // checking if round 1 has round 2 winners
                                 if (tournamentToUpdate.rounds[2].participants.every(i => tournamentToUpdate.rounds[1].participants.includes(i)) == false) { 
                                     R2 = { "participants": [] };
                                     R3 = { "participants": [] };
                                     R4 = { "participants": [] };
                                 }
 
+                                // checking if round 0 has round 1 winners
                                 if (tournamentToUpdate.rounds[1].participants.every(i => tournamentToUpdate.rounds[0].participants.includes(i)) == false) { 
                                     R1 = { "participants": [] };
                                     R2 = { "participants": [] };
@@ -271,6 +292,7 @@ module.exports.processUpdatePage = (req, res, next) => {
                                     R4 = { "participants": [] };
                                 }
 
+                                // creating new tournament ofject after validation the rounds
                                 let validatedTounament = Tournament({
                                     "_id": id,
                                     "title": req.body.title,
@@ -284,6 +306,7 @@ module.exports.processUpdatePage = (req, res, next) => {
                                     "description": req.body.description
                                 });
 
+                                //upadating tournament after validation
                                 Tournament.update({ _id: id }, validatedTounament, (err) => {
                                     if(err) {
                                         console.log(err);
@@ -302,8 +325,11 @@ module.exports.processUpdatePage = (req, res, next) => {
     });
 }
 
+// controller for deleting tournament
 module.exports.performDelete = (req, res, next) => {
     let id = req.params.id;
+
+    // checking if the user is logged in
     if (!req.user) {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
@@ -314,15 +340,18 @@ module.exports.performDelete = (req, res, next) => {
                 res.end(err);
             }
             else { 
-                let host = findHost.host; 
-                console.log(host);
+                let host = findHost.host;
+
+                // checking if the user is host of the tournament
                 if (req.user.username != host) {
                     if (err) { 
                         console.log(err);
                     }
-                    dialog.info('Access Denied!');
+                    //dialog.info('Access Denied!');
                     res.redirect('/login');
                 } else { 
+
+                    // removing tournament after validation
                     Tournament.remove({_id: id}, (err) => {
                         if(err)
                         {
@@ -366,9 +395,11 @@ module.exports.performDelete = (req, res, next) => {
 //     });
 // }
 
+// GET controller for display bracket page
 module.exports.displayBrackets = (req, res, next) => {
     let id = req.params.id;
 
+    //finding tournament by id to display
     Tournament.findById(id, (err, tournamentToView) => {
         if(err)
         {
@@ -377,23 +408,20 @@ module.exports.displayBrackets = (req, res, next) => {
         }
         else
         {
-            // if (!req.user) {
-            //     req.session.returnTo = req.originalUrl; 
-            //     res.redirect('/login');
-            // } else {
-                //show the update view
-                res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
-                    tournament: tournamentToView, 
-                    displayName: req.user ? req.user.displayName : ''  });
-            // }
+            //show the update view
+            res.render('index', { title: 'Tournament brackets', file: '../views/tournament/brackets', 
+                tournament: tournamentToView, 
+                displayName: req.user ? req.user.displayName : ''  });
         }
     });
 }
 
+// POST controller for display progress page
 module.exports.displayProgress = (req, res, next) => {
     let id = req.params.id;
     let roundNumber = req.params.roundNumber;
 
+    // finding tournament by id to continue the progress
     Tournament.findById(id, (err, tournamentToView) => {
         let host = tournamentToView.host;
         if(err)
@@ -403,15 +431,19 @@ module.exports.displayProgress = (req, res, next) => {
         }
         else
         {
+
+            // checking if user is logged in
             if (!req.user) {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
             } else {
+
+                // validating if the logged in user is the host of tournament
                 if (req.user.username != host) {
                     if (err) { 
                         console.log(err);
                     }
-                    dialog.info('Access Denied!');
+                    //dialog.info('Access Denied!');
                     res.redirect('/login');
                 } else { 
                     //show the update view
@@ -425,6 +457,7 @@ module.exports.displayProgress = (req, res, next) => {
     });
 }
 
+// POST route for process progress page
 module.exports.processProgress = (req, res, next) => {
     let id = req.params.id;
     let roundNumber = req.params.roundNumber;
@@ -459,8 +492,9 @@ module.exports.processProgress = (req, res, next) => {
                 res.end(err);
             }
             else { 
-                let host = findHost.host; 
-                console.log(host);
+                let host = findHost.host;
+                
+                // validating if user logged in is the host of the tournament
                 if (req.user.username != host) {
                     if (err) { 
                         console.log(err);
@@ -476,12 +510,14 @@ module.exports.processProgress = (req, res, next) => {
                     }
                     else
                     {
+
+                        // checking if user is logged in
                         if (!req.user) {
                             req.session.returnTo = req.originalUrl; 
                             res.redirect('/login');
                         } else {
                             // redirect to next round page
-                        res.redirect(`/tournament/progress/${id}/${parseInt(roundNumber) + 1}`);
+                            res.redirect(`/tournament/progress/${id}/${parseInt(roundNumber) + 1}`);
                         }
                     }
                 });

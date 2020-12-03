@@ -1,119 +1,118 @@
 <h1 class="display-4 text-center pb-4"><%= title %></h1>
 <div class="container">
-<div class="row vh-100">
-    <div class="offset-md-3 col-md-6">
-        <form class="form" method="POST">
+    <div class="row vh-100">
+        <div class="offset-md-3 col-md-6">
+            <form class="form" method="POST">
 
-            
-            <% if(new Date(Date.parse(tournament.enddate)+ (28 * 60 * 60 * 1000)+(59 *60 *1000)) < Date.now()) { %>
-                <div class="alert alert-danger" role="alert">
-                    This tournament already ended.
-                </div>
-            <% } if(new Date(Date.parse(tournament.startdate) + (28 * 60 * 60 * 1000)+(59 *60 *1000)) > Date.now()) { %>
-                <div class="alert alert-danger" role="alert">
-                    This tournament hasn't started yet.
-                </div>
-            <% } if(tournament.rounds[0].participants.length != parseInt(tournament.type) * 2) { %>
-                <div class="alert alert-danger" role="alert">
-                    The number of participants should be <%= parseInt(tournament.type) * 2 %>.
-                </div>
-            <% } %>
+                <% if(new Date(Date.parse(tournament.enddate)+ (28 * 60 * 60 * 1000)+(59 *60 *1000)) < Date.now()) { %>
+                    <div class="alert alert-danger" role="alert">
+                        This tournament already ended.
+                    </div>
+                <% } if(new Date(Date.parse(tournament.startdate) + (28 * 60 * 60 * 1000)+(59 *60 *1000)) > Date.now()) { %>
+                    <div class="alert alert-danger" role="alert">
+                        This tournament hasn't started yet.
+                    </div>
+                <% } if(tournament.rounds[0].participants.length != parseInt(tournament.type) * 2) { %>
+                    <div class="alert alert-danger" role="alert">
+                        The number of participants should be <%= parseInt(tournament.type) * 2 %>.
+                    </div>
+                <% } %>
 
-            <!-- tournament title -->
-            <div class="form-group row">
-                <label for="titleTextField" class="col-2 col-form-label">Title</label>
-                <div class="col-12">
-                    <input type="text" class="form-control"
-                    id="titleTextField"
-                    placeholder="Enter title"
-                    name="title" 
-                    value="<%= tournament.title %>"
-                    required>
-                </div>
-            </div>
-
-            <!-- tournament type -->
-            <div class="form-group row">
-                <label for="typeTextField" class="col-2 col-form-label">Type</label>
-                <div class="col-12">
-
-                    <!-- When the type of tournament is 4 bouts -->
-                    <input type="radio" id="fourBouts" name="type" value="4" onclick="displayParticipant()"
-                    <% if(tournament.type == "4") { %>
-                    checked
-                    <% } %>> 
-                    <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
-                    <input type="radio" id="eightBouts" name="type" value="8" onclick="displayParticipant()"
-                    
-                    <% if(tournament.type == "8") { %>
-                    checked
-                    <% } %>>
-                    <label for="lblEightBouts">8 Bouts</label><br>
-                </div>
-            </div>
-
-            <!-- tournament start date and end date-->
-            <div class="form-group row">
-                <label for="example-date-input" class="col-8 col-form-label">Start-End</label>
-                <div class="col-md-6 col-sm-12 pb-2">
-                    <input class="form-control" type="date" value="<%= tournament.startdate.toISOString().replace('T', ' ').substr(0, 10) %>" id="startdate" name="startdate">
-                </div>
-                <div class="col-md-6 col-sm-12 pb-2">
-                    <input class="form-control" type="date" value="<%= tournament.enddate.toISOString().replace('T', ' ').substr(0, 10) %>" id="enddate" name="enddate">
-                </div>
-            </div>
-
-            <!-- tournament description -->
-            <div class="form-group">
-                <label for="participantTextField">Description</label>
-                <textarea class="form-control" id="description" name="description" placeholder="Enter description" rows="3"  required><%= tournament.description %></textarea>
-            </div>
-            
-            <!-- tournament participants -->
-            <div class="form-group">
-                <label for="participantTextField">Participants</label>
-                <div class="form-group" id="fourbout" style="display: none">
-                    <small class="form-text text-muted">A total of 8 participants are required for viewing the brackets properly.</small>
-                </div>
-                <div class="form-group" id="eightbout" style="display: none">
-                    <small class="form-text text-muted">A total of 16 participants are required for viewing the brackets properly.</small>
-                </div>
-                <textarea class="form-control" id="participants"
-                    placeholder="Enter participants"
-                    name="participants" 
-                    required rows="8"><% for(let count = 0; count < tournament.rounds[0].participants.length; count++) { %><%= tournament.rounds[0].participants[count] %>&#13;&#10;<% } %></textarea>
-            </div>
-
-            <div class="form-group text-center row">
-                <!-- tournament start/resume button -->
-                <div class="col-lg-4 pb-2">
-                    <td class="text-center">
-                        <% if(new Date(Date.parse(tournament.enddate) +(28 * 60 * 60 * 1000)+(59 *60 *1000)) >= Date.now() &&
-                                new Date(Date.parse(tournament.startdate) + (28 * 60 * 60 * 1000)+(59 *60 *1000)) <= Date.now() &&
-                                tournament.rounds[0].participants.length == parseInt(tournament.type) * 2) { %>
-                                <a href="/tournament/progress/<%= tournament._id %>/0" class="btn color-red1 btn-md w-100 active-btn text-light">
-                                    Start Tournament</a>
-                        <% } else {%>
-                            <a class="btn btn-md  w-100 bg-light-80 btn-disabled active-btn text-light">
-                                Start Tournament</a>
-                        <% } %>
-                    </td>
-                </div>
-               
-                <!-- tournament save button -->
-                <div class="col-lg-4 pb-2">
-                    <button class="btn color-red2 btn-md w-100 active-btn text-light" type="submit" id="btnSubmit">
-                        Save</button>
+                <!-- tournament title -->
+                <div class="form-group row">
+                    <label for="titleTextField" class="col-2 col-form-label">Title</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control"
+                        id="titleTextField"
+                        placeholder="Enter title"
+                        name="title" 
+                        value="<%= tournament.title %>"
+                        required>
+                    </div>
                 </div>
 
-                <!-- back to list button -->
-                <div class="col-lg-4 pb-2">
-                    <a href="/tournament" class="btn color-red3 btn-md w-100 active-btn text-light">
-                        Back to list</a>
+                <!-- tournament type -->
+                <div class="form-group row">
+                    <label for="typeTextField" class="col-2 col-form-label">Type</label>
+                    <div class="col-12">
+
+                        <!-- When the type of tournament is 4 bouts -->
+                        <input type="radio" id="fourBouts" name="type" value="4" onclick="displayParticipant()"
+                        <% if(tournament.type == "4") { %>
+                        checked
+                        <% } %>> 
+                        <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
+                        <input type="radio" id="eightBouts" name="type" value="8" onclick="displayParticipant()"
                         
+                        <% if(tournament.type == "8") { %>
+                        checked
+                        <% } %>>
+                        <label for="lblEightBouts">8 Bouts</label><br>
+                    </div>
                 </div>
-            </div>
-        </form>
+
+                <!-- tournament start date and end date-->
+                <div class="form-group row">
+                    <label for="example-date-input" class="col-8 col-form-label">Start-End</label>
+                    <div class="col-md-6 col-sm-12 pb-2">
+                        <input class="form-control" type="date" value="<%= tournament.startdate.toISOString().replace('T', ' ').substr(0, 10) %>" id="startdate" name="startdate">
+                    </div>
+                    <div class="col-md-6 col-sm-12 pb-2">
+                        <input class="form-control" type="date" value="<%= tournament.enddate.toISOString().replace('T', ' ').substr(0, 10) %>" id="enddate" name="enddate">
+                    </div>
+                </div>
+
+                <!-- tournament description -->
+                <div class="form-group">
+                    <label for="participantTextField">Description</label>
+                    <textarea class="form-control" id="description" name="description" placeholder="Enter description" rows="3"  required><%= tournament.description %></textarea>
+                </div>
+                
+                <!-- tournament participants -->
+                <div class="form-group">
+                    <label for="participantTextField">Participants</label>
+                    <div class="form-group" id="fourbout" style="display: none">
+                        <small class="form-text text-muted">A total of 8 participants are required for viewing the brackets properly.</small>
+                    </div>
+                    <div class="form-group" id="eightbout" style="display: none">
+                        <small class="form-text text-muted">A total of 16 participants are required for viewing the brackets properly.</small>
+                    </div>
+                    <textarea class="form-control" id="participants"
+                        placeholder="Enter participants"
+                        name="participants" 
+                        required rows="8"><% for(let count = 0; count < tournament.rounds[0].participants.length; count++) { %><%= tournament.rounds[0].participants[count] %>&#13;&#10;<% } %></textarea>
+                </div>
+
+                <div class="form-group text-center row">
+                    <!-- tournament start/resume button -->
+                    <div class="col-lg-4 pb-2">
+                        <td class="text-center">
+                            <% if(new Date(Date.parse(tournament.enddate) +(28 * 60 * 60 * 1000)+(59 *60 *1000)) >= Date.now() &&
+                                    new Date(Date.parse(tournament.startdate) + (28 * 60 * 60 * 1000)+(59 *60 *1000)) <= Date.now() &&
+                                    tournament.rounds[0].participants.length == parseInt(tournament.type) * 2) { %>
+                                    <a href="/tournament/progress/<%= tournament._id %>/0" class="btn color-red1 btn-md w-100 active-btn text-light">
+                                        Start Tournament</a>
+                            <% } else {%>
+                                <a class="btn btn-md  w-100 bg-light-80 btn-disabled active-btn text-light">
+                                    Start Tournament</a>
+                            <% } %>
+                        </td>
+                    </div>
+                
+                    <!-- tournament save button -->
+                    <div class="col-lg-4 pb-2">
+                        <button class="btn color-red2 btn-md w-100 active-btn text-light" type="submit" id="btnSubmit">
+                            Save</button>
+                    </div>
+
+                    <!-- back to list button -->
+                    <div class="col-lg-4 pb-2">
+                        <a href="/tournament" class="btn color-red3 btn-md w-100 active-btn text-light">
+                            Back to list</a>
+                            
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </div>
