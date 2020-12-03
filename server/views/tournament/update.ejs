@@ -1,7 +1,8 @@
 <h1 class="display-4 text-center pb-4"><%= title %></h1>
+<div class="container">
 <div class="row vh-100">
-    <div class="offset-md-3 col-md-6 p-5 bg-dark-80">
-        <form class="form p-5" method="POST">
+    <div class="offset-md-3 col-md-6">
+        <form class="form" method="POST">
 
             
             <% if(new Date(Date.parse(tournament.enddate)+ (28 * 60 * 60 * 1000)+(59 *60 *1000)) < Date.now()) { %>
@@ -21,7 +22,7 @@
             <!-- tournament title -->
             <div class="form-group row">
                 <label for="titleTextField" class="col-2 col-form-label">Title</label>
-                <div class="col-10">
+                <div class="col-12">
                     <input type="text" class="form-control"
                     id="titleTextField"
                     placeholder="Enter title"
@@ -34,7 +35,7 @@
             <!-- tournament type -->
             <div class="form-group row">
                 <label for="typeTextField" class="col-2 col-form-label">Type</label>
-                <div class="col-10">
+                <div class="col-12">
 
                     <!-- When the type of tournament is 4 bouts -->
                     <input type="radio" id="fourBouts" name="type" value="4" onclick="displayParticipant()"
@@ -43,6 +44,7 @@
                     <% } %>> 
                     <label for="lblFourBouts">4 Bouts</label>&nbsp;&nbsp;
                     <input type="radio" id="eightBouts" name="type" value="8" onclick="displayParticipant()"
+                    
                     <% if(tournament.type == "8") { %>
                     checked
                     <% } %>>
@@ -52,11 +54,11 @@
 
             <!-- tournament start date and end date-->
             <div class="form-group row">
-                <label for="example-date-input" class="col-2 col-form-label">Start-End</label>
-                <div class="col-5">
+                <label for="example-date-input" class="col-8 col-form-label">Start-End</label>
+                <div class="col-md-6 col-sm-12 pb-2">
                     <input class="form-control" type="date" value="<%= tournament.startdate.toISOString().replace('T', ' ').substr(0, 10) %>" id="startdate" name="startdate">
                 </div>
-                <div class="col-5">
+                <div class="col-md-6 col-sm-12 pb-2">
                     <input class="form-control" type="date" value="<%= tournament.enddate.toISOString().replace('T', ' ').substr(0, 10) %>" id="enddate" name="enddate">
                 </div>
             </div>
@@ -84,32 +86,34 @@
 
             <div class="form-group text-center row">
                 <!-- tournament start/resume button -->
-                <div class="col-4">
-                    <td class="text-center col-1">
+                <div class="col-lg-4 pb-2">
+                    <td class="text-center">
                         <% if(new Date(Date.parse(tournament.enddate) +(28 * 60 * 60 * 1000)+(59 *60 *1000)) >= Date.now() &&
                                 new Date(Date.parse(tournament.startdate) + (28 * 60 * 60 * 1000)+(59 *60 *1000)) <= Date.now() &&
                                 tournament.rounds[0].participants.length == parseInt(tournament.type) * 2) { %>
-                                <a href="/tournament/progress/<%= tournament._id %>/0" class="btn btn-danger btn-flexible">
-                                    Start/Resume Tournament</a>
+                                <a href="/tournament/progress/<%= tournament._id %>/0" class="btn color-red1 btn-md w-100 active-btn text-light">
+                                    Start Tournament</a>
                         <% } else {%>
-                            <a class="btn btn-flexible bg-light-80 btn-disabled">
-                                Start/Resume Tournament</a>
+                            <a class="btn btn-md  w-100 bg-light-80 btn-disabled active-btn text-light">
+                                Start Tournament</a>
                         <% } %>
                     </td>
                 </div>
-
+               
                 <!-- tournament save button -->
-                <div class="col-4">
-                    <button class="btn btn-primary btn-flexible" type="submit" id="btnSubmit">
+                <div class="col-lg-4 pb-2">
+                    <button class="btn color-red2 btn-md w-100 active-btn text-light" type="submit" id="btnSubmit">
                         Save</button>
                 </div>
 
                 <!-- back to list button -->
-                <div class="col-4">
-                    <a href="/tournament" class="btn btn-warning btn-flexible">
+                <div class="col-lg-4 pb-2">
+                    <a href="/tournament" class="btn color-red3 btn-md w-100 active-btn text-light">
                         Back to list</a>
+                        
                 </div>
             </div>
         </form>
     </div>
+</div>
 </div>
