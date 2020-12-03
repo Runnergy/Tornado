@@ -62,13 +62,15 @@
                             <td>
                                 <div class="participant first">
                                     <div class="participant-num"><div class="m-auto"><%= count + 1 %></div></div>
-                                    <div class="participant-name">
-                                        <div class="m-auto">
-                                            <% if(tournament.rounds[0].participants.length != 0) { %>
-                                                <%= tournament.rounds[0].participants[count] %>
-                                            <% } else { %>
-                                                player is needed
-                                            <% } %>
+                                    <div id="parent<%= count + 1 %>1">
+                                        <div class="participant-name">
+                                            <div class="m-auto">
+                                                <% if(tournament.rounds[0].participants.length != 0) { %>
+                                                    <%= tournament.rounds[0].participants[count] %>
+                                                <% } else { %>
+                                                    player is needed
+                                                <% } %>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -81,18 +83,20 @@
                                         <!-- container number -->
                                         <div class="participant-num"><div class="m-auto"><%= count/2 + 1 %></div></div>
                                         <!-- input text field displaying participant name -->
-                                        <% if(tournament.rounds[1].participants[count/2]) { %>
-                                            <div class="participant-name">
-                                                <div class="m-auto">
-                                                    <%= tournament.rounds[1].participants[count/2] %>
+                                        <div id="parent<%= (count/2) + 1 %>2">
+                                            <% if(tournament.rounds[1].participants[count/2]) { %>
+                                                <div class="participant-name">
+                                                    <div class="m-auto">
+                                                        <%= tournament.rounds[1].participants[count/2] %>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        <% } else { %>
-                                                <!-- input text field displaying participant name -->
-                                                <div class="participant-name text-muted">
-                                                    <div class="m-auto">no player</div>
-                                                </div>
-                                        <% } %>
+                                            <% } else { %>
+                                                    <!-- input text field displaying participant name -->
+                                                    <div class="participant-name text-muted">
+                                                        <div class="m-auto">no player</div>
+                                                    </div>
+                                            <% } %>
+                                        </div>
                                     </div>
                                 </td>
                             <% } else { %>
@@ -106,18 +110,20 @@
                                         <!-- container number -->
                                         <div class="participant-num"><div class="m-auto"><%= count/4 + 1 %></div></div>
                                         <!-- input text field displaying participant name -->
-                                        <% if(tournament.rounds[2].participants[count/4]) { %>
-                                            <div class="participant-name">
-                                                <div class="m-auto">
-                                                    <%= tournament.rounds[2].participants[count/4] %>
+                                        <div id="parent<%= (count/4) + 1 %>3">
+                                            <% if(tournament.rounds[2].participants[count/4]) { %>
+                                                <div class="participant-name">
+                                                    <div class="m-auto">
+                                                        <%= tournament.rounds[2].participants[count/4] %>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <% } else { %>
-                                                <!-- input text field displaying participant name -->
-                                                <div class="participant-name text-muted">
-                                                    <div class="m-auto">no player</div>
-                                                </div>
-                                        <% } %>
+                                                <% } else { %>
+                                                    <!-- input text field displaying participant name -->
+                                                    <div class="participant-name text-muted">
+                                                        <div class="m-auto">no player</div>
+                                                    </div>
+                                            <% } %>
+                                        </div>
                                     </div>
                                 </td>
                             <% } else { %>
@@ -131,18 +137,20 @@
                                         <!-- container number -->
                                         <div class="participant-num"><div class="m-auto"><%= count/8 + 1 %></div></div>
                                         <!-- input text field displaying participant name -->
-                                        <% if(tournament.rounds[3].participants[count/8]) { %>
-                                            <div class="participant-name">
-                                                <div class="m-auto">
-                                                    <%= tournament.rounds[3].participants[count/8] %>
+                                        <div id="parent<%= (count/8) + 1 %>4">
+                                            <% if(tournament.rounds[3].participants[count/8]) { %>
+                                                <div class="participant-name">
+                                                    <div class="m-auto">
+                                                        <%= tournament.rounds[3].participants[count/8] %>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             <% } else { %>
                                                     <!-- input text field displaying participant name -->
                                                     <div class="participant-name text-muted">
                                                         <div class="m-auto">no player</div>
                                                     </div>
-                                        <% } %>
+                                            <% } %>
+                                        </div>
                                     </div>
                                 </td>
                             <% } else { %>
@@ -157,12 +165,13 @@
                                             <!-- container number -->
                                             <div class="participant-num"><div class="m-auto"><%= count/16 + 1 %></div></div>
                                             <!-- input text field displaying participant name -->
-                                            <% if(tournament.rounds[4].participants[count/16]) { %>
-                                                <div class="participant-name">
-                                                    <div class="m-auto">
-                                                        <%= tournament.rounds[4].participants[count/16] %>
+                                            <div id="parent<%= (count/16) + 1 %>5">
+                                                <% if(tournament.rounds[4].participants[count/16]) { %>
+                                                    <div class="participant-name">
+                                                        <div class="m-auto">
+                                                            <%= tournament.rounds[4].participants[count/16] %>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 <% } else { %>
                                                     <!-- input text field displaying participant name -->
                                                     <div class="participant-name text-muted">
@@ -170,7 +179,8 @@
                                                             no player
                                                         </div>
                                                     </div>
-                                            <% } %>
+                                                <% } %>
+                                            </div>
                                         </div>
                                     </td>
                                 <% } else { %>
@@ -233,4 +243,4 @@
             <button class="mb-2 btn color-red3 active-btn text-light w-100 btnExport d-none d-sm-block"><i class="fas fa-file-pdf"></i> Export PDF</button>
         </div>
     
-</div>
+</div> 

@@ -1,4 +1,5 @@
 // IIFE
+
 (function () {
     function Start() {
 
@@ -48,7 +49,7 @@
                     break;
             }
         }
-
+        
         if(title === 'Tournament brackets')
         {
             let bracketWidth = document.getElementById('resultBracket').clientWidth;
@@ -69,6 +70,8 @@
                     }).from(resultBracket).toContainer().toCanvas().toPdf().save();
                 });
             }
+
+            
         }
 
         if(title === "Update Tournament"|| title === "Create Tournament")
