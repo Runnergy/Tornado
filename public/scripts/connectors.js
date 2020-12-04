@@ -35,7 +35,7 @@ for (let base = 1; base < 6; base++) {
             
             // defining the properties of the line
             {
-                endPlug: 'square',
+                endPlug: 'behind',
                 path: 'grid',
                 // color: '#2b2b2b',
                 // color: 'white',
