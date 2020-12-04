@@ -30,15 +30,19 @@ for (let base = 1; base < 6; base++) {
         // using pre-defined function from LeaderLine.js to draw lines(connector)
         new ll.LeaderLine(
             // passing the params of the start location and the end location of the line with exact positions
-            ll.LeaderLine.pointAnchor(document.getElementById(String(startT)), {x: '100%', y: 25}),
-            ll.LeaderLine.pointAnchor(document.getElementById(String(endT)), { x: 0, y: 25 }),
+            ll.LeaderLine.pointAnchor(document.getElementById(String(startT)), {x: '60%', y: 25}),
+            ll.LeaderLine.pointAnchor(document.getElementById(String(endT)), {x: 0, y: 25}),
             
             // defining the properties of the line
             {
-                endPlug: 'behind',
-                path: 'straight',
-                color: 'white',
-                size: 2
+                endPlug: 'square',
+                path: 'grid',
+                // color: '#2b2b2b',
+                // color: 'white',
+                size: 2,
+                startPlugColor: 'rgba(43, 43, 43, 0.075)',
+                endPlugColor: '#333333',
+                gradient: true
             }
         );
     }
