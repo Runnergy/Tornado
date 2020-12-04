@@ -229,6 +229,11 @@
         }); 
     }
 
+    window.history.forward();
+    function noBack(){
+        window.history.forward();
+    }
+
     function determineWinnerRound(nextRound)
     {
         // radio button for each participant
@@ -355,7 +360,7 @@ function contactFunction()
         }
 
     };
-    
+
     //define globally
     window.responsiveTables = responsiveTables;
     return responsiveTables;
