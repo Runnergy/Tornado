@@ -38,6 +38,15 @@ fieldset {
 
 #footer {
     background-color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#footer h3, #footer h4, #footer h5 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.role-txt {
+    font-size: 12px;
 }
 
 /* bootstrap navbar custom color */
@@ -87,10 +96,6 @@ footer a:hover {
     color: rgb(255, 208, 181);
 }
 
-.contact-column {
-    display: inline-block;
-}
-
 .bracket-container table {
     margin-top: 50px;
     margin-right: auto;
@@ -122,6 +127,22 @@ footer a:hover {
 
 .color-black {
     background-color: black;
+}
+
+.color-footer-1 {
+    background-color: #560500;
+}
+
+.color-footer-2 {
+    background-color: #490000;
+}
+
+.color-footer-3 {
+    background-color: #3D0000;
+}
+
+.color-footer-background {
+    background-color: #250000;
 }
 
 /* hover effect when the button is enabled */
