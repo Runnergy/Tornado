@@ -136,7 +136,8 @@ module.exports.displayUpdatePage = (req, res, next) => {
 
             // validating if user is logged in
             if (!req.user) {
-                req.session.returnTo = req.originalUrl; 
+                req.session.returnTo = req.originalUrl;
+                console.log("i run");
                 res.redirect('/login');
             } else {
 

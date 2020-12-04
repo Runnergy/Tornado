@@ -68,9 +68,9 @@ module.exports.processLoginPage = (req, res, next) => {
                 if (err) {
                     return next(err);
                 }
-                res.redirect(req.session.returnTo || '/');
+                //res.redirect(req.session.returnTo || '/');
                 delete req.session.returnTo;
-                //return res.redirect('/tournament');
+                return res.redirect('/tournament');
             })
         })(req, res, next);
 }
