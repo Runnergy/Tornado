@@ -145,7 +145,7 @@ module.exports.displayUpdatePage = (req, res, next) => {
                     if (err) { 
                         console.log(err);
                     }
-                    dialog.info('Access Denied!');
+                    //dialog.info('Access Denied!');
                     res.redirect('/login');
                 } else { 
                     //show the update view
@@ -492,7 +492,7 @@ module.exports.processProgress = (req, res, next) => {
                     if (err) { 
                         console.log(err);
                     }
-                    dialog.info('Access Denied!');
+                    //dialog.info('Access Denied!');
                     res.redirect('/login');
                 } else { 
                     Tournament.updateOne({_id: id}, updatedTounament, (err) => {
