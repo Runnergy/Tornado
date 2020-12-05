@@ -4,34 +4,74 @@
         <%= messages %>
     </div>
 <% } %>
+<div class="authentication-page">
+    <main class="container vh-100 py-5">
+        <div class="row">
+            <div class="d-sm-block d-md-none offset-1 col-10 color-red3 rounded p-4">
+                <h1 class="text-center"><b>Login</b> </h1>
+                <form action="" method="POST" autocomplete="off">
 
-<main class="container vh-100 pt-5">
-    <div class="row">
-        <div class="offset-md-4 col-md-4 p-5 bg-dark-80">
-            <h1>Please Login</h1>
-            <form action="" method="POST" autocomplete="off">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" name="username" placeholder="Enter username"
+                        id="username" required autofocus>    
+                    </div>
 
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" class="form-control" name="username" placeholder="Enter username"
-                    id="username" required autofocus>    
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control mb-2" name="password" placeholder="Enter password"
+                        id="password" required>
+                        Not a user? | 
+                        <a href="/register">Register here</a>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-outline-success btn-flexible mb-3" value="Login">
+                        <a href="/">
+                            <input type="button" class="btn btn-outline-warning btn-flexible" value="Cancel">
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="offset-lg-2 col-lg-8 offset-md-0 col-md-12 color-red3 rounded px-0 d-none d-md-block">
+                <div class="rounded-left w-50 h-100 float-left pattern-background position-relative">
+                    <div class="pattern-background-cover w-100 h-100 position-absolute">
+                    </div>
+                    <div class="trophy-img mx-auto position-absolute">
+                        <img src="/assets/images/trophy.png" alt="" height="300px">
+                    </div>
+                    <div class="welcome-message position-absolute w-75">
+                        <h5 class="text-center">Welcome to Tornado!</h5>
+                        <p class="text-center"><small>Are you ready to start your tournament?</small> </p>
+                    </div>
                 </div>
+                <div class="w-50 float-left p-4">
+                    <h1 class="text-center"><b>Login</b> </h1>
+                    <form action="" method="POST" autocomplete="off">
 
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control mb-2" name="password" placeholder="Enter password"
-                    id="password" required>
-                    Not a user? | 
-                    <a href="/register">Register here</a>
-                </div>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" name="username" placeholder="Enter username"
+                            id="username" required autofocus>    
+                        </div>
 
-                <div class="form-group text-center">
-                    <input type="submit" class="btn btn-outline-success btn-flexible mb-3" value="Login">
-                    <a href="/">
-                        <input type="button" class="btn btn-outline-warning btn-flexible" value="Cancel">
-                    </a>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control mb-2" name="password" placeholder="Enter password"
+                            id="password" required>
+                            <small>Not a user? | 
+                            <a href="/register">Register here</a></small> 
+                        </div>
+
+                        <div class="form-group text-center">
+                            <input type="submit" class="btn btn-outline-success btn-flexible mb-3" value="Login">
+                            <a href="/">
+                                <input type="button" class="btn btn-outline-warning btn-flexible" value="Cancel">
+                            </a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
+</div>

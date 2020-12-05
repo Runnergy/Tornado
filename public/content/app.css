@@ -18,7 +18,7 @@ body{
 }
 
 a:hover {
-    color: #9c0404;
+    color: #ce8a8a;
     text-decoration: none;
 }
 
@@ -133,6 +133,32 @@ footer a:hover {
     background-color: black;
 }
 
+.pattern-background {
+    background-image: url('../assets/images/pattern3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pattern-background-cover {
+    opacity: 0.8;
+    background-color: #430505;
+    top: 0;
+    left: 0;
+}
+
+.trophy-img {
+    top:40%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+.welcome-message {
+    top:80%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+
 .color-footer-1 {
     background-color: #560500;
 }
@@ -148,6 +174,34 @@ footer a:hover {
 .color-footer-background {
     background-color: #250000;
 }
+
+.authentication-page {
+    background: linear-gradient(360deg, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0.7) 90%, rgba(0,0,0,0) 100%);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.authentication-page h1, 
+.authentication-page h2, 
+.authentication-page h3, 
+.authentication-page h4, 
+.authentication-page h5, 
+.authentication-page h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#main-nav {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+}
+
+#main-nav ul li {
+    padding: 0 10px;
+}
+
+/* .authentication-container {
+    background-color: rgb(110, 44, 44);
+    
+} */
 
 /* hover effect when the button is enabled */
 .active-btn:hover {
