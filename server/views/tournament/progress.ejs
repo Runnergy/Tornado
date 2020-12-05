@@ -1,13 +1,13 @@
-<div class="container p-5 vh-100">
+<div class="container">
     <form method="POST">
-        <h2 class="display-4 text-center mb-5">Who's the winner?</h2>
-        <div class="row container">
+        <h1 class="text-center mb-5">Who's the winner?</h1>
+        <div class="row">
             <!-- repeat half the number of participants -->
             <% if(roundNumber < tournament.roundTotal) { %>
                 <% for(let i = 0; i < tournament.rounds[roundNumber].participants.length/2; i++) { %>
 
                     <!-- if the user does not reach the last round -->
-                    <div class="offset-2 col-3 mb-1">
+                    <div class="offset-lg-2 col-lg-3 mb-1 offset-md-1 col-md-4">
                         <div class="input-group roundParticipant">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -29,9 +29,9 @@
                         </div>
                     </div>
 
-                    <div class="col-2 text-center text-muted">VS</div>
+                    <div class="col-md-2 text-center text-light">VS</div>
 
-                    <div class="col-3 mb-1">
+                    <div class="col-lg-3 col-md-4 mb-5">
                         <div class="input-group roundParticipant">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
@@ -55,26 +55,32 @@
                     </div>
                 <% } %> 
                 
-                <div class="offset-2 col-3 mt-4">
+                <!-- previous round button -->
+                <div class="offset-lg-2 offset-md-1 offset-sm-0 text-center col-md-2 col-sm-3 mt-4">
                     <!-- Last round button -->
                     <% if(parseInt(roundNumber) > 0) { %>
-                            <a class="btn btn-primary btn-sm" href="/tournament/progress/<%= tournament._id %>/<%= parseInt(roundNumber) - 1 %>">PREVIOUS</a>
+                        <a class="btn active-btn color-red1 text-light py-2 w-100" href="/tournament/progress/<%= tournament._id %>/<%= parseInt(roundNumber) - 1 %>">
+                            <i class="fas fa-chevron-left "></i>
+                        </a>
+                    <% } else {%>
+                        <a class="btn inactive-btn color-red1t py-2 w-100"><i class="fas fa-chevron-left  text-muted"></i></a>
                     <% } %>
                 </div>
                 
-                <div class="col-2 text-center mt-4">
-                    <a class="btn btn-primary btn-sm" href="/tournament/update/<%= tournament._id %>">Back to Edit</a>
+                <!-- back to edit buton -->
+                <div class="col-sm-6 col-lg-4 text-center mt-4">
+                    <a class="btn active-btn color-red2 text-light py-2 w-100" href="/tournament/update/<%= tournament._id %>">Back to Edit</a>
                 </div>
 
                 <!-- next round button -->
-                <div class="col-3 text-right mt-4">
-                    <button class="btn btn-primary btn-sm" type="submit">NEXT</button>
+                <div class="col-md-2 col-sm-3 text-center mt-4">
+                    <button class="btn active-btn color-red1 text-light py-2 w-100" type="submit"><i class="fas fa-chevron-right "></i></button>
                 </div>
 
             <% } else { %> 
                 <!-- check the result button -->
-                <div class="col-12 text-center mt-4">
-                    <a href="/tournament/brackets/<%= tournament._id %>" class="btn btn-xl btn-outline-danger">
+                <div class="col-12 text-center mt-4 vh-100">
+                    <a href="/tournament/brackets/<%= tournament._id %>" class="btn btn-lg btn-outline-danger">
                         Check the result</a>
                 </div>
             <% } %>
