@@ -85,6 +85,14 @@ let tournamentRouter = require('../routes/tournament');
 
 let app = express();
 
+//  force the browser to obtain new copy of the page even when they hit "back".
+app.use(function(req, res, next) {
+  // Set the Cache-control headers to no-cache conditionally for logged out users
+  if (!req.user)
+      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
