@@ -354,7 +354,7 @@ a.active { cursor: pointer; }
 
 /* absolute active div in tournament card page */
 .status-active-btn {
-    top: 85px;
+    top: 95px;
     left:50%;
     transform:translate(-50%, -50%);
 }
