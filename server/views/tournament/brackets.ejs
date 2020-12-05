@@ -64,15 +64,19 @@
                                 <div class="participant first">
                                     <div class="participant-num"><div class="m-auto"><%= count + 1 %></div></div>
                                     <div id="parent<%= count + 1 %>1" class="h-100">
-                                        <div class="participant-name">
-                                            <div class="m-auto">
-                                                <% if(tournament.rounds[0].participants.length != 0) { %>
+                                        <!-- input text field displaying participant name -->
+                                        <% if(tournament.rounds[0].participants[count]) { %>
+                                            <div class="participant-name m-auto">
+                                                <div class="m-auto py-1">
                                                     <%= tournament.rounds[0].participants[count] %>
-                                                <% } else { %>
-                                                    player is needed
-                                                <% } %>
+                                                </div>
                                             </div>
-                                        </div>
+                                        <% } else { %>
+                                            <!-- input text field displaying participant name -->
+                                            <div class="participant-name text-muted m-auto">
+                                                <div class="m-auto">no player</div>
+                                            </div>
+                                        <% } %>
                                     </div>
                                 </div>
                             </td>
@@ -85,7 +89,7 @@
                                         <div class="participant-num"><div class="m-auto"><%= count/2 + 1 %></div></div>
                                         <!-- create div with id to determine start and end in leader-line -->
                                         <div id="parent<%= (count/2) + 1 %>2" class="h-100">
-                                            <!-- input text field displaying participant name -->
+                                            <!-- displaying participant name -->
                                             <% if(tournament.rounds[1].participants[count/2]) { %>
                                                 <div class="participant-name m-auto">
                                                     <div class="m-auto py-1">
@@ -93,7 +97,7 @@
                                                     </div>
                                                 </div>
                                             <% } else { %>
-                                                <!-- input text field displaying participant name -->
+                                                <!-- displaying participant name -->
                                                 <div class="participant-name text-muted m-auto">
                                                     <div class="m-auto">no player</div>
                                                 </div>
@@ -113,7 +117,7 @@
                                         <div class="participant-num"><div class="m-auto"><%= count/4 + 1 %></div></div>
                                         <!-- create div with id to determine start and end in leader-line -->
                                         <div id="parent<%= (count/4) + 1 %>3" class="h-100">
-                                            <!-- input text field displaying participant name -->
+                                            <!-- displaying participant name -->
                                             <% if(tournament.rounds[2].participants[count/4]) { %>
                                                 <div class="participant-name">
                                                     <div class="m-auto">
@@ -121,7 +125,7 @@
                                                     </div>
                                                 </div>
                                                 <% } else { %>
-                                                    <!-- input text field displaying participant name -->
+                                                    <!-- displaying participant name -->
                                                     <div class="participant-name text-muted">
                                                         <div class="m-auto">no player</div>
                                                     </div>
@@ -141,7 +145,7 @@
                                         <div class="participant-num"><div class="m-auto"><%= count/8 + 1 %></div></div>
                                         <!-- create div with id to determine start and end in leader-line -->
                                         <div id="parent<%= (count/8) + 1 %>4" class="h-100">
-                                            <!-- input text field displaying participant name -->
+                                            <!-- displaying participant name -->
                                             <% if(tournament.rounds[3].participants[count/8]) { %>
                                                 <div class="participant-name">
                                                     <div class="m-auto">
@@ -149,7 +153,7 @@
                                                     </div>
                                                 </div>
                                             <% } else { %>
-                                                    <!-- input text field displaying participant name -->
+                                                    <!-- displaying participant name -->
                                                     <div class="participant-name text-muted">
                                                         <div class="m-auto">no player</div>
                                                     </div>
@@ -170,7 +174,7 @@
                                             <div class="participant-num"><div class="m-auto"><%= count/16 + 1 %></div></div>
                                             <!-- create div with id to determine start and end in leader-line -->
                                             <div id="parent<%= (count/16) + 1 %>5" class="h-100">
-                                                <!-- input text field displaying participant name -->
+                                                <!-- displaying participant name -->
                                                 <% if(tournament.rounds[4].participants[count/16]) { %>
                                                     <div class="participant-name">
                                                         <div class="m-auto">
@@ -178,7 +182,7 @@
                                                         </div>
                                                     </div>
                                                 <% } else { %>
-                                                    <!-- input text field displaying participant name -->
+                                                    <!-- displaying participant name -->
                                                     <div class="participant-name text-muted">
                                                         <div class="m-auto">
                                                             no player
@@ -219,7 +223,7 @@
                     </thead>
                     
                     <!-- repeat the number of participants -->
-                    <% for(let i = 0; i < tournament.type * 2; i++) { %>
+                    <% for(let i = 0; i < tournament.rounds[0].participants.length; i++) { %>
                         <tr>
                             <td class="">
                                 <%= tournament.rounds[0].participants[i] %>
@@ -240,6 +244,7 @@
                 </table>
             </div>
         </div>
+
         <div class="offset-lg-4 col-lg-4 offset-md-3 col-md-6 mt-5">
             <!-- go to result bracket -->
             <a class="mb-2 btn color-red1 active-btn text-light w-100 d-none d-sm-block" href="#resultBracket"><i class="fas fa-trophy"></i> Check Bracket</a>

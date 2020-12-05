@@ -84,7 +84,6 @@ let usersRouter = require('../routes/users');
 let tournamentRouter = require('../routes/tournament');
 
 let app = express();
-
 //  force the browser to obtain new copy of the page even when they hit "back".
 app.use(function(req, res, next) {
   // Set the Cache-control headers to no-cache conditionally for logged out users
