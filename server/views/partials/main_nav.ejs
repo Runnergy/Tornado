@@ -21,38 +21,40 @@
       <% } else { %>
         <li class="nav-item">
       <% } %>
-        <a class="nav-link" href="/home">
-          <!-- <i class="fas fa-lg fa-home"></i>  -->
-          HOME </a>
-        </li>
+      <a class="nav-link" href="/home">
+        <!-- <i class="fas fa-lg fa-home"></i>  -->
+        HOME </a>
+      </li>
+
+        <% if (title == "Tournaments") { %>
+        <li class="nav-item active">
+      <% } else  { %>
+        <li class="nav-item">
+      <% } %>
+      <a class="nav-link" href="/tournament/card">
+      <!-- <i class="fas fa-trophy"></i>  -->
+        TOURNAMENT </a>
+      </li>
 
       <% if (title == "About Us") {%>
         <li class="nav-item active">
       <% } else { %>
         <li class="nav-item">
       <% } %>
-        <a class="nav-link" href="/about">
-          ABOUT US </a>
-        </li>
+      <a class="nav-link" href="/about">
+        ABOUT US </a>
+      </li>
       
 
-      <% if (title == "Tournaments") { %>
-        <li class="nav-item active">
-      <% } else  { %>
-        <li class="nav-item">
-      <% } %>
-        <a class="nav-link" href="/tournament/card">
-        <!-- <i class="fas fa-trophy"></i>  -->
-          TOURNAMENT </a>
-        </li>
+      
 
-      <% if (title == "Contact Us") {%>
+      <!-- <% if (title == "Contact Us") {%>
         <li class="nav-item active">
       <% } else { %>
         <li class="nav-item">
       <% } %>
         <a class="nav-link" href="/contact"> CONTACT US </a>
-        </li>
+        </li> -->
       
       <div class="d-lg-none d-xl-none">
         <% if(typeof displayName == 'string' && displayName ){ %>
@@ -72,7 +74,7 @@
 
   <div class=" d-none d-lg-block">
     <% if(typeof displayName == 'string' && displayName ){ %>
-      <p><i class="fas fa-lg fa-user"></i> Hello, <%= displayName %> &nbsp;
+      <p><i class="fas fa-lg fa-user"></i> <%= displayName %> &nbsp;
         <a href="/logout" class="btn btn-small text-light color-red3 active-btn ">
           <i class="fas fa-lg fa-sign-out-alt"></i> Logout
         </a>
