@@ -58,6 +58,10 @@ module.exports.processCreatePage = (req, res, next) => {
     // split the line with the new line character and assign it to array
     let participants = participantString.split("\r\n");
 
+    for (let index = 0; index < participants.length; index++) {
+        participants[index] = participants[index].trim();
+    }
+
     // remove empty element from the array
     participants = participants.filter(item => item);
 
@@ -169,6 +173,10 @@ module.exports.processUpdatePage = (req, res, next) => {
     
     // split the line with the new line character and assign it to array
     let participants = participantString.split("\r\n");
+
+    for (let index = 0; index < participants.length; index++) {
+        participants[index] = participants[index].trim();
+    }
 
     // remove empty element from the array
     participants = participants.filter(item => item);

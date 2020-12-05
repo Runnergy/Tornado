@@ -3,12 +3,11 @@
     <div class="row vh-100">
         <div class="offset-md-3 col-md-6">
             <form class="form" method="POST">
-
                 <% if(new Date(Date.parse(tournament.enddate)+ (28 * 60 * 60 * 1000)+(59 *60 *1000)) < Date.now()) { %>
                     <div class="alert alert-danger" role="alert">
                         This tournament already ended.
                     </div>
-                <% } if(new Date(Date.parse(tournament.startdate) + (28 * 60 * 60 * 1000)+(59 *60 *1000)) > Date.now()) { %>
+                <% } if(new Date(Date.parse(tournament.startdate) + (5 * 60 * 60 * 1000)) > Date.now()) { %>
                     <div class="alert alert-danger" role="alert">
                         This tournament hasn't started yet.
                     </div>
@@ -88,12 +87,12 @@
                     <div class="col-lg-4 pb-2">
                         <td class="text-center">
                             <% if(new Date(Date.parse(tournament.enddate) +(28 * 60 * 60 * 1000)+(59 *60 *1000)) >= Date.now() &&
-                                    new Date(Date.parse(tournament.startdate) + (28 * 60 * 60 * 1000)+(59 *60 *1000)) <= Date.now() &&
+                                    new Date(Date.parse(tournament.startdate) + (5 * 60 * 60 * 1000)) <= Date.now() &&
                                     tournament.rounds[0].participants.length == parseInt(tournament.type) * 2) { %>
                                     <a href="/tournament/progress/<%= tournament._id %>/0" class="btn color-red1 btn-md w-100 active-btn text-light">
                                         Start Tournament</a>
                             <% } else {%>
-                                <a class="btn btn-md  w-100 bg-light-80 btn-disabled active-btn text-light">
+                                <a class="btn btn-md w-100 bg-light-80 inactive-btn text-muted">
                                     Start Tournament</a>
                             <% } %>
                         </td>

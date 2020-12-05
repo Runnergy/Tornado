@@ -41,6 +41,10 @@ fieldset {
     font-family: 'Montserrat', sans-serif;
 }
 
+#about-page h1, #about-page h2, #about-page h3, #about-page h4 {
+    font-family: 'Montserrat', sans-serif;
+}
+
 #footer h3, #footer h4, #footer h5 {
     font-family: 'Montserrat', sans-serif;
 }
@@ -268,6 +272,7 @@ a.active { cursor: pointer; }
     height: 100%;
     bottom:20px;
     right:-350px;
+    z-index: -1;
 }
 
 /* home page h6 under text logo */
