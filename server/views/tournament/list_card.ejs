@@ -12,7 +12,7 @@
             </div>
         </div>
         <% if(typeof displayName != 'string' || !displayName) { %>
-            <h6 class="my-5">Please <a href="/login">login</a> to View, Edit or Delete tournament options.
+            <h6 class="my-5">Please <a href="/login">login</a> to manage more tournaments.
             <br><small>( User who is not logged in can only see the active tournament. ) </small></h6>
         <% } %>
         
@@ -33,8 +33,12 @@
                                     <a class="btn color-red2 active-btn mt-3 text-light" href="/tournament/brackets/<%= tournamentList[0 + (i * 3)]._id %>" role="button">VIEW</a>
                                     <% if(typeof displayName != 'string' || !displayName || tournamentList[0 + (i * 3)].host != username) { %>
                                         <a class="btn inactive-btn mt-3 text-muted" role="button">EDIT</a>
+                                        <a class="btn inactive-btn btn-sm btn-delete">
+                                        <i class="fas fa-trash-alt"></i></a>
                                     <% } else { %> 
                                         <a class="btn color-red1 active-btn mt-3 text-light" href="/tournament/update/<%= tournamentList[0 + (i * 3)]._id %>" role="button">EDIT</a>
+                                        <a href="/tournament/delete/<%= tournamentList[i]._id %>" class="btn color-red1 active-btn btn-sm btn-delete">
+                                        <i class="fas fa-trash-alt"></i></a>
                                     <% } %> 
                                     
                                 </div>
