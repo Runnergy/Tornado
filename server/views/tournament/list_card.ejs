@@ -33,11 +33,11 @@
                                     <a class="btn color-red2 active-btn mt-3 text-light" href="/tournament/brackets/<%= tournamentList[0 + (i * 3)]._id %>" role="button">VIEW</a>
                                     <% if(typeof displayName != 'string' || !displayName || tournamentList[0 + (i * 3)].host != username) { %>
                                         <a class="btn inactive-btn mt-3 text-muted" role="button">EDIT</a>
-                                        <a class="btn inactive-btn btn-sm btn-delete">
+                                        <a class="btn inactive-btn mt-3">
                                         <i class="fas fa-trash-alt"></i></a>
                                     <% } else { %> 
                                         <a class="btn color-red1 active-btn mt-3 text-light" href="/tournament/update/<%= tournamentList[0 + (i * 3)]._id %>" role="button">EDIT</a>
-                                        <a href="/tournament/delete/<%= tournamentList[i]._id %>" class="btn color-red1 active-btn btn-sm btn-delete">
+                                        <a href="/tournament/delete/<%= tournamentList[0 + (i * 3)]._id %>" class="btn color-red1 mt-3 active-btn btn-delete">
                                         <i class="fas fa-trash-alt"></i></a>
                                     <% } %> 
                                     
@@ -79,8 +79,12 @@
                                     <a class="btn color-red2 active-btn mt-3 text-light" href="/tournament/brackets/<%= tournamentList[1 + (i * 3)]._id %>" role="button">VIEW</a>
                                     <% if(typeof displayName != 'string' || !displayName || tournamentList[1 + (i * 3)].host != username) { %>
                                         <a class="btn inactive-btn mt-3 text-muted" role="button">EDIT</a>
+                                        <a class="btn mt-3 inactive-btn">
+                                        <i class="fas fa-trash-alt"></i></a>
                                     <% } else { %> 
                                         <a class="btn color-red1 active-btn mt-3 text-light" href="/tournament/update/<%= tournamentList[1 + (i * 3)]._id %>" role="button">EDIT</a>
+                                        <a href="/tournament/delete/<%= tournamentList[1 + (i * 3)]._id %>" class="btn color-red1 mt-3 active-btn btn-delete">
+                                        <i class="fas fa-trash-alt"></i></a>
                                     <% } %> 
                                 
                                 </div>
@@ -121,8 +125,12 @@
                                     <a class="btn color-red2 active-btn mt-3 text-light" href="/tournament/brackets/<%= tournamentList[2 + (i * 3)]._id %>" role="button">VIEW</a>
                                     <% if(typeof displayName != 'string' || !displayName || tournamentList[2 + (i * 3)].host != username) { %>
                                         <a class="btn inactive-btn mt-3 text-muted" role="button">EDIT</a>
+                                        <a class="btn mt-3 inactive-btn">
+                                        <i class="fas fa-trash-alt"></i></a>
                                     <% } else { %> 
                                         <a class="btn color-red1 active-btn mt-3 text-light" href="/tournament/update/<%= tournamentList[2 + (i * 3)]._id %>" role="button">EDIT</a>
+                                        <a href="/tournament/delete/<%= tournamentList[2 + (i * 3)]._id %>" class="btn color-red1 mt-3 active-btn btn-delete">
+                                        <i class="fas fa-trash-alt"></i></a>
                                     <% } %> 
                                 </div>
                                 
