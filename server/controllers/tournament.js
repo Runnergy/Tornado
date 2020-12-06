@@ -446,7 +446,6 @@ module.exports.displayProgress = (req, res, next) => {
                 req.session.returnTo = req.originalUrl; 
                 res.redirect('/login');
             } else {
-
                 // validating if the logged in user is the host of tournament
                 if (req.user.username != host) {
                     if (err) { 
@@ -455,17 +454,26 @@ module.exports.displayProgress = (req, res, next) => {
                     //dialog.info('Access Denied!');
                     res.redirect('/login');
                 } else { 
+                    // if tournament is inactive, it cannot be started
                     if(tournamentToView.status != 'active')
                     {
                         res.redirect('back');
                     }
                     else
                     {
+                        let errorMessage = '';
+                        if(roundNumber != tournamentToView.roundTotal && 
+                            tournamentToView.rounds[roundNumber].participants.length != Math.pow(2, tournamentToView.roundTotal - roundNumber))
+                        {
+                            errorMessage = 'Access denied. Please start it again.';
+                            // errorMessage = `participant should be ${Math.pow(2, tournamentToView.roundTotal - roundNumber)}`;
+                        }
                         //show the update view
                         res.render('index', { title: 'Progress Tournament', file: '../views/tournament/progress', 
                         tournament: tournamentToView, 
                         displayName: req.user ? req.user.displayName : '',
-                        roundNumber: roundNumber });
+                        roundNumber: roundNumber,
+                        errorMessage:  errorMessage});
                     }
                    
                 }
